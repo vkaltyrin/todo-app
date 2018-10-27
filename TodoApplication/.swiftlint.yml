@@ -39,6 +39,10 @@ opt_in_rules:
 - function_default_parameter_at_end
 - trailing_closure
 
+disabled_rules:
+
+- void_return
+
 # configurations
 
 line_length: 120

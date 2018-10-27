@@ -17,6 +17,12 @@
 		8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ECE2184D7A4002F4500 /* Task.swift */; };
 		8C3C9ED12184D90C002F4500 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED02184D90C002F4500 /* List.swift */; };
 		8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED32184D947002F4500 /* Identifier.swift */; };
+		8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED62184DAC4002F4500 /* TaskStorage.swift */; };
+		8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED82184DB7C002F4500 /* Result.swift */; };
+		8C3C9EDB2184DED1002F4500 /* ListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDA2184DED1002F4500 /* ListStorage.swift */; };
+		8C3C9EDD2184DF33002F4500 /* OnSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDC2184DF33002F4500 /* OnSuccess.swift */; };
+		8C3C9EDF2184E160002F4500 /* ListCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDE2184E160002F4500 /* ListCoreDataStorage.swift */; };
+		8C3C9EE12184E17F002F4500 /* TaskCoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE02184E17F002F4500 /* TaskCoreDataStorage.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +54,12 @@
 		8C3C9ECE2184D7A4002F4500 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		8C3C9ED02184D90C002F4500 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		8C3C9ED32184D947002F4500 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		8C3C9ED62184DAC4002F4500 /* TaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorage.swift; sourceTree = "<group>"; };
+		8C3C9ED82184DB7C002F4500 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		8C3C9EDA2184DED1002F4500 /* ListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStorage.swift; sourceTree = "<group>"; };
+		8C3C9EDC2184DF33002F4500 /* OnSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnSuccess.swift; sourceTree = "<group>"; };
+		8C3C9EDE2184E160002F4500 /* ListCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoreDataStorage.swift; sourceTree = "<group>"; };
+		8C3C9EE02184E17F002F4500 /* TaskCoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCoreDataStorage.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +116,7 @@
 		8C3C9EAA2184D3DF002F4500 /* TodoApplication */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9ED52184DAAE002F4500 /* Storage */,
 				8C3C9ED22184D93C002F4500 /* Core */,
 				8C3C9ECD2184D784002F4500 /* Models */,
 				8C3C9EAB2184D3DF002F4500 /* AppDelegate.swift */,
@@ -138,8 +151,21 @@
 			isa = PBXGroup;
 			children = (
 				8C3C9ED32184D947002F4500 /* Identifier.swift */,
+				8C3C9ED82184DB7C002F4500 /* Result.swift */,
+				8C3C9EDC2184DF33002F4500 /* OnSuccess.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		8C3C9ED52184DAAE002F4500 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9ED62184DAC4002F4500 /* TaskStorage.swift */,
+				8C3C9EE02184E17F002F4500 /* TaskCoreDataStorage.swift */,
+				8C3C9EDA2184DED1002F4500 /* ListStorage.swift */,
+				8C3C9EDE2184E160002F4500 /* ListCoreDataStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
@@ -333,9 +359,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3C9EDD2184DF33002F4500 /* OnSuccess.swift in Sources */,
 				8C3C9EAE2184D3DF002F4500 /* ViewController.swift in Sources */,
 				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
+				8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */,
 				8C3C9ED12184D90C002F4500 /* List.swift in Sources */,
+				8C3C9EDF2184E160002F4500 /* ListCoreDataStorage.swift in Sources */,
+				8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */,
+				8C3C9EE12184E17F002F4500 /* TaskCoreDataStorage.swift in Sources */,
+				8C3C9EDB2184DED1002F4500 /* ListStorage.swift in Sources */,
 				8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */,
 				8C3C9EAC2184D3DF002F4500 /* AppDelegate.swift in Sources */,
 			);
