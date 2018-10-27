@@ -7,7 +7,7 @@ protocol TaskStorage: class {
 
     func deleteTask(taskId: Identifier, _ completion: @escaping OnSuccess)
 
-    func saveTask(_ task: Task, _ completion: @escaping OnSuccess)
+    func createTask(_ task: Task, _ completion: @escaping OnSuccess)
 
     func updateTask(_ task: Task, _ completion: @escaping OnSuccess)
 }

@@ -7,7 +7,7 @@ protocol ListStorage: class {
 
     func deleteList(listId: Identifier, _ completion: @escaping OnSuccess)
 
-    func saveList(_ list: List, _ completion: @escaping OnSuccess)
+    func createList(_ list: List, _ completion: @escaping OnSuccess)
 
     func updateList(_ task: List, _ completion: @escaping OnSuccess)
 }
