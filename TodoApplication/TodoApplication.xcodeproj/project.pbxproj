@@ -14,6 +14,9 @@
 		8C3C9EB32184D3E0002F4500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9EB22184D3E0002F4500 /* Assets.xcassets */; };
 		8C3C9EB62184D3E0002F4500 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9EB42184D3E0002F4500 /* LaunchScreen.storyboard */; };
 		8C3C9EC12184D3E0002F4500 /* TodoApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EC02184D3E0002F4500 /* TodoApplicationTests.swift */; };
+		8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ECE2184D7A4002F4500 /* Task.swift */; };
+		8C3C9ED12184D90C002F4500 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED02184D90C002F4500 /* List.swift */; };
+		8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED32184D947002F4500 /* Identifier.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,9 @@
 		8C3C9EBC2184D3E0002F4500 /* TodoApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3C9EC02184D3E0002F4500 /* TodoApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApplicationTests.swift; sourceTree = "<group>"; };
 		8C3C9EC22184D3E0002F4500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C3C9ECE2184D7A4002F4500 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		8C3C9ED02184D90C002F4500 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		8C3C9ED32184D947002F4500 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +104,8 @@
 		8C3C9EAA2184D3DF002F4500 /* TodoApplication */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9ED22184D93C002F4500 /* Core */,
+				8C3C9ECD2184D784002F4500 /* Models */,
 				8C3C9EAB2184D3DF002F4500 /* AppDelegate.swift */,
 				8C3C9EAD2184D3DF002F4500 /* ViewController.swift */,
 				8C3C9EAF2184D3DF002F4500 /* Main.storyboard */,
@@ -115,6 +123,23 @@
 				8C3C9EC22184D3E0002F4500 /* Info.plist */,
 			);
 			path = TodoApplicationTests;
+			sourceTree = "<group>";
+		};
+		8C3C9ECD2184D784002F4500 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9ECE2184D7A4002F4500 /* Task.swift */,
+				8C3C9ED02184D90C002F4500 /* List.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8C3C9ED22184D93C002F4500 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9ED32184D947002F4500 /* Identifier.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
@@ -309,6 +334,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3C9EAE2184D3DF002F4500 /* ViewController.swift in Sources */,
+				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
+				8C3C9ED12184D90C002F4500 /* List.swift in Sources */,
+				8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */,
 				8C3C9EAC2184D3DF002F4500 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
