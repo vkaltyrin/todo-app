@@ -52,6 +52,37 @@ class TaskStorageImplTests: TestCase {
         XCTAssertEqual(receivedTasks[1], TestData.runMarathonTask)
     }
     
+    func testFetchTask_returnError_withWrongListIdentifier() {
+        // given
+        var receivedError: StorageError?
+        let response = expectation(description: "wait for return")
+        
+        // when
+        storage.fetchTasks(listId: TestData.wrongIdentifier) { result in
+            result.onSuccess { _ in
+                response.fulfill()
+            }
+            result.onFailure { error in
+                receivedError = error
+                response.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        guard let error = receivedError else {
+            XCTFail("fetchTask should return an error")
+            return
+        }
+        
+        switch error {
+        case .cannotFetch:
+            break
+        default:
+            XCTFail("fetchTask should return corrent error")
+        }
+    }
+    
     func testDeleteTask_deleteTask_withSuccess() {
         // given
         let identifier = TestData.runMarathonTaskIdentifier
@@ -72,6 +103,37 @@ class TaskStorageImplTests: TestCase {
         
         // then
         XCTAssertNil(receivedError)
+    }
+    
+    func testDeleteTask_returnError_withWrongTaskIdentifier() {
+        // given
+        var receivedError: StorageError?
+        let response = expectation(description: "wait for return")
+        
+        // when
+        storage.deleteTask(taskId: TestData.wrongIdentifier) { result in
+            result.onSuccess {
+                response.fulfill()
+            }
+            result.onFailure { error in
+                receivedError = error
+                response.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        guard let error = receivedError else {
+            XCTFail("deleteTask should return an error")
+            return
+        }
+        
+        switch error {
+        case .cannotDelete:
+            break
+        default:
+            XCTFail("deleteTask should return corrent error")
+        }
     }
     
     func testCreateTask_createTask_withSuccess() {
@@ -116,6 +178,38 @@ class TaskStorageImplTests: TestCase {
         
         // then
         XCTAssertNil(receivedError)
+    }
+    
+    func testUpdateTask_returnError_withWrongTaskIdentifier() {
+        // given
+        let task = TestData.makeCoffeeTask
+        var receivedError: StorageError?
+        let response = expectation(description: "wait for return")
+        
+        // when
+        storage.updateTask(task) { result in
+            result.onSuccess {
+                response.fulfill()
+            }
+            result.onFailure { error in
+                receivedError = error
+                response.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        guard let error = receivedError else {
+            XCTFail("updateTask should return an error")
+            return
+        }
+        
+        switch error {
+        case .cannotUpdate:
+            break
+        default:
+            XCTFail("updateTask should return corrent error")
+        }
     }
     
     // MARK: - Private
@@ -165,6 +259,7 @@ class TaskStorageImplTests: TestCase {
 extension TaskStorageImplTests {
     struct TestData {
         static let listIdentifier = "List-ID"
+        static let wrongIdentifier = "Wrong ID"
         static let runMarathonTaskIdentifier = "ID-1"
         static let runMarathonTask = Task(
             identifier: runMarathonTaskIdentifier,

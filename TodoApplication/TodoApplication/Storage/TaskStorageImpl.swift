@@ -33,7 +33,7 @@ final class TaskStorageImpl: TaskStorage {
                 }
                 completion(.success(()))
             } catch {
-                completion(.failure(.cannotDelete))
+                completion(.failure(.internalError))
             }
         }
     }
@@ -48,7 +48,7 @@ final class TaskStorageImpl: TaskStorage {
                 }
                 completion(.success(()))
             } catch {
-                completion(.failure(.cannotCreate))
+                completion(.failure(.internalError))
             }
         }
     }
@@ -70,7 +70,7 @@ final class TaskStorageImpl: TaskStorage {
                 }
                 completion(.success(()))
             } catch {
-                completion(.failure(.cannotUpdate))
+                completion(.failure(.internalError))
             }
         }
     }
