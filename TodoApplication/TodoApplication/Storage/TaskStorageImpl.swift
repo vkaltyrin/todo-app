@@ -3,8 +3,10 @@ import RealmSwift
 
 final class TaskStorageImpl: TaskStorage {
 
+    // MARK: - Private
     private let queue = DispatchQueue(label: "com.vkaltyrin.TaskStorageImpl.queue")
 
+    // MARK: - TaskStorage
     func fetchTasks(listId: Identifier, _ completion: @escaping OnFetchTasks) {
         queue.async {
             let realm = try? Realm()

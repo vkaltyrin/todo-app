@@ -19,6 +19,12 @@ extension RealmTask {
     }
 }
 
+extension Array where Element == Task {
+    func toRealm() -> [RealmTask] {
+        return map { $0.toRealm() }
+    }
+}
+
 extension Task {
     func toRealm() -> RealmTask {
         let result = RealmTask()
