@@ -265,25 +265,25 @@ extension TaskStorageImplTests {
             identifier: runMarathonTaskIdentifier,
             name: "Run a marathon",
             status: .undone,
-            creationDate: Date()
+            creationDate: Date(timeIntervalSince1970: 0)
         )
         static let buyTeaTask = Task(
             identifier: "ID-2",
             name: "Buy a pu-erh tea",
             status: .done,
-            creationDate: Date()
+            creationDate: Date(timeIntervalSince1970: 1)
         )
         static let writeTestsTask = Task(
             identifier: runMarathonTaskIdentifier,
             name: "Write tests",
             status: .done,
-            creationDate: Date()
+            creationDate: Date(timeIntervalSince1970: 2)
         )
         static let makeCoffeeTask = Task(
             identifier: "ID",
             name: "Make a coffee",
             status: .done,
-            creationDate: Date()
+            creationDate: Date(timeIntervalSince1970: 3)
         )
     }
 }
