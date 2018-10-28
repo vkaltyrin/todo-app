@@ -5,7 +5,11 @@ protocol ListRouter: class {
 }
 
 final class ListRouterImpl: ListRouter {
-    weak var transitionHandler: TransitionHandler?
+    unowned let transitionHandler: TransitionHandler
+
+    init(transitionHandler: TransitionHandler) {
+        self.transitionHandler = transitionHandler
+    }
 
     func openTasks() {
 

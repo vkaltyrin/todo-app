@@ -1,7 +1,5 @@
 import Foundation
 
-typealias OnFetchLists = (StorageResult<[List]>) -> ()
-
 protocol ListStorage: class {
     func fetchLists(_ completion: @escaping OnFetchLists)
 

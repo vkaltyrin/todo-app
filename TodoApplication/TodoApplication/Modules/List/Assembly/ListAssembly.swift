@@ -9,21 +9,23 @@ final class ListAssemblyImpl: Assembly {
 
     func module() -> UIViewController {
 
-        let presenter = ListPresenterImpl()
+        let viewController = ListViewController()
+
+        let presenter = ListPresenterImpl(
+            view: viewController
+        )
 
         let interactor = ListInteractorImpl(
             presenter: presenter,
             listStorage: ListStorageImpl()
         )
-        let router = ListRouterImpl()
 
-        let viewController = ListViewController(
-            interactor: interactor,
-            router: router
+        let router = ListRouterImpl(
+            transitionHandler: viewController
         )
 
-        presenter.view = viewController
-        router.transitionHandler = viewController
+        viewController.router = router
+        viewController.interactor = interactor
 
         return viewController
     }
