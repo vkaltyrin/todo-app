@@ -26,7 +26,7 @@ final class ListViewController: UIViewController {
 }
 
 extension ListViewController: ListViewInput {
-    func showItems(_ viewModel: ListViewShowItemsData.ViewModel) {
+    func showItems(_ viewModel: ListDataFlow.ShowLists.ViewModel) {
 
     }
 }

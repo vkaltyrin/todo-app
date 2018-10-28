@@ -2,6 +2,8 @@ import Foundation
 
 protocol ListInteractor: class {
     func fetchItems()
+    func deleteItem(request: ListDataFlow.DeleteList.Request)
+    func updateItem(request: ListDataFlow.UpdateList.Request)
 }
 
 final class ListInteractorImpl: ListInteractor {
@@ -19,4 +21,13 @@ final class ListInteractorImpl: ListInteractor {
     func fetchItems() {
 
     }
+
+    func deleteItem(request: ListDataFlow.DeleteList.Request) {
+
+    }
+
+    func updateItem(request: ListDataFlow.UpdateList.Request) {
+
+    }
+
 }

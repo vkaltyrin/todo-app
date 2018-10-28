@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ListPresenter: class {
-    func presentItems(_ response: ListViewShowItemsData.Response)
+    func presentItems(_ response: ListDataFlow.ShowLists.Response)
 }
 
 final class ListPresenterImpl: ListPresenter {
@@ -14,7 +14,7 @@ final class ListPresenterImpl: ListPresenter {
     }
 
     // MARK: - ListPresenter
-    func presentItems(_ response: ListViewShowItemsData.Response) {
+    func presentItems(_ response: ListDataFlow.ShowLists.Response) {
 
     }
 }
