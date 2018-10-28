@@ -42,13 +42,20 @@ final class TaskStorageImpl: TaskStorage {
         }
     }
 
-    func createTask(_ task: Task, _ completion: @escaping OnStorageResult) {
+    func createTask(listId: Identifier, task: Task, _ completion: @escaping OnStorageResult) {
         queue.async {
             let realm = try? Realm()
-            let realmTask = task.toRealm()
+            guard let listForUpdate = realm?.objects(RealmList.self).first(where: { realmTask in
+                realmTask.identifier == listId
+            }) else {
+                completion(.failure(.cannotCreate))
+                return
+            }
+
             do {
+                let realmTask = task.toRealm()
                 try realm?.write {
-                    realm?.add(realmTask)
+                    listForUpdate.tasks.append(realmTask)
                 }
                 completion(.success(()))
             } catch {
@@ -57,7 +64,7 @@ final class TaskStorageImpl: TaskStorage {
         }
     }
 
-    func updateTask(_ task: Task, _ completion: @escaping OnStorageResult) {
+    func updateTask(task: Task, _ completion: @escaping OnStorageResult) {
         queue.async {
             let realm = try? Realm()
             guard let taskForUpdate = realm?.objects(RealmTask.self).first(where: { realmTask in

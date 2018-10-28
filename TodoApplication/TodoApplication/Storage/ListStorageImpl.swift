@@ -54,19 +54,18 @@ final class ListStorageImpl: ListStorage {
         }
     }
 
-    func updateList(_ list: List, _ completion: @escaping OnStorageResult) {
+    func updateList(listId: Identifier, name: String, _ completion: @escaping OnStorageResult) {
         queue.async {
             let realm = try? Realm()
             guard let listForUpdate = realm?.objects(RealmList.self).first(where: { realmTask in
-                realmTask.identifier == list.identifier
+                realmTask.identifier == listId
             }) else {
                 completion(.failure(.cannotUpdate))
                 return
             }
             do {
                 try realm?.write {
-                    listForUpdate.name = list.name
-                    listForUpdate.tasks.append(objectsIn: list.tasks.toRealm())
+                    listForUpdate.name = name
                 }
                 completion(.success(()))
             } catch {

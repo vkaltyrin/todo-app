@@ -140,7 +140,7 @@ final class TaskStorageImplTests: StorageTestCase {
         let response = expectation(description: "wait for return")
         
         // when
-        storage.createTask(task) { result in
+        storage.createTask(listId: TestData.listIdentifier, task: task) { result in
             result.onSuccess {
                 response.fulfill()
             }
@@ -162,7 +162,7 @@ final class TaskStorageImplTests: StorageTestCase {
         let response = expectation(description: "wait for return")
         
         // when
-        storage.updateTask(task) { result in
+        storage.updateTask(task: task) { result in
             result.onSuccess {
                 response.fulfill()
             }
@@ -184,7 +184,7 @@ final class TaskStorageImplTests: StorageTestCase {
         let response = expectation(description: "wait for return")
         
         // when
-        storage.updateTask(task) { result in
+        storage.updateTask(task: task) { result in
             result.onSuccess {
                 response.fulfill()
             }

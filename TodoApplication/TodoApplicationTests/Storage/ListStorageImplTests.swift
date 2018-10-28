@@ -131,7 +131,7 @@ final class ListStorageImplTests: StorageTestCase {
         let response = expectation(description: "wait for return")
         
         // when
-        storage.updateList(list) { result in
+        storage.updateList(listId: list.identifier ?? "", name: list.name) { result in
             result.onSuccess {
                 response.fulfill()
             }
@@ -153,7 +153,7 @@ final class ListStorageImplTests: StorageTestCase {
         let response = expectation(description: "wait for return")
         
         // when
-        storage.updateList(list) { result in
+        storage.updateList(listId: list.identifier ?? "", name: list.name) { result in
             result.onSuccess {
                 response.fulfill()
             }
