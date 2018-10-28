@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ListRouter: class {
-    func openTasks()
+    func openTasks(listIdentifier: String)
 }
 
 final class ListRouterImpl: ListRouter {
@@ -11,7 +11,7 @@ final class ListRouterImpl: ListRouter {
         self.transitionHandler = transitionHandler
     }
 
-    func openTasks() {
+    func openTasks(listIdentifier: String) {
 
     }
 }

@@ -3,12 +3,14 @@ import XCTest
 
 final class ListPresenterMock: ListPresenter {
     func presentShowList(_ response: ListDataFlow.ShowLists.Response) {
+    
+    }
+    
+    func presentError(_ error: StorageError) {
         
     }
     
-    func presentGeneralError(_ response: ListDataFlow.GeneralError.Response) {
-        
-    }
+
     
 
 }

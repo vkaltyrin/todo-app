@@ -212,8 +212,11 @@ final class TaskStorageImplTests: StorageTestCase {
     // MARK: - Private
     private func createTasks() {
         let tasks = [TestData.runMarathonTask, TestData.buyTeaTask]
-        let list = List(identifier: TestData.listIdentifier, name: "Todo list", tasks: tasks)
-        
+        let list = List(
+            name: "Todo list",
+            tasks: tasks,
+            identifier: TestData.listIdentifier
+        )
         let listStorage = ListStorageImpl()
         let createListExpectation = expectation(description: "wait for return")
         listStorage.createList(list) { result in

@@ -8,68 +8,97 @@ final class ListStorageImpl: ListStorage {
     // MARK: - ListStorage
     func fetchLists(_ completion: @escaping OnFetchLists) {
         queue.async {
+            let result: ListResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+
             let realm = try? Realm()
+
             if let lists = realm?.objects(RealmList.self).sorted(
                 byKeyPath: "name",
                 ascending: true) {
-                completion(.success(lists.map { $0.toList() }))
+                result = .success(lists.map { $0.toList() })
             } else {
-                completion(.failure(.cannotFetch))
+                result = .failure(.cannotFetch)
             }
         }
     }
 
     func deleteList(listId: Identifier, _ completion: @escaping OnStorageResult) {
         queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+
             let realm = try? Realm()
             guard let listForDelete = realm?.objects(RealmList.self).first(where: { list in
                 list.identifier == listId
             }) else {
-                completion(.failure(.cannotDelete))
+                result = .failure(.cannotDelete)
                 return
             }
             do {
                 try realm?.write {
                     realm?.delete(listForDelete)
                 }
-                completion(.success(()))
+                result = .success(())
             } catch {
-                completion(.failure(.internalError))
+                result = .failure(.internalError)
             }
         }
     }
 
     func createList(_ list: List, _ completion: @escaping OnStorageResult) {
         queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+
             let realm = try? Realm()
             let realmList = list.toRealm()
             do {
                 try realm?.write {
                     realm?.add(realmList)
                 }
-                completion(.success(()))
+                result = .success(())
             } catch {
-                completion(.failure(.internalError))
+                result = .failure(.internalError)
             }
         }
     }
 
     func updateList(listId: Identifier, name: String, _ completion: @escaping OnStorageResult) {
         queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+
             let realm = try? Realm()
             guard let listForUpdate = realm?.objects(RealmList.self).first(where: { realmTask in
                 realmTask.identifier == listId
             }) else {
-                completion(.failure(.cannotUpdate))
+                result = .failure(.cannotUpdate)
                 return
             }
             do {
                 try realm?.write {
                     listForUpdate.name = name
                 }
-                completion(.success(()))
+                result = .success(())
             } catch {
-                completion(.failure(.internalError))
+                result = .failure(.internalError)
             }
         }
     }

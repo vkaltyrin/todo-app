@@ -10,9 +10,9 @@ final class RealmList: Object {
 extension RealmList {
     func toList() -> List {
         return List(
-            identifier: identifier,
             name: name,
-            tasks: tasks.map { $0.toTask() }
+            tasks: tasks.map { $0.toTask() },
+            identifier: identifier
         )
     }
 }

@@ -7,40 +7,114 @@ final class ListViewController: UIViewController {
     var router: ListRouter?
 
     // MARK: - State
-    private var listViewTableDelegate: UITableViewDelegate = ListViewTableDelegate()
-    private var listViewDataSource: UITableViewDataSource = ListViewDataSource()
+    private var tableDirector = ListViewTableDirector()
+
+    private var state: ViewControllerState<ListViewModel> = .loading {
+        didSet {
+            switch state {
+            case .loading:
+                startLoading()
+                interactor?.fetchItems()
+            case .error(let message):
+                stopLoading()
+                showError(message: message)
+            case .result(let items):
+                stopLoading()
+                tableDirector.items = items
+            }
+        }
+    }
+
+    private let keyboardObserver: KeyboardObserver = KeyboardObserverImpl()
 
     // MARK: - Outlets
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableDirector.tableView = tableView
+        }
+    }
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+            activityIndicator.hidesWhenStopped = true
+        }
+    }
+
+    // MARK: - Private views
+    private var addListButton: UIBarButtonItem?
 
     // MARK: - ViewController life-cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.delegate = listViewTableDelegate
-        tableView.dataSource = listViewDataSource
-        tableView.registerNib(cellClass: ListCell.self)
+        state = .loading
+
+        tableDirector.onListTap = { [weak self] listIdentifier in
+            self?.router?.openTasks(listIdentifier: listIdentifier)
+        }
+        tableDirector.onCellTextDidEndEditing = { [weak self] listIdentifier, text in
+            let request = ListDataFlow.UpdateList.Request(
+                identifier: listIdentifier,
+                name: text
+            )
+            self?.interactor?.updateItem(request: request)
+        }
+        tableDirector.onDeleteTap = { [weak self] listIdentifier in
+            let request = ListDataFlow.DeleteList.Request(identifier: listIdentifier)
+            self?.interactor?.deleteItem(request: request)
+        }
+
+        keyboardObserver.onKeyboardWillShown = { [weak self] frame in
+            self?.tableViewBottomConstraint.constant = frame.height
+        }
+        keyboardObserver.onKeyboardWillHide = { [weak self] in
+            self?.tableViewBottomConstraint.constant = 0
+        }
+
+        addListButton = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(onAddListTap)
+        )
+        navigationItem.rightBarButtonItem = addListButton
+    }
+
+    // MARK: - Private
+
+    @objc private func onAddListTap() {
+        let request = ListDataFlow.CreateList.Request(name: "")
+        interactor?.createItem(request: request)
+    }
+
+    func startLoading() {
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        activityIndicator.stopAnimating()
+    }
+
+    func showError(message: String) {
+        let alert = UIAlertController(
+            title: "Error 🚫",
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let closeAction = UIAlertAction(
+            title: "OK",
+            style: .cancel,
+            handler: nil
+        )
+        alert.addAction(closeAction)
+
+        present(alert, animated: true, completion: nil)
     }
 }
 
 extension ListViewController: ListViewInput {
     func showItems(_ viewModel: ListDataFlow.ShowLists.ViewModel) {
-
-    }
-}
-
-final class ListViewTableDelegate: NSObject, UITableViewDelegate {
-
-}
-
-final class ListViewDataSource: NSObject, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        self.state = viewModel.state
     }
 }

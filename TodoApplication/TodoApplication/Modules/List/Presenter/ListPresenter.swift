@@ -2,7 +2,7 @@ import Foundation
 
 protocol ListPresenter: class {
     func presentShowList(_ response: ListDataFlow.ShowLists.Response)
-    func presentGeneralError(_ response: ListDataFlow.GeneralError.Response)
+    func presentError(_ error: StorageError)
 }
 
 final class ListPresenterImpl: ListPresenter {
@@ -19,15 +19,21 @@ final class ListPresenterImpl: ListPresenter {
         let viewModel: ListDataFlow.ShowLists.ViewModel
         switch response.result {
         case .success(let items):
-            break
+            let resultItems = items.map {
+                ListViewModel(
+                    identifier: $0.identifier ?? "",
+                    name: $0.name
+                )
+            }
+            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(items: resultItems))
         case .failure(let error):
             viewModel = errorStateViewModel(error)
         }
-        //view.showItems(viewModel)
+        view.showItems(viewModel)
     }
 
-    func presentGeneralError(_ response: ListDataFlow.GeneralError.Response) {
-        let viewModel = errorStateViewModel(response.result)
+    func presentError(_ error: StorageError) {
+        let viewModel = errorStateViewModel(error)
         view.showItems(viewModel)
     }
 

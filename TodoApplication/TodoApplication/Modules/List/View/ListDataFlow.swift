@@ -3,7 +3,6 @@ import Foundation
 enum ViewControllerState<T> {
     case loading
     case result(items: [T])
-    case empty(message: String)
     case error(message: String)
 }
 
@@ -14,6 +13,7 @@ enum ListViewError {
 struct ListViewModel {
     let identifier: Identifier
     let name: String
+
 }
 
 // swiftlint:disable nesting
@@ -34,6 +34,10 @@ struct ListDataFlow {
         struct Request {
             let identifier: Identifier
         }
+
+        struct Response {
+            let result: GeneralResult
+        }
     }
 
     struct UpdateList {
@@ -41,16 +45,21 @@ struct ListDataFlow {
             let identifier: Identifier
             let name: String
         }
-    }
 
-    struct GeneralError {
         struct Response {
-            let result: StorageError
-        }
-
-        struct ViewModel {
-            let state: ViewControllerState<ListViewModel>
+            let result: GeneralResult
         }
     }
+
+    struct CreateList {
+        struct Request {
+            let name: String
+        }
+
+        struct Response {
+            let result: StorageResult<List>
+        }
+    }
+
 }
 // swiftlint:enable nesting

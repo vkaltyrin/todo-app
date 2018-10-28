@@ -204,27 +204,27 @@ extension ListStorageImplTests {
         ]
         
         static let todayList = List(
-            identifier: listIdentifier,
             name: "Today List",
-            tasks: tasks
+            tasks: tasks,
+            identifier: listIdentifier
         )
         
         static let tomorrowList = List(
-            identifier: "ID-2",
             name: "Tomorrow List",
-            tasks: tasks
+            tasks: tasks,
+            identifier: "ID-2"
         )
         
         static let newTodayList = List(
-            identifier: listIdentifier,
             name: "New Today List",
-            tasks: [TaskStorageImplTests.TestData.makeCoffeeTask]
+            tasks: [TaskStorageImplTests.TestData.makeCoffeeTask],
+            identifier: listIdentifier
         )
         
         static let notExistingList = List(
-            identifier: "Some ID",
             name: "",
-            tasks: []
+            tasks: [],
+            identifier: "Some ID"
         )
     }
 }
