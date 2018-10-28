@@ -5,7 +5,7 @@ protocol ListRouter: class {
 }
 
 final class ListRouterImpl: ListRouter {
-    unowned let transitionHandler: TransitionHandler
+    private unowned let transitionHandler: TransitionHandler
 
     init(transitionHandler: TransitionHandler) {
         self.transitionHandler = transitionHandler

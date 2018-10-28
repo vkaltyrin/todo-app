@@ -44,6 +44,8 @@
 		8C3C9F252185CD9C002F4500 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9F232185CD9C002F4500 /* ListCell.xib */; };
 		8C3C9F282185CDDC002F4500 /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F272185CDDC002F4500 /* UITableViewExtensions.swift */; };
 		8C3C9F2A2185D1AA002F4500 /* ListViewDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F292185D1AA002F4500 /* ListViewDataFlow.swift */; };
+		8C3C9F2D2185DA31002F4500 /* ListAssemblyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F2C2185DA31002F4500 /* ListAssemblyTests.swift */; };
+		8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F2F2185DDAD002F4500 /* ListInteractorTests.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +104,8 @@
 		8C3C9F232185CD9C002F4500 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		8C3C9F272185CDDC002F4500 /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
 		8C3C9F292185D1AA002F4500 /* ListViewDataFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDataFlow.swift; sourceTree = "<group>"; };
+		8C3C9F2C2185DA31002F4500 /* ListAssemblyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAssemblyTests.swift; sourceTree = "<group>"; };
+		8C3C9F2F2185DDAD002F4500 /* ListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractorTests.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +179,7 @@
 		8C3C9EBF2184D3E0002F4500 /* TodoApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9F2B2185DA19002F4500 /* Modules */,
 				8C3C9F122185C411002F4500 /* Storage */,
 				8C3C9EE42184EE4B002F4500 /* UnitTestUtilities */,
 				8C3C9EC22184D3E0002F4500 /* Info.plist */,
@@ -341,6 +346,23 @@
 				8C3C9F272185CDDC002F4500 /* UITableViewExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8C3C9F2B2185DA19002F4500 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F2E2185DA39002F4500 /* List */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8C3C9F2E2185DA39002F4500 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F2C2185DA31002F4500 /* ListAssemblyTests.swift */,
+				8C3C9F2F2185DDAD002F4500 /* ListInteractorTests.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
@@ -607,6 +629,8 @@
 				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,
 				8C3C9EF92185B897002F4500 /* TestStorageUtilityImpl.swift in Sources */,
 				8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */,
+				8C3C9F2D2185DA31002F4500 /* ListAssemblyTests.swift in Sources */,
+				8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */,
 				8C3C9EF32185A0CC002F4500 /* ListStorageImplTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,7 +1,7 @@
 @testable import TodoApplication
 import XCTest
 
-class TaskStorageImplTests: StorageTestCase {
+final class TaskStorageImplTests: StorageTestCase {
     
     // MARK: - Subject under test
     var storage: TaskStorage!
@@ -10,7 +10,6 @@ class TaskStorageImplTests: StorageTestCase {
     var tasks: [Task] = []
     
     // MARK: - Set Up
-    
     override func setUp() {
         super.setUp()
         storage = TaskStorageImpl()
@@ -18,14 +17,12 @@ class TaskStorageImplTests: StorageTestCase {
     }
     
     // MARK: - Tear Down
-    
     override func tearDown() {
         super.tearDown()
         storage = nil
     }
     
     // MARK: - Tests
-    
     func testFetchTasks_returnTasks_sortedDescendingByCreationDate() {
         // given
         var receivedTasks: [Task] = []
@@ -213,7 +210,6 @@ class TaskStorageImplTests: StorageTestCase {
     }
     
     // MARK: - Private
-    
     private func createTasks() {
         let tasks = [TestData.runMarathonTask, TestData.buyTeaTask]
         let list = List(identifier: TestData.listIdentifier, name: "Todo list", tasks: tasks)

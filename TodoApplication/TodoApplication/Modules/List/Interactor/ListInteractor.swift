@@ -6,8 +6,8 @@ protocol ListInteractor: class {
 
 final class ListInteractorImpl: ListInteractor {
     // MARK: - Dependencies
-    let presenter: ListPresenter
-    let listStorage: ListStorage
+    private let presenter: ListPresenter
+    private let listStorage: ListStorage
 
     // MARK: - Init
     init(presenter: ListPresenter, listStorage: ListStorage) {

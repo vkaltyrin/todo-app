@@ -1,13 +1,12 @@
 import Foundation
 import UIKit
 
-protocol Assembly: class {
-    func module() -> UIViewController
+protocol ListAssembly: class {
+    func module() -> ListViewController
 }
 
-final class ListAssemblyImpl: Assembly {
-
-    func module() -> UIViewController {
+final class ListAssemblyImpl: ListAssembly {
+    func module() -> ListViewController {
 
         let viewController = ListViewController()
 

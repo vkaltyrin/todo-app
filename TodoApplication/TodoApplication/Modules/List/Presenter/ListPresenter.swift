@@ -6,7 +6,7 @@ protocol ListPresenter: class {
 
 final class ListPresenterImpl: ListPresenter {
     // MARK: - Dependencies
-    unowned let view: ListViewInput
+    private unowned let view: ListViewInput
 
     // MARK: - Init
     init(view: ListViewInput) {
