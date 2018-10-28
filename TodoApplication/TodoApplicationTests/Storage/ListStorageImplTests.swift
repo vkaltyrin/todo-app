@@ -196,8 +196,8 @@ final class ListStorageImplTests: StorageTestCase {
 
 extension ListStorageImplTests {
     struct TestData {
-        static let listIdentifier = "ID-1"
-        static let wrongIdentifier = "Wrong ID"
+        static let listIdentifier = Identifier.generateUniqueIdentifier()
+        static let wrongIdentifier = Identifier.generateUniqueIdentifier()
         static let tasks = [
             TaskStorageImplTests.TestData.buyTeaTask,
             TaskStorageImplTests.TestData.runMarathonTask
@@ -212,7 +212,7 @@ extension ListStorageImplTests {
         static let tomorrowList = List(
             name: "Tomorrow List",
             tasks: tasks,
-            identifier: "ID-2"
+            identifier: Identifier.generateUniqueIdentifier()
         )
         
         static let newTodayList = List(
@@ -224,7 +224,7 @@ extension ListStorageImplTests {
         static let notExistingList = List(
             name: "",
             tasks: [],
-            identifier: "Some ID"
+            identifier: Identifier.generateUniqueIdentifier()
         )
     }
 }

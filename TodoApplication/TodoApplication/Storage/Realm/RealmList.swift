@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 final class RealmList: Object {
-    @objc dynamic var identifier: Identifier?
+    @objc dynamic var identifier: Identifier = ""
     @objc dynamic var name = ""
     let tasks = RealmSwift.List<RealmTask>()
 }
@@ -20,7 +20,7 @@ extension RealmList {
 extension List {
     func toRealm() -> RealmList {
         let result = RealmList()
-        result.identifier = identifier
+        result.identifier = identifier ?? Identifier.generateUniqueIdentifier()
         result.name = name
 
         let realm = try? Realm()

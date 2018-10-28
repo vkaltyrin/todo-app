@@ -230,9 +230,9 @@ final class TaskStorageImplTests: StorageTestCase {
 
 extension TaskStorageImplTests {
     struct TestData {
-        static let listIdentifier = "List-ID"
-        static let wrongIdentifier = "wrongIdentifier"
-        static let runMarathonTaskIdentifier = "ID-1"
+        static let listIdentifier = Identifier.generateUniqueIdentifier()
+        static let wrongIdentifier = Identifier.generateUniqueIdentifier()
+        static let runMarathonTaskIdentifier = Identifier.generateUniqueIdentifier()
         static let runMarathonTask = Task(
             identifier: runMarathonTaskIdentifier,
             name: "Run a marathon",
@@ -258,7 +258,7 @@ extension TaskStorageImplTests {
             creationDate: Date(timeIntervalSince1970: 3)
         )
         static let nonExistingTask = Task(
-            identifier: "nonExistingTask ID",
+            identifier: Identifier.generateUniqueIdentifier(),
             name: "Non existing",
             status: .done,
             creationDate: Date(timeIntervalSince1970: 4)
