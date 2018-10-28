@@ -30,6 +30,8 @@
 		8C3C9EEF21859628002F4500 /* StorageTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EEE21859628002F4500 /* StorageTypealiases.swift */; };
 		8C3C9EF121859DB0002F4500 /* RealmList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF021859DB0002F4500 /* RealmList.swift */; };
 		8C3C9EF32185A0CC002F4500 /* ListStorageImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF22185A0CC002F4500 /* ListStorageImplTests.swift */; };
+		8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */; };
+		8C3C9EF92185B897002F4500 /* TestStorageUtilityImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,8 @@
 		8C3C9EEE21859628002F4500 /* StorageTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTypealiases.swift; sourceTree = "<group>"; };
 		8C3C9EF021859DB0002F4500 /* RealmList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmList.swift; sourceTree = "<group>"; };
 		8C3C9EF22185A0CC002F4500 /* ListStorageImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStorageImplTests.swift; sourceTree = "<group>"; };
+		8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStorageUtility.swift; sourceTree = "<group>"; };
+		8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStorageUtilityImpl.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -192,6 +196,8 @@
 			children = (
 				8C3C9EE52184EE64002F4500 /* Task+Equatable.swift */,
 				8C3C9EE72184EE81002F4500 /* TestCase.swift */,
+				8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */,
+				8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 				8C3C9EB82184D3E0002F4500 /* Sources */,
 				8C3C9EB92184D3E0002F4500 /* Frameworks */,
 				8C3C9EBA2184D3E0002F4500 /* Resources */,
+				00CF452EB0D33112B5105E4E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -318,6 +325,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00CF452EB0D33112B5105E4E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		154362E3F31C04125BEA8ED5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,7 +459,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3C9EE32184E29A002F4500 /* TaskStorageImplTests.swift in Sources */,
+				8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */,
 				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,
+				8C3C9EF92185B897002F4500 /* TestStorageUtilityImpl.swift in Sources */,
 				8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */,
 				8C3C9EF32185A0CC002F4500 /* ListStorageImplTests.swift in Sources */,
 			);

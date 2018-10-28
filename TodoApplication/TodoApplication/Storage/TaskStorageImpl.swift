@@ -10,9 +10,11 @@ final class TaskStorageImpl: TaskStorage {
     func fetchTasks(listId: Identifier, _ completion: @escaping OnFetchTasks) {
         queue.async {
             let realm = try? Realm()
-            if let tasks = realm?.objects(RealmTask.self).sorted(
-                byKeyPath: "creationDate",
-                ascending: false) {
+            let tasks = realm?.objects(RealmTask.self)
+                .sorted(byKeyPath: "creationDate", ascending: false)
+                .filter { $0.owner.first?.identifier == listId } ?? []
+
+            if !tasks.isEmpty {
                 completion(.success(tasks.map { $0.toTask() }))
             } else {
                 completion(.failure(.cannotFetch))

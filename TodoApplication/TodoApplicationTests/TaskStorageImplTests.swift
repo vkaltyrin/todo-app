@@ -1,7 +1,7 @@
 @testable import TodoApplication
 import XCTest
 
-class TaskStorageImplTests: TestCase {
+class TaskStorageImplTests: StorageTestCase {
     
     // MARK: - Subject under test
     var storage: TaskStorage!
@@ -13,7 +13,7 @@ class TaskStorageImplTests: TestCase {
     
     override func setUp() {
         super.setUp()
-        resetStorageState()
+        storage = TaskStorageImpl()
         createTasks()
     }
     
@@ -214,43 +214,16 @@ class TaskStorageImplTests: TestCase {
     
     // MARK: - Private
     
-    private func resetStorageState() {
-        storage = TaskStorageImpl()
-        deleteAllTasks()
-    }
-    
-    private func deleteAllTasks() {
-        let fetchTasksExpectation = expectation(description: "wait for return")
-        var receivedTasks: [Task] = []
-        storage.fetchTasks(listId: TestData.listIdentifier) { result in
-            result.onSuccess { tasks in
-                receivedTasks = tasks
-            }
-            fetchTasksExpectation.fulfill()
-        }
-        waitForExpectations(timeout: expectationTimeout)
-        
-        receivedTasks.forEach { [weak self] task in
-            if let identifier = task.identifier {
-                let deleteTaskExpectation = expectation(description: "wait for return")
-                self?.storage.deleteTask(taskId: identifier) { _ in
-                    deleteTaskExpectation.fulfill()
-                }
-                waitForExpectations(timeout: expectationTimeout)
-            }
-        }
-    }
-    
     private func createTasks() {
         let tasks = [TestData.runMarathonTask, TestData.buyTeaTask]
+        let list = List(identifier: TestData.listIdentifier, name: "Todo list", tasks: tasks)
         
-        tasks.forEach { [weak self] task in
-            let createTaskExpectation = expectation(description: "wait for return")
-            self?.storage.createTask(task) { result in
-                createTaskExpectation.fulfill()
-            }
-            waitForExpectations(timeout: expectationTimeout)
+        let listStorage = ListStorageImpl()
+        let createListExpectation = expectation(description: "wait for return")
+        listStorage.createList(list) { result in
+            createListExpectation.fulfill()
         }
+        waitForExpectations(timeout: expectationTimeout)
         
         self.tasks = tasks
     }
@@ -259,7 +232,7 @@ class TaskStorageImplTests: TestCase {
 extension TaskStorageImplTests {
     struct TestData {
         static let listIdentifier = "List-ID"
-        static let wrongIdentifier = "Wrong ID"
+        static let wrongIdentifier = "wrongIdentifier"
         static let runMarathonTaskIdentifier = "ID-1"
         static let runMarathonTask = Task(
             identifier: runMarathonTaskIdentifier,
@@ -284,6 +257,12 @@ extension TaskStorageImplTests {
             name: "Make a coffee",
             status: .done,
             creationDate: Date(timeIntervalSince1970: 3)
+        )
+        static let nonExistingTask = Task(
+            identifier: "nonExistingTask ID",
+            name: "Non existing",
+            status: .done,
+            creationDate: Date(timeIntervalSince1970: 4)
         )
     }
 }

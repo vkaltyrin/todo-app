@@ -1,7 +1,7 @@
 @testable import TodoApplication
 import XCTest
 
-class ListStorageImplTests: TestCase {
+class ListStorageImplTests: StorageTestCase {
     
     // MARK: - Subject under test
     var storage: ListStorage!
@@ -13,7 +13,7 @@ class ListStorageImplTests: TestCase {
     
     override func setUp() {
         super.setUp()
-        resetStorageState()
+        storage = ListStorageImpl()
         createLists()
     }
     
@@ -182,33 +182,6 @@ class ListStorageImplTests: TestCase {
     }
     
     // MARK: - Private
-    
-    private func resetStorageState() {
-        storage = ListStorageImpl()
-        deleteAllLists()
-    }
-    
-    private func deleteAllLists() {
-        let fetchListsExpectation = expectation(description: "wait for return")
-        var receivedLists: [List] = []
-        storage.fetchLists() { result in
-            result.onSuccess { tasks in
-                receivedLists = tasks
-            }
-            fetchListsExpectation.fulfill()
-        }
-        waitForExpectations(timeout: expectationTimeout)
-        
-        receivedLists.forEach { [weak self] List in
-            if let identifier = List.identifier {
-                let deleteTaskExpectation = expectation(description: "wait for return")
-                self?.storage.deleteList(listId: identifier) { _ in
-                    deleteTaskExpectation.fulfill()
-                }
-                waitForExpectations(timeout: expectationTimeout)
-            }
-        }
-    }
     
     private func createLists() {
         let lists = [TestData.todayList, TestData.tomorrowList]

@@ -6,6 +6,7 @@ final class RealmTask: Object {
     @objc dynamic var name = ""
     @objc dynamic var status = Task.Status.undone
     @objc dynamic var creationDate = Date()
+    let owner = LinkingObjects(fromType: RealmList.self, property: "tasks")
 }
 
 extension RealmTask {

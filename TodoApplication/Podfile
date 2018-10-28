@@ -10,7 +10,8 @@ target 'TodoApplication' do
 
   target 'TodoApplicationTests' do
     inherit! :search_paths
-    # Pods for testing
+    
+    pod 'RealmSwift'
   end
 
 end
