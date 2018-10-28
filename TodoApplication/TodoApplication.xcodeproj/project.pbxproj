@@ -32,6 +32,13 @@
 		8C3C9EF32185A0CC002F4500 /* ListStorageImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF22185A0CC002F4500 /* ListStorageImplTests.swift */; };
 		8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */; };
 		8C3C9EF92185B897002F4500 /* TestStorageUtilityImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */; };
+		8C3C9F042185BE7F002F4500 /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F032185BE7F002F4500 /* ListRouter.swift */; };
+		8C3C9F062185BE98002F4500 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F052185BE98002F4500 /* ListView.swift */; };
+		8C3C9F082185BEAF002F4500 /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F072185BEAF002F4500 /* ListInteractor.swift */; };
+		8C3C9F0A2185BEC6002F4500 /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F092185BEC6002F4500 /* ListPresenter.swift */; };
+		8C3C9F0D2185BF88002F4500 /* TransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F0C2185BF88002F4500 /* TransitionHandler.swift */; };
+		8C3C9F0F2185BFC2002F4500 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F0E2185BFC2002F4500 /* ListViewController.swift */; };
+		8C3C9F112185BFF7002F4500 /* ListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F102185BFF7002F4500 /* ListAssembly.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +85,13 @@
 		8C3C9EF22185A0CC002F4500 /* ListStorageImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStorageImplTests.swift; sourceTree = "<group>"; };
 		8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStorageUtility.swift; sourceTree = "<group>"; };
 		8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStorageUtilityImpl.swift; sourceTree = "<group>"; };
+		8C3C9F032185BE7F002F4500 /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
+		8C3C9F052185BE98002F4500 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		8C3C9F072185BEAF002F4500 /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
+		8C3C9F092185BEC6002F4500 /* ListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
+		8C3C9F0C2185BF88002F4500 /* TransitionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandler.swift; sourceTree = "<group>"; };
+		8C3C9F0E2185BFC2002F4500 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		8C3C9F102185BFF7002F4500 /* ListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAssembly.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +148,7 @@
 		8C3C9EAA2184D3DF002F4500 /* TodoApplication */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9EFB2185BDCD002F4500 /* Modules */,
 				8C3C9ED52184DAAE002F4500 /* Storage */,
 				8C3C9ED22184D93C002F4500 /* Core */,
 				8C3C9ECD2184D784002F4500 /* Models */,
@@ -170,6 +185,7 @@
 		8C3C9ED22184D93C002F4500 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9F0B2185BF7D002F4500 /* VIP */,
 				8C3C9EDC2184DF33002F4500 /* Typealiases.swift */,
 				8C3C9ED32184D947002F4500 /* Identifier.swift */,
 				8C3C9ED82184DB7C002F4500 /* Result.swift */,
@@ -209,6 +225,83 @@
 				8C3C9EF021859DB0002F4500 /* RealmList.swift */,
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		8C3C9EFB2185BDCD002F4500 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9EFD2185BDE7002F4500 /* Task */,
+				8C3C9EFC2185BDE1002F4500 /* List */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8C3C9EFC2185BDE1002F4500 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9EFE2185BE32002F4500 /* Assembly */,
+				8C3C9F022185BE5D002F4500 /* Router */,
+				8C3C9F012185BE55002F4500 /* View */,
+				8C3C9EFF2185BE37002F4500 /* Interactor */,
+				8C3C9F002185BE4E002F4500 /* Presenter */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		8C3C9EFD2185BDE7002F4500 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		8C3C9EFE2185BE32002F4500 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F102185BFF7002F4500 /* ListAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		8C3C9EFF2185BE37002F4500 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F072185BEAF002F4500 /* ListInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8C3C9F002185BE4E002F4500 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F092185BEC6002F4500 /* ListPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8C3C9F012185BE55002F4500 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F052185BE98002F4500 /* ListView.swift */,
+				8C3C9F0E2185BFC2002F4500 /* ListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C3C9F022185BE5D002F4500 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F032185BE7F002F4500 /* ListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8C3C9F0B2185BF7D002F4500 /* VIP */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F0C2185BF88002F4500 /* TransitionHandler.swift */,
+			);
+			path = VIP;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
@@ -438,19 +531,26 @@
 			files = (
 				8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */,
 				8C3C9EAE2184D3DF002F4500 /* ViewController.swift in Sources */,
+				8C3C9F0A2185BEC6002F4500 /* ListPresenter.swift in Sources */,
+				8C3C9F0D2185BF88002F4500 /* TransitionHandler.swift in Sources */,
 				8C3C9EED2185959C002F4500 /* StorageError.swift in Sources */,
+				8C3C9F062185BE98002F4500 /* ListView.swift in Sources */,
 				8C3C9EEB21859545002F4500 /* RealmTask.swift in Sources */,
 				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
 				8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */,
+				8C3C9F112185BFF7002F4500 /* ListAssembly.swift in Sources */,
 				8C3C9ED12184D90C002F4500 /* List.swift in Sources */,
 				8C3C9EDF2184E160002F4500 /* ListStorageImpl.swift in Sources */,
 				8C3C9EF121859DB0002F4500 /* RealmList.swift in Sources */,
 				8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */,
 				8C3C9EE12184E17F002F4500 /* TaskStorageImpl.swift in Sources */,
+				8C3C9F082185BEAF002F4500 /* ListInteractor.swift in Sources */,
 				8C3C9EEF21859628002F4500 /* StorageTypealiases.swift in Sources */,
+				8C3C9F042185BE7F002F4500 /* ListRouter.swift in Sources */,
 				8C3C9EDB2184DED1002F4500 /* ListStorage.swift in Sources */,
 				8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */,
 				8C3C9EAC2184D3DF002F4500 /* AppDelegate.swift in Sources */,
+				8C3C9F0F2185BFC2002F4500 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
