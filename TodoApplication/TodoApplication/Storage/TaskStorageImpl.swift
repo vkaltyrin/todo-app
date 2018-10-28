@@ -1,42 +1,6 @@
 import Foundation
 import RealmSwift
 
-enum StorageError {
-    case cannotCreate
-    case cannotFetch
-    case cannotDelete
-    case cannotUpdate
-}
-
-class RealmTask: Object {
-    @objc dynamic var identifier: Identifier?
-    @objc dynamic var name = ""
-    @objc dynamic var status = Task.Status.undone
-    @objc dynamic var creationDate = Date()
-}
-
-extension RealmTask {
-    func toTask() -> Task {
-        return Task(
-            identifier: identifier,
-            name: name,
-            status: status,
-            creationDate: creationDate
-        )
-    }
-}
-
-extension Task {
-    func toRealm() -> RealmTask {
-        let result = RealmTask()
-        result.identifier = identifier
-        result.name = name
-        result.status = status
-        result.creationDate = creationDate
-        return result
-    }
-}
-
 final class TaskStorageImpl: TaskStorage {
 
     private let queue = DispatchQueue(label: "com.vkaltyrin.TaskStorageImpl.queue")
