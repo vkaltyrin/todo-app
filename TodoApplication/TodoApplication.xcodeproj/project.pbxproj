@@ -27,6 +27,7 @@
 		8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE72184EE81002F4500 /* TestCase.swift */; };
 		8C3C9EEB21859545002F4500 /* RealmTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EEA21859545002F4500 /* RealmTask.swift */; };
 		8C3C9EED2185959C002F4500 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EEC2185959C002F4500 /* StorageError.swift */; };
+		8C3C9EEF21859628002F4500 /* StorageTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EEE21859628002F4500 /* StorageTypealiases.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		8C3C9EE72184EE81002F4500 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		8C3C9EEA21859545002F4500 /* RealmTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTask.swift; sourceTree = "<group>"; };
 		8C3C9EEC2185959C002F4500 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
+		8C3C9EEE21859628002F4500 /* StorageTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTypealiases.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +177,7 @@
 				8C3C9EDA2184DED1002F4500 /* ListStorage.swift */,
 				8C3C9EDE2184E160002F4500 /* ListStorageImpl.swift */,
 				8C3C9EEC2185959C002F4500 /* StorageError.swift */,
+				8C3C9EEE21859628002F4500 /* StorageTypealiases.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				8C3C9EDF2184E160002F4500 /* ListStorageImpl.swift in Sources */,
 				8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */,
 				8C3C9EE12184E17F002F4500 /* TaskStorageImpl.swift in Sources */,
+				8C3C9EEF21859628002F4500 /* StorageTypealiases.swift in Sources */,
 				8C3C9EDB2184DED1002F4500 /* ListStorage.swift in Sources */,
 				8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */,
 				8C3C9EAC2184D3DF002F4500 /* AppDelegate.swift in Sources */,

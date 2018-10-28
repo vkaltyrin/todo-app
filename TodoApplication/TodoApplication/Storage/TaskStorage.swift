@@ -1,9 +1,5 @@
 import Foundation
 
-typealias OnFetchTasks = (StorageResult<[Task]>) -> ()
-typealias StorageResult<T> = Result<T, StorageError>
-typealias OnStorageResult = (StorageResult<Void>) -> ()
-
 protocol TaskStorage: class {
     func fetchTasks(listId: Identifier, _ completion: @escaping OnFetchTasks)
 
