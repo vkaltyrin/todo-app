@@ -6,6 +6,7 @@ protocol ListAssembly: class {
 }
 
 final class ListAssemblyImpl: ListAssembly {
+
     func module() -> ListViewController {
 
         let viewController = ListViewController()
@@ -28,4 +29,5 @@ final class ListAssemblyImpl: ListAssembly {
 
         return viewController
     }
+
 }

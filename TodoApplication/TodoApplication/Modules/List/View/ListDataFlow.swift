@@ -7,9 +7,13 @@ enum ViewControllerState<T> {
     case error(message: String)
 }
 
+enum ListViewError {
+
+}
+
 struct ListViewModel {
     let identifier: Identifier
-    let title: String
+    let name: String
 }
 
 // swiftlint:disable nesting
@@ -28,19 +32,22 @@ struct ListDataFlow {
 
     struct DeleteList {
         struct Request {
-            let result: GeneralResult
-        }
-        
-        struct ViewModel {
-            let state: ViewControllerState<ListViewModel>
+            let identifier: Identifier
         }
     }
 
     struct UpdateList {
         struct Request {
-            let result: GeneralResult
+            let identifier: Identifier
+            let name: String
         }
-        
+    }
+
+    struct GeneralError {
+        struct Response {
+            let result: StorageError
+        }
+
         struct ViewModel {
             let state: ViewControllerState<ListViewModel>
         }
