@@ -23,6 +23,8 @@
 		8C3C9EDF2184E160002F4500 /* ListStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDE2184E160002F4500 /* ListStorageImpl.swift */; };
 		8C3C9EE12184E17F002F4500 /* TaskStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE02184E17F002F4500 /* TaskStorageImpl.swift */; };
 		8C3C9EE32184E29A002F4500 /* TaskStorageImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE22184E29A002F4500 /* TaskStorageImplTests.swift */; };
+		8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE52184EE64002F4500 /* Task+Equatable.swift */; };
+		8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE72184EE81002F4500 /* TestCase.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		8C3C9EDE2184E160002F4500 /* ListStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStorageImpl.swift; sourceTree = "<group>"; };
 		8C3C9EE02184E17F002F4500 /* TaskStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageImpl.swift; sourceTree = "<group>"; };
 		8C3C9EE22184E29A002F4500 /* TaskStorageImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageImplTests.swift; sourceTree = "<group>"; };
+		8C3C9EE52184EE64002F4500 /* Task+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Equatable.swift"; sourceTree = "<group>"; };
+		8C3C9EE72184EE81002F4500 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +136,7 @@
 		8C3C9EBF2184D3E0002F4500 /* TodoApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9EE42184EE4B002F4500 /* Utils */,
 				8C3C9EE22184E29A002F4500 /* TaskStorageImplTests.swift */,
 				8C3C9EC22184D3E0002F4500 /* Info.plist */,
 			);
@@ -166,6 +171,15 @@
 				8C3C9EDE2184E160002F4500 /* ListStorageImpl.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		8C3C9EE42184EE4B002F4500 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9EE52184EE64002F4500 /* Task+Equatable.swift */,
+				8C3C9EE72184EE81002F4500 /* TestCase.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
@@ -378,6 +392,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3C9EE32184E29A002F4500 /* TaskStorageImplTests.swift in Sources */,
+				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,
+				8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
