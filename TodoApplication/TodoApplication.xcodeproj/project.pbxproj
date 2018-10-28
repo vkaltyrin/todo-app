@@ -19,7 +19,7 @@
 		8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED62184DAC4002F4500 /* TaskStorage.swift */; };
 		8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9ED82184DB7C002F4500 /* Result.swift */; };
 		8C3C9EDB2184DED1002F4500 /* ListStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDA2184DED1002F4500 /* ListStorage.swift */; };
-		8C3C9EDD2184DF33002F4500 /* OnSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDC2184DF33002F4500 /* OnSuccess.swift */; };
+		8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDC2184DF33002F4500 /* Typealiases.swift */; };
 		8C3C9EDF2184E160002F4500 /* ListStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EDE2184E160002F4500 /* ListStorageImpl.swift */; };
 		8C3C9EE12184E17F002F4500 /* TaskStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE02184E17F002F4500 /* TaskStorageImpl.swift */; };
 		8C3C9EE32184E29A002F4500 /* TaskStorageImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EE22184E29A002F4500 /* TaskStorageImplTests.swift */; };
@@ -58,7 +58,7 @@
 		8C3C9ED62184DAC4002F4500 /* TaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorage.swift; sourceTree = "<group>"; };
 		8C3C9ED82184DB7C002F4500 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8C3C9EDA2184DED1002F4500 /* ListStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStorage.swift; sourceTree = "<group>"; };
-		8C3C9EDC2184DF33002F4500 /* OnSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnSuccess.swift; sourceTree = "<group>"; };
+		8C3C9EDC2184DF33002F4500 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		8C3C9EDE2184E160002F4500 /* ListStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStorageImpl.swift; sourceTree = "<group>"; };
 		8C3C9EE02184E17F002F4500 /* TaskStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageImpl.swift; sourceTree = "<group>"; };
 		8C3C9EE22184E29A002F4500 /* TaskStorageImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorageImplTests.swift; sourceTree = "<group>"; };
@@ -155,9 +155,9 @@
 		8C3C9ED22184D93C002F4500 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9EDC2184DF33002F4500 /* Typealiases.swift */,
 				8C3C9ED32184D947002F4500 /* Identifier.swift */,
 				8C3C9ED82184DB7C002F4500 /* Result.swift */,
-				8C3C9EDC2184DF33002F4500 /* OnSuccess.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -206,6 +206,7 @@
 				8C3C9EA62184D3DF002F4500 /* Resources */,
 				8C3C9ECB2184D454002F4500 /* SwiftLint Autocorrect */,
 				8C3C9ECC2184D47E002F4500 /* SwiftLint Lint */,
+				714C809E462F7E7CE8DE0664 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -312,18 +313,34 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		714C809E462F7E7CE8DE0664 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TodoApplication/Pods-TodoApplication-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TodoApplication/Pods-TodoApplication-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8C3C9ECB2184D454002F4500 /* SwiftLint Autocorrect */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = "SwiftLint Autocorrect";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,13 +352,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = "SwiftLint Lint";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,7 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C3C9EDD2184DF33002F4500 /* OnSuccess.swift in Sources */,
+				8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */,
 				8C3C9EAE2184D3DF002F4500 /* ViewController.swift in Sources */,
 				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
 				8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */,

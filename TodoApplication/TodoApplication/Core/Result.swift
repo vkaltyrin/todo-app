@@ -1,6 +1,6 @@
-public enum Result<T> {
+public enum Result<T, E> {
     case success(T)
-    case failure(Error)
+    case failure(E)
 
     public typealias CompletionHandler = (Result) -> ()
 
@@ -13,7 +13,7 @@ public enum Result<T> {
         }
     }
 
-    public func onFailure(_ closure: (Error) -> ()) {
+    public func onFailure(_ closure: (E) -> ()) {
         switch self {
         case .failure(let error):
             closure(error)

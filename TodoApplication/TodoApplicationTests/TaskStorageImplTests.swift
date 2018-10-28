@@ -26,31 +26,6 @@ class TaskStorageImplTests: TestCase {
     
     // MARK: - Tests
     
-    func testFetchTasks_returnTasks_withSuccess() {
-        // given
-        let expectedTasks = tasks
-        var receivedError: Error?
-        var receivedTasks: [Task] = []
-        let response = expectation(description: "wait for return")
-        
-        // when
-        storage.fetchTasks(listId: TestData.listIdentifier) { result in
-            result.onSuccess { tasks in
-                receivedTasks = tasks
-                response.fulfill()
-            }
-            result.onFailure { error in
-                receivedError = error
-                response.fulfill()
-            }
-        }
-        waitForExpectations(timeout: expectationTimeout)
-        
-        // then
-        XCTAssertEqual(receivedTasks, expectedTasks)
-        XCTAssertNil(receivedError)
-    }
-    
     func testFetchTasks_returnTasks_sortedDescendingByCreationDate() {
         // given
         var receivedTasks: [Task] = []
@@ -80,7 +55,7 @@ class TaskStorageImplTests: TestCase {
     func testDeleteTask_deleteTask_withSuccess() {
         // given
         let identifier = TestData.runMarathonTaskIdentifier
-        var receivedError: Error?
+        var receivedError: StorageError?
         let response = expectation(description: "wait for return")
         
         // when
@@ -102,7 +77,7 @@ class TaskStorageImplTests: TestCase {
     func testCreateTask_createTask_withSuccess() {
         // given
         let task = TestData.makeCoffeeTask
-        var receivedError: Error?
+        var receivedError: StorageError?
         let response = expectation(description: "wait for return")
         
         // when
@@ -124,7 +99,7 @@ class TaskStorageImplTests: TestCase {
     func testUpdateTask_updateTask_withSuccess() {
         // given
         let task = TestData.writeTestsTask
-        var receivedError: Error?
+        var receivedError: StorageError?
         let response = expectation(description: "wait for return")
         
         // when

@@ -1,7 +1,7 @@
 import Foundation
 
 struct Task {
-    enum Status {
+    @objc enum Status: Int {
         case undone
         case done
     }

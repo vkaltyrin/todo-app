@@ -5,15 +5,15 @@ final class ListStorageImpl: ListStorage {
 
     }
 
-    func deleteList(listId: Identifier, _ completion: @escaping OnSuccess) {
+    func deleteList(listId: Identifier, _ completion: @escaping OnStorageResult) {
 
     }
 
-    func createList(_ list: List, _ completion: @escaping OnSuccess) {
+    func createList(_ list: List, _ completion: @escaping OnStorageResult) {
 
     }
 
-    func updateList(_ task: List, _ completion: @escaping OnSuccess) {
+    func updateList(_ task: List, _ completion: @escaping OnStorageResult) {
 
     }
 

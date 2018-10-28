@@ -6,6 +6,7 @@ target 'TodoApplication' do
   use_frameworks!
 
   pod 'SwiftLint'
+  pod 'RealmSwift'
 
   target 'TodoApplicationTests' do
     inherit! :search_paths
