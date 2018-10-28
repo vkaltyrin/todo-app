@@ -51,7 +51,7 @@ final class ListViewController: UIViewController {
         state = .loading
 
         tableDirector.onListTap = { [weak self] listIdentifier in
-            self?.router?.openTasks(listIdentifier: listIdentifier)
+            self?.showListActions(listIdentifier)
         }
         tableDirector.onCellTextDidEndEditing = { [weak self] listIdentifier, text in
             let request = ListDataFlow.UpdateList.Request(
@@ -110,6 +110,35 @@ final class ListViewController: UIViewController {
         alert.addAction(closeAction)
 
         present(alert, animated: true, completion: nil)
+    }
+
+    private func showListActions(_ listIdentifier: Identifier) {
+        let actionSheet = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+
+        let editAciton = UIAlertAction(title: "Edit 📝", style: .default) { _ in
+
+        }
+        actionSheet.addAction(editAciton)
+
+        let deleteAction = UIAlertAction(title: "Delete 🗑", style: .default) { [weak self] _ in
+            let request = ListDataFlow.DeleteList.Request(identifier: listIdentifier)
+            self?.interactor?.deleteItem(request: request)
+        }
+        actionSheet.addAction(deleteAction)
+
+        let openAction = UIAlertAction(title: "View tasks ▶️", style: .default) { [weak self] _ in
+            self?.router?.openTasks(listIdentifier: listIdentifier)
+        }
+        actionSheet.addAction(openAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
     }
 }
 

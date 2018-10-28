@@ -9,6 +9,7 @@ final class ListViewTableDirector: NSObject, TableDirector {
             tableView?.dataSource = self
 
             tableView?.registerNib(cellClass: ListCell.self)
+            tableView?.allowsMultipleSelection = true
         }
     }
 

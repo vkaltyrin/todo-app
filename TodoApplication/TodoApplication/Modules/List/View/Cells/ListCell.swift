@@ -12,6 +12,13 @@ class ListCell: UITableViewCell {
 
         textField.delegate = self
         textField.returnKeyType = .done
+        textField.isUserInteractionEnabled = false
+        self.selectionStyle = .none
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
     }
 }
 
