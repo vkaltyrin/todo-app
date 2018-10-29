@@ -88,6 +88,7 @@
 		8C3C9FCD218756C3002F4500 /* TaskAssemblyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FC2218756C2002F4500 /* TaskAssemblyTests.swift */; };
 		8C3C9FD4218756C3002F4500 /* TaskViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FCA218756C2002F4500 /* TaskViewControllerTests.swift */; };
 		8C3C9FD5218756C3002F4500 /* TaskInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FCB218756C2002F4500 /* TaskInteractorTests.swift */; };
+		8C45A1F02187A50200542D11 /* TaskPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C45A1EF2187A50200542D11 /* TaskPresenterMock.swift */; };
 		8C5F24302187606D00D207A1 /* ListRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F242F2187606D00D207A1 /* ListRouterTests.swift */; };
 		8C5F243E218760F600D207A1 /* ListRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F2433218760F500D207A1 /* ListRouterMock.swift */; };
 		8C5F243F218760F600D207A1 /* TaskViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F2434218760F500D207A1 /* TaskViewInputMock.swift */; };
@@ -99,7 +100,6 @@
 		8C5F2445218760F600D207A1 /* ListViewTableDirectorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F243A218760F500D207A1 /* ListViewTableDirectorMock.swift */; };
 		8C5F2446218760F600D207A1 /* ListInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F243B218760F500D207A1 /* ListInteractorMock.swift */; };
 		8C5F2447218760F600D207A1 /* TaskViewTableDirectorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F243C218760F500D207A1 /* TaskViewTableDirectorMock.swift */; };
-		8C5F2448218760F600D207A1 /* TaskPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F243D218760F500D207A1 /* TaskPresenterMock.swift */; };
 		8C5F244A2187610100D207A1 /* TransitionHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F24492187610100D207A1 /* TransitionHandlerMock.swift */; };
 		8C5F244C218765E800D207A1 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F244B218765E800D207A1 /* BaseCell.swift */; };
 		8C5F24632187842800D207A1 /* AccessibleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F24622187842800D207A1 /* AccessibleCell.swift */; };
@@ -229,6 +229,7 @@
 		8C3C9FC2218756C2002F4500 /* TaskAssemblyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAssemblyTests.swift; sourceTree = "<group>"; };
 		8C3C9FCA218756C2002F4500 /* TaskViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewControllerTests.swift; sourceTree = "<group>"; };
 		8C3C9FCB218756C2002F4500 /* TaskInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskInteractorTests.swift; sourceTree = "<group>"; };
+		8C45A1EF2187A50200542D11 /* TaskPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenterMock.swift; sourceTree = "<group>"; };
 		8C5F242F2187606D00D207A1 /* ListRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouterTests.swift; sourceTree = "<group>"; };
 		8C5F2433218760F500D207A1 /* ListRouterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListRouterMock.swift; sourceTree = "<group>"; };
 		8C5F2434218760F500D207A1 /* TaskViewInputMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewInputMock.swift; sourceTree = "<group>"; };
@@ -240,7 +241,6 @@
 		8C5F243A218760F500D207A1 /* ListViewTableDirectorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewTableDirectorMock.swift; sourceTree = "<group>"; };
 		8C5F243B218760F500D207A1 /* ListInteractorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListInteractorMock.swift; sourceTree = "<group>"; };
 		8C5F243C218760F500D207A1 /* TaskViewTableDirectorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewTableDirectorMock.swift; sourceTree = "<group>"; };
-		8C5F243D218760F500D207A1 /* TaskPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPresenterMock.swift; sourceTree = "<group>"; };
 		8C5F24492187610100D207A1 /* TransitionHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandlerMock.swift; sourceTree = "<group>"; };
 		8C5F244B218765E800D207A1 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		8C5F24622187842800D207A1 /* AccessibleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCell.swift; sourceTree = "<group>"; };
@@ -603,8 +603,8 @@
 		8C3C9F9D218741FC002F4500 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9F9E218741FC002F4500 /* TaskViewInput.swift */,
 				8C3C9F9F218741FC002F4500 /* Cells */,
+				8C3C9F9E218741FC002F4500 /* TaskViewInput.swift */,
 				8C3C9FA2218741FC002F4500 /* TaskViewController.xib */,
 				8C3C9FA3218741FC002F4500 /* TaskViewController.swift */,
 				8C3C9FA4218741FC002F4500 /* TaskViewTableDirector.swift */,
@@ -671,8 +671,8 @@
 				8C5F243A218760F500D207A1 /* ListViewTableDirectorMock.swift */,
 				8C5F243B218760F500D207A1 /* ListInteractorMock.swift */,
 				8C5F243C218760F500D207A1 /* TaskViewTableDirectorMock.swift */,
-				8C5F243D218760F500D207A1 /* TaskPresenterMock.swift */,
 				8C5F24492187610100D207A1 /* TransitionHandlerMock.swift */,
+				8C45A1EF2187A50200542D11 /* TaskPresenterMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1063,13 +1063,13 @@
 				8C5F243E218760F600D207A1 /* ListRouterMock.swift in Sources */,
 				8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */,
 				8C5F24302187606D00D207A1 /* ListRouterTests.swift in Sources */,
-				8C5F2448218760F600D207A1 /* TaskPresenterMock.swift in Sources */,
 				8C3C9EF32185A0CC002F4500 /* ListStorageImplTests.swift in Sources */,
 				8C5F2446218760F600D207A1 /* ListInteractorMock.swift in Sources */,
 				8C5F2443218760F600D207A1 /* ListStorageMock.swift in Sources */,
 				8C5F244A2187610100D207A1 /* TransitionHandlerMock.swift in Sources */,
 				8C3C9FD4218756C3002F4500 /* TaskViewControllerTests.swift in Sources */,
 				8C3C9FD5218756C3002F4500 /* TaskInteractorTests.swift in Sources */,
+				8C45A1F02187A50200542D11 /* TaskPresenterMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
