@@ -236,15 +236,12 @@
 		8C3C9ED22184D93C002F4500 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9F5A218712CE002F4500 /* ActivityDisplayble */,
+				8C3C9F5F21871E73002F4500 /* UI */,
 				8C3C9F262185CDB5002F4500 /* Extensions */,
 				8C3C9F0B2185BF7D002F4500 /* VIP */,
 				8C3C9EDC2184DF33002F4500 /* Typealiases.swift */,
 				8C3C9ED32184D947002F4500 /* Identifier.swift */,
 				8C3C9ED82184DB7C002F4500 /* Result.swift */,
-				8C3C9F3921860E8D002F4500 /* ConfigurableCell.swift */,
-				8C3C9F3F218613D5002F4500 /* TableDirector.swift */,
-				8C3C9F4121862381002F4500 /* KeyboardObserver.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -339,9 +336,9 @@
 		8C3C9F012185BE55002F4500 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9F462186D58D002F4500 /* ViewModels */,
 				8C3C9F1B2185CC4C002F4500 /* Cells */,
 				8C3C9F052185BE98002F4500 /* ListViewInput.swift */,
+				8C3C9F472186D5A5002F4500 /* ListViewModel.swift */,
 				8C3C9F172185C852002F4500 /* ListViewController.swift */,
 				8C3C9F182185C852002F4500 /* ListViewController.xib */,
 				8C3C9F292185D1AA002F4500 /* ListDataFlow.swift */,
@@ -413,15 +410,6 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		8C3C9F462186D58D002F4500 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				8C3C9F442186D0EE002F4500 /* Alert.swift */,
-				8C3C9F472186D5A5002F4500 /* ListViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		8C3C9F4F218700D6002F4500 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +430,18 @@
 				8C3C9F5D218714DD002F4500 /* ActivityDisplaybleImpl.swift */,
 			);
 			path = ActivityDisplayble;
+			sourceTree = "<group>";
+		};
+		8C3C9F5F21871E73002F4500 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F3F218613D5002F4500 /* TableDirector.swift */,
+				8C3C9F4121862381002F4500 /* KeyboardObserver.swift */,
+				8C3C9F3921860E8D002F4500 /* ConfigurableCell.swift */,
+				8C3C9F442186D0EE002F4500 /* Alert.swift */,
+				8C3C9F5A218712CE002F4500 /* ActivityDisplayble */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
