@@ -3,6 +3,7 @@ import Foundation
 protocol ListPresenter: class {
     func presentShowList(_ response: ListDataFlow.ShowLists.Response)
     func presentError(_ error: StorageError)
+    func presentListActions(_ identifier: Identifier)
 }
 
 final class ListPresenterImpl: ListPresenter {
@@ -37,8 +38,34 @@ final class ListPresenterImpl: ListPresenter {
         view.showItems(viewModel)
     }
 
-    // MARK: - Private
+    func presentListActions(_ identifier: Identifier) {
+        let actions: [Dialog.Action] = [
+            Dialog.Action(
+                title: "Edit 📝",
+                style: .default) { [weak self] in
+                    self?.view.showEditing(identifier)
+            },
+            Dialog.Action(
+                title: "Delete 🗑",
+                style: .default) { [weak self] in
+                    self?.view.deleteItem(identifier)
+            },
+            Dialog.Action(
+                title: "View tasks ▶️",
+                style: .default) { [weak self] in
+                    self?.view.openTasks(identifier)
+            },
+            Dialog.Action(
+                title: "Cancel",
+                style: .cancel,
+                onTap: nil
+            )
+        ]
+        let dialog = Dialog(actions: actions)
+        view.showActionSheet(dialog)
+    }
 
+    // MARK: - Private
     func errorStateViewModel(_ error: StorageError) -> ListDataFlow.ShowLists.ViewModel {
         let message: String
         switch error {
@@ -50,6 +77,18 @@ final class ListPresenterImpl: ListPresenter {
              .cannotUpdate:
             message = "Incorrect input in the database 🤔"
         }
-        return ListDataFlow.ShowLists.ViewModel(state: .error(message: message))
+
+        let action = Dialog.Action(
+            title: "OK",
+            style: .cancel,
+            onTap: nil
+        )
+        let dialog = Dialog(
+            title: nil,
+            message: message,
+            actions: [action]
+        )
+
+        return ListDataFlow.ShowLists.ViewModel(state: .error(dialog: dialog))
     }
 }

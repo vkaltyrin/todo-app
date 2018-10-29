@@ -1,30 +1,51 @@
 import Foundation
 import UIKit
 
-final class ListViewTableDirector: NSObject, TableDirector {
+protocol ListViewTableDirector: TableDirector {
+    func focusOnList(_ identifier: Identifier)
 
-    weak var tableView: UITableView? {
-        didSet {
-            tableView?.delegate = self
-            tableView?.dataSource = self
+    var items: [ListViewModel] { get set }
 
-            tableView?.registerNib(cellClass: ListCell.self)
-            tableView?.allowsMultipleSelection = true
-        }
-    }
+    var onListTap: ((Identifier) -> ())? { get set }
+    var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())? { get set }
+    var onDeleteTap: ((_ identifier: Identifier) -> ())? { get set }
+}
+
+final class ListViewTableDirectorImpl: NSObject, ListViewTableDirector {
+
+    // MARK: - State
+    private weak var tableView: UITableView?
 
     // MARK: - TableDirector
-
     func reload() {
         tableView?.reloadData()
     }
 
     // MARK: - State
-
     var items: [ListViewModel] = [] {
         didSet {
             reload()
         }
+    }
+
+    // MARK: - ListViewTableDirector
+    func setup(with tableView: UITableView) {
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.registerNib(cellClass: ListCell.self)
+        tableView.allowsMultipleSelection = true
+
+        self.tableView = tableView
+    }
+
+    func focusOnList(_ identifier: Identifier) {
+        guard let row = items.firstIndex(where: { $0.identifier == identifier }) else {
+            return
+        }
+        let indexPath = IndexPath(row: row, section: 0)
+        let cell = tableView?.cellForRow(at: indexPath) as? ListCell
+        cell?.focus()
     }
 
     var onListTap: ((Identifier) -> ())?
@@ -32,7 +53,6 @@ final class ListViewTableDirector: NSObject, TableDirector {
     var onDeleteTap: ((_ identifier: Identifier) -> ())?
 
     // MARK: - UITableViewDelegate
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectRow(at: indexPath, animated: true) }
 
@@ -67,7 +87,6 @@ final class ListViewTableDirector: NSObject, TableDirector {
     }
 
     // MARK: - UITableViewDataSource
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }

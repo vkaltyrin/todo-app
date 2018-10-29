@@ -7,6 +7,12 @@ class ListCell: UITableViewCell {
 
     @IBOutlet weak var textField: UITextField!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        textField.isUserInteractionEnabled = false
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -16,9 +22,18 @@ class ListCell: UITableViewCell {
         self.selectionStyle = .none
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func focus() {
+        textField.isUserInteractionEnabled = true
+        textField.becomeFirstResponder()
+    }
 
+    func disableFocus() {
+        textField.isUserInteractionEnabled = false
+    }
+
+    override func resignFirstResponder() -> Bool {
+
+        return super.resignFirstResponder()
     }
 }
 
@@ -31,6 +46,10 @@ extension ListCell: ConfigurableCell {
 }
 
 extension ListCell: UITextFieldDelegate {
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        disableFocus()
+    }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         onTextDidEndEditing?(textField.text ?? "")

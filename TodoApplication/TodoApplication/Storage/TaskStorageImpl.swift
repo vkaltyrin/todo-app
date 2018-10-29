@@ -9,46 +9,64 @@ final class TaskStorageImpl: TaskStorage {
     // MARK: - TaskStorage
     func fetchTasks(listId: Identifier, _ completion: @escaping OnFetchTasks) {
         queue.async {
+            let result: TaskResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
             let realm = try? Realm()
             let tasks = realm?.objects(RealmTask.self)
                 .sorted(byKeyPath: "creationDate", ascending: false)
                 .filter { $0.owner.first?.identifier == listId } ?? []
 
             if !tasks.isEmpty {
-                completion(.success(tasks.map { $0.toTask() }))
+                result = .success(tasks.map { $0.toTask() })
             } else {
-                completion(.failure(.cannotFetch))
+                result = .failure(.cannotFetch)
             }
         }
     }
 
     func deleteTask(taskId: Identifier, _ completion: @escaping OnStorageResult) {
         queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
             let realm = try? Realm()
             guard let taskForDelete = realm?.objects(RealmTask.self).first(where: { task in
                 task.identifier == taskId
             }) else {
-                completion(.failure(.cannotDelete))
+                result = .failure(.cannotDelete)
                 return
             }
             do {
                 try realm?.write {
                     realm?.delete(taskForDelete)
                 }
-                completion(.success(()))
+                result = .success(())
             } catch {
-                completion(.failure(.internalError))
+                result = .failure(.internalError)
             }
         }
     }
 
     func createTask(listId: Identifier, task: Task, _ completion: @escaping OnStorageResult) {
         queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
             let realm = try? Realm()
             guard let listForUpdate = realm?.objects(RealmList.self).first(where: { realmTask in
                 realmTask.identifier == listId
             }) else {
-                completion(.failure(.cannotCreate))
+                result = .failure(.cannotCreate)
                 return
             }
 
@@ -57,20 +75,26 @@ final class TaskStorageImpl: TaskStorage {
                 try realm?.write {
                     listForUpdate.tasks.append(realmTask)
                 }
-                completion(.success(()))
+                result = .success(())
             } catch {
-                completion(.failure(.internalError))
+                result = .failure(.internalError)
             }
         }
     }
 
     func updateTask(task: Task, _ completion: @escaping OnStorageResult) {
         queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
             let realm = try? Realm()
             guard let taskForUpdate = realm?.objects(RealmTask.self).first(where: { realmTask in
                 realmTask.identifier == task.identifier
             }) else {
-                completion(.failure(.cannotUpdate))
+                result = .failure(.cannotUpdate)
                 return
             }
             do {
@@ -79,9 +103,9 @@ final class TaskStorageImpl: TaskStorage {
                     taskForUpdate.status = task.status
                     taskForUpdate.creationDate = task.creationDate
                 }
-                completion(.success(()))
+                result = .success(())
             } catch {
-                completion(.failure(.internalError))
+                result = .failure(.internalError)
             }
         }
     }

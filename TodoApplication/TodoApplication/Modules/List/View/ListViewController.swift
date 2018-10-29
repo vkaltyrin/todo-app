@@ -5,22 +5,29 @@ final class ListViewController: UIViewController {
     // MARK: - Dependencies
     var interactor: ListInteractor?
     var router: ListRouter?
+    var tableDirector: ListViewTableDirector?
 
     // MARK: - State
-    private var tableDirector = ListViewTableDirector()
 
-    private var state: ViewControllerState<ListViewModel> = .loading {
+    private var state: ListDataFlow.ViewControllerState = .loading {
         didSet {
             switch state {
             case .loading:
                 startLoading()
                 interactor?.fetchItems()
-            case .error(let message):
+            case .error(let dialog):
                 stopLoading()
-                showError(message: message)
+                showAlert(dialog)
             case .result(let items):
                 stopLoading()
-                tableDirector.items = items
+                tableDirector?.items = items
+            case .editing(let listIdentifier):
+                stopLoading()
+                tableDirector?.focusOnList(listIdentifier)
+//            case .create(let listIdentifier, let items):
+//                stopLoading()var items: [ListViewModel] = []
+//                tableDirector.items = items
+//                self.state = .editing(listIdentifier: listIdentifier)
             }
         }
     }
@@ -30,7 +37,7 @@ final class ListViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            tableDirector.tableView = tableView
+            tableDirector?.setup(with: tableView)
         }
     }
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -44,23 +51,31 @@ final class ListViewController: UIViewController {
     private var addListButton: UIBarButtonItem?
 
     // MARK: - ViewController life-cycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         state = .loading
 
-        tableDirector.onListTap = { [weak self] listIdentifier in
-            self?.showListActions(listIdentifier)
+        tableDirector?.onListTap = { [weak self] listIdentifier in
+            guard let self = `self` else {
+                return
+            }
+            switch self.state {
+            case .editing:
+                break
+            default:
+                let request = ListDataFlow.OpenListActions.Request(identifier: listIdentifier)
+                self.interactor?.openListActions(request: request)
+            }
         }
-        tableDirector.onCellTextDidEndEditing = { [weak self] listIdentifier, text in
+        tableDirector?.onCellTextDidEndEditing = { [weak self] listIdentifier, text in
             let request = ListDataFlow.UpdateList.Request(
                 identifier: listIdentifier,
                 name: text
             )
             self?.interactor?.updateItem(request: request)
         }
-        tableDirector.onDeleteTap = { [weak self] listIdentifier in
+        tableDirector?.onDeleteTap = { [weak self] listIdentifier in
             let request = ListDataFlow.DeleteList.Request(identifier: listIdentifier)
             self?.interactor?.deleteItem(request: request)
         }
@@ -87,62 +102,29 @@ final class ListViewController: UIViewController {
         interactor?.createItem(request: request)
     }
 
-    func startLoading() {
+    private func startLoading() {
         activityIndicator.startAnimating()
     }
 
-    func stopLoading() {
+    private func stopLoading() {
         activityIndicator.stopAnimating()
-    }
-
-    func showError(message: String) {
-        let alert = UIAlertController(
-            title: "Error 🚫",
-            message: message,
-            preferredStyle: .alert
-        )
-
-        let closeAction = UIAlertAction(
-            title: "OK",
-            style: .cancel,
-            handler: nil
-        )
-        alert.addAction(closeAction)
-
-        present(alert, animated: true, completion: nil)
-    }
-
-    private func showListActions(_ listIdentifier: Identifier) {
-        let actionSheet = UIAlertController(
-            title: nil,
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-
-        let editAciton = UIAlertAction(title: "Edit 📝", style: .default) { _ in
-
-        }
-        actionSheet.addAction(editAciton)
-
-        let deleteAction = UIAlertAction(title: "Delete 🗑", style: .default) { [weak self] _ in
-            let request = ListDataFlow.DeleteList.Request(identifier: listIdentifier)
-            self?.interactor?.deleteItem(request: request)
-        }
-        actionSheet.addAction(deleteAction)
-
-        let openAction = UIAlertAction(title: "View tasks ▶️", style: .default) { [weak self] _ in
-            self?.router?.openTasks(listIdentifier: listIdentifier)
-        }
-        actionSheet.addAction(openAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionSheet.addAction(cancelAction)
-        
-        present(actionSheet, animated: true, completion: nil)
     }
 }
 
 extension ListViewController: ListViewInput {
+    func showEditing(_ identifier: Identifier) {
+        self.state = .editing(listIdentifier: identifier)
+    }
+
+    func deleteItem(_ identifier: Identifier) {
+        let request = ListDataFlow.DeleteList.Request(identifier: identifier)
+        interactor?.deleteItem(request: request)
+    }
+
+    func openTasks(_ identifier: Identifier) {
+        router?.openTasks(listIdentifier: identifier)
+    }
+
     func showItems(_ viewModel: ListDataFlow.ShowLists.ViewModel) {
         self.state = viewModel.state
     }

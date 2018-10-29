@@ -26,6 +26,7 @@ final class ListAssemblyImpl: ListAssembly {
 
         viewController.router = router
         viewController.interactor = interactor
+        viewController.tableDirector = ListViewTableDirectorImpl()
 
         return viewController
     }

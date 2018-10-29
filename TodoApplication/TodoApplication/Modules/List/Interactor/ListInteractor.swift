@@ -5,6 +5,7 @@ protocol ListInteractor: class {
     func deleteItem(request: ListDataFlow.DeleteList.Request)
     func updateItem(request: ListDataFlow.UpdateList.Request)
     func createItem(request: ListDataFlow.CreateList.Request)
+    func openListActions(request: ListDataFlow.OpenListActions.Request)
 }
 
 final class ListInteractorImpl: ListInteractor {
@@ -43,7 +44,7 @@ final class ListInteractorImpl: ListInteractor {
             let response = ListDataFlow.UpdateList.Response(result: result)
             switch response.result {
             case .success:
-                break
+                self?.fetchItems()
             case .failure(let error):
                 self?.presenter.presentError(error)
             }
@@ -55,5 +56,9 @@ final class ListInteractorImpl: ListInteractor {
         listStorage.createList(list) { [weak self] _ in
             self?.fetchItems()
         }
+    }
+
+    func openListActions(request: ListDataFlow.OpenListActions.Request) {
+        presenter.presentListActions(request.identifier)
     }
 }
