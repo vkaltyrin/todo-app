@@ -5,7 +5,7 @@ protocol TaskStorage: class {
 
     func deleteTask(taskId: Identifier, _ completion: @escaping OnStorageResult)
 
-    func createTask(listId: Identifier, task: Task, _ completion: @escaping OnStorageResult)
+    func createTask(listId: Identifier, task: Task, _ completion: @escaping OnStorageIndentifier)
 
-    func updateTask(task: Task, _ completion: @escaping OnStorageResult)
+    func updateTask(taskId: Identifier, name: String, _ completion: @escaping OnStorageResult)
 }

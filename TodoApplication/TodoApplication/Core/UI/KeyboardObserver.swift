@@ -17,12 +17,14 @@ final class KeyboardObserverImpl: KeyboardObserver {
     // MARK: - Init
     init() {
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillShown(_:)),
+            self,
+            selector: #selector(keyboardWillShown(_:)),
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(keyboardWillShown(_:)),
+            self,
+            selector: #selector(keyboardWillShown(_:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )

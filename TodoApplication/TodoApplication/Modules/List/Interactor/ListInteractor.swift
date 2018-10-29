@@ -68,7 +68,10 @@ final class ListInteractorImpl: ListInteractor {
     }
 
     func openListActions(request: ListDataFlow.OpenListActions.Request) {
-        presenter.presentListActions(request.identifier)
+        presenter.presentListActions(
+            request.identifier,
+            name: request.name
+        )
     }
 
     func openListEditing(request: ListDataFlow.OpenListEditing.Request) {

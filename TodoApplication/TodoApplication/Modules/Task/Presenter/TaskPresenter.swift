@@ -1,35 +1,35 @@
 import Foundation
 
-protocol ListPresenter: class {
-    func presentShowLists(_ response: ListDataFlow.ShowLists.Response, identifier: Identifier?)
+protocol TaskPresenter: class {
+    func presentShowTasks(_ response: TaskDataFlow.ShowTasks.Response, identifier: Identifier?)
     func presentError(_ error: StorageError)
-    func presentListActions(_ identifier: Identifier, name: String)
-    func presentListEditing(_ identifier: Identifier)
+    func presentTaskActions(_ identifier: Identifier)
+    func presentTaskEditing(_ identifier: Identifier)
 }
 
-final class ListPresenterImpl: ListPresenter {
+final class TaskPresenterImpl: TaskPresenter {
     // MARK: - Dependencies
-    private unowned let view: ListViewInput
+    private unowned let view: TaskViewInput
 
     // MARK: - Init
-    init(view: ListViewInput) {
+    init(view: TaskViewInput) {
         self.view = view
     }
 
-    // MARK: - ListPresenter
-    func presentShowLists(_ response: ListDataFlow.ShowLists.Response, identifier: Identifier?) {
-        let viewModel: ListDataFlow.ShowLists.ViewModel
+    // MARK: - TaskPresenter
+    func presentShowTasks(_ response: TaskDataFlow.ShowTasks.Response, identifier: Identifier?) {
+        let viewModel: TaskDataFlow.ShowTasks.ViewModel
         switch response.result {
         case .success(let items):
             let resultItems = items.map {
-                ListViewModel(
+                TaskViewModel(
                     identifier: $0.identifier ?? "",
                     name: $0.name
                 )
             }
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(
+            viewModel = TaskDataFlow.ShowTasks.ViewModel(state: .result(
                 items: resultItems,
-                listIdentifier: identifier
+                identifier: identifier
                 )
             )
         case .failure(let error):
@@ -43,22 +43,17 @@ final class ListPresenterImpl: ListPresenter {
         view.showItems(viewModel)
     }
 
-    func presentListActions(_ identifier: Identifier, name: String) {
+    func presentTaskActions(_ identifier: Identifier) {
         let actions: [Dialog.Action] = [
             Dialog.Action(
-                title: "Edit list 📝",
+                title: "Edit todo 📝",
                 style: .default) { [weak self] in
                     self?.view.showEditing(identifier)
             },
             Dialog.Action(
-                title: "Delete list and all containing tasks 🗑",
+                title: "Delete 🗑",
                 style: .default) { [weak self] in
                     self?.view.deleteItem(identifier)
-            },
-            Dialog.Action(
-                title: "Look at tasks ▶️",
-                style: .default) { [weak self] in
-                    self?.view.openTasks(identifier, name: name)
             },
             Dialog.Action(
                 title: "Cancel",
@@ -70,14 +65,15 @@ final class ListPresenterImpl: ListPresenter {
         view.showActionSheet(dialog)
     }
 
-    func presentListEditing(_ identifier: Identifier) {
+    func presentTaskEditing(_ identifier: Identifier) {
         view.showEditing(identifier)
     }
 
     // MARK: - Private
-    func errorStateViewModel(_ error: StorageError) -> ListDataFlow.ShowLists.ViewModel {
+    func errorStateViewModel(_ error: StorageError) -> TaskDataFlow.ShowTasks.ViewModel {
         let dialogBuilder = DialogBuilder()
         let dialog = dialogBuilder.build(storageError: error)
-        return ListDataFlow.ShowLists.ViewModel(state: .error(dialog: dialog))
+
+        return TaskDataFlow.ShowTasks.ViewModel(state: .error(dialog: dialog))
     }
 }

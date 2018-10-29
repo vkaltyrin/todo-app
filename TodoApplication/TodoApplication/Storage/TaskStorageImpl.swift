@@ -18,9 +18,9 @@ final class TaskStorageImpl: TaskStorage {
             let realm = try? Realm()
             let tasks = realm?.objects(RealmTask.self)
                 .sorted(byKeyPath: "creationDate", ascending: false)
-                .filter { $0.owner.first?.identifier == listId } ?? []
+                .filter { $0.owner.first?.identifier == listId }
 
-            if !tasks.isEmpty {
+            if let tasks = tasks {
                 result = .success(tasks.map { $0.toTask() })
             } else {
                 result = .failure(.cannotFetch)
@@ -54,9 +54,9 @@ final class TaskStorageImpl: TaskStorage {
         }
     }
 
-    func createTask(listId: Identifier, task: Task, _ completion: @escaping OnStorageResult) {
+    func createTask(listId: Identifier, task: Task, _ completion: @escaping OnStorageIndentifier) {
         queue.async {
-            let result: GeneralResult
+            let result: StorageResult<Identifier>
             defer {
                 DispatchQueue.main.async {
                     completion(result)
@@ -75,14 +75,14 @@ final class TaskStorageImpl: TaskStorage {
                 try realm?.write {
                     listForUpdate.tasks.append(realmTask)
                 }
-                result = .success(())
+                result = .success(realmTask.identifier)
             } catch {
                 result = .failure(.internalError)
             }
         }
     }
 
-    func updateTask(task: Task, _ completion: @escaping OnStorageResult) {
+    func updateTask(taskId: Identifier, name: String, _ completion: @escaping OnStorageResult) {
         queue.async {
             let result: GeneralResult
             defer {
@@ -92,21 +92,20 @@ final class TaskStorageImpl: TaskStorage {
             }
             let realm = try? Realm()
             guard let taskForUpdate = realm?.objects(RealmTask.self).first(where: { realmTask in
-                realmTask.identifier == task.identifier
+                realmTask.identifier == taskId
             }) else {
                 result = .failure(.cannotUpdate)
                 return
             }
             do {
                 try realm?.write {
-                    taskForUpdate.name = task.name
-                    taskForUpdate.status = task.status
-                    taskForUpdate.creationDate = task.creationDate
+                    taskForUpdate.name = name
                 }
                 result = .success(())
             } catch {
                 result = .failure(.internalError)
             }
         }
+
     }
 }

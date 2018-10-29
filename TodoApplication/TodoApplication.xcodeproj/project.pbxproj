@@ -76,6 +76,18 @@
 		8C3C9F8921872937002F4500 /* TestStorageUtilityImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */; };
 		8C3C9F8B218729F6002F4500 /* EnterListNameAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F8A218729F6002F4500 /* EnterListNameAction.swift */; };
 		8C3C9F8F21873AAB002F4500 /* EarlGreyActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F8E21873AAB002F4500 /* EarlGreyActions.swift */; };
+		8C3C9FB0218741FD002F4500 /* TaskViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F9E218741FC002F4500 /* TaskViewInput.swift */; };
+		8C3C9FB1218741FD002F4500 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA0218741FC002F4500 /* TaskCell.swift */; };
+		8C3C9FB2218741FD002F4500 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA1218741FC002F4500 /* TaskCell.xib */; };
+		8C3C9FB3218741FD002F4500 /* TaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA2218741FC002F4500 /* TaskViewController.xib */; };
+		8C3C9FB4218741FD002F4500 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA3218741FC002F4500 /* TaskViewController.swift */; };
+		8C3C9FB5218741FD002F4500 /* TaskViewTableDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA4218741FC002F4500 /* TaskViewTableDirector.swift */; };
+		8C3C9FB6218741FD002F4500 /* TaskDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA5218741FC002F4500 /* TaskDataFlow.swift */; };
+		8C3C9FB7218741FD002F4500 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA6218741FC002F4500 /* TaskViewModel.swift */; };
+		8C3C9FB8218741FD002F4500 /* TaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA8218741FC002F4500 /* TaskInteractor.swift */; };
+		8C3C9FBA218741FD002F4500 /* TaskAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FAB218741FD002F4500 /* TaskAssembly.swift */; };
+		8C3C9FBB218741FD002F4500 /* TaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FAD218741FD002F4500 /* TaskPresenter.swift */; };
+		8C3C9FBE21874E5A002F4500 /* DialogBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */; };
 		991C9E411C41FEC5B93054CF /* EarlGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C703D376E6204152F9605 /* EarlGrey.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 		C72E180E779DE45BF60B3BA2 /* Pods_TodoApplicationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1C4C140F247C2F4227EB8C /* Pods_TodoApplicationUITests.framework */; };
@@ -192,6 +204,18 @@
 		8C3C9F86218724CD002F4500 /* UIAccessibilityIdentificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAccessibilityIdentificationExtensions.swift; sourceTree = "<group>"; };
 		8C3C9F8A218729F6002F4500 /* EnterListNameAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterListNameAction.swift; sourceTree = "<group>"; };
 		8C3C9F8E21873AAB002F4500 /* EarlGreyActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlGreyActions.swift; sourceTree = "<group>"; };
+		8C3C9F9E218741FC002F4500 /* TaskViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewInput.swift; sourceTree = "<group>"; };
+		8C3C9FA0218741FC002F4500 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		8C3C9FA1218741FC002F4500 /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
+		8C3C9FA2218741FC002F4500 /* TaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskViewController.xib; sourceTree = "<group>"; };
+		8C3C9FA3218741FC002F4500 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		8C3C9FA4218741FC002F4500 /* TaskViewTableDirector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewTableDirector.swift; sourceTree = "<group>"; };
+		8C3C9FA5218741FC002F4500 /* TaskDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDataFlow.swift; sourceTree = "<group>"; };
+		8C3C9FA6218741FC002F4500 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		8C3C9FA8218741FC002F4500 /* TaskInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskInteractor.swift; sourceTree = "<group>"; };
+		8C3C9FAB218741FD002F4500 /* TaskAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAssembly.swift; sourceTree = "<group>"; };
+		8C3C9FAD218741FD002F4500 /* TaskPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPresenter.swift; sourceTree = "<group>"; };
+		8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBuilder.swift; sourceTree = "<group>"; };
 		AE0C703D376E6204152F9605 /* EarlGrey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EarlGrey.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F19CEE97F9FEB255637457 /* EarlGrey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EarlGrey.framework; path = Pods/EarlGrey/EarlGrey/EarlGrey.framework; sourceTree = SOURCE_ROOT; };
@@ -371,6 +395,10 @@
 		8C3C9EFD2185BDE7002F4500 /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				8C3C9FAA218741FD002F4500 /* Assembly */,
+				8C3C9FA7218741FC002F4500 /* Interactor */,
+				8C3C9FAC218741FD002F4500 /* Presenter */,
+				8C3C9F9D218741FC002F4500 /* View */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -507,6 +535,7 @@
 				8C3C9F3921860E8D002F4500 /* ConfigurableCell.swift */,
 				8C3C9F442186D0EE002F4500 /* Alert.swift */,
 				8C3C9F5A218712CE002F4500 /* ActivityDisplayble */,
+				8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -552,6 +581,53 @@
 				8C3C9F822187236E002F4500 /* CreateNewListTestCase.swift */,
 			);
 			path = TestCases;
+			sourceTree = "<group>";
+		};
+		8C3C9F9D218741FC002F4500 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9F9E218741FC002F4500 /* TaskViewInput.swift */,
+				8C3C9F9F218741FC002F4500 /* Cells */,
+				8C3C9FA2218741FC002F4500 /* TaskViewController.xib */,
+				8C3C9FA3218741FC002F4500 /* TaskViewController.swift */,
+				8C3C9FA4218741FC002F4500 /* TaskViewTableDirector.swift */,
+				8C3C9FA5218741FC002F4500 /* TaskDataFlow.swift */,
+				8C3C9FA6218741FC002F4500 /* TaskViewModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C3C9F9F218741FC002F4500 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9FA0218741FC002F4500 /* TaskCell.swift */,
+				8C3C9FA1218741FC002F4500 /* TaskCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8C3C9FA7218741FC002F4500 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9FA8218741FC002F4500 /* TaskInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8C3C9FAA218741FD002F4500 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9FAB218741FD002F4500 /* TaskAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		8C3C9FAC218741FD002F4500 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8C3C9FAD218741FD002F4500 /* TaskPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		9B9C09DAC8BA123825F38EE3 /* Pods */ = {
@@ -689,6 +765,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3C9EB62184D3E0002F4500 /* LaunchScreen.storyboard in Resources */,
+				8C3C9FB2218741FD002F4500 /* TaskCell.xib in Resources */,
+				8C3C9FB3218741FD002F4500 /* TaskViewController.xib in Resources */,
 				8C3C9F252185CD9C002F4500 /* ListCell.xib in Resources */,
 				8C3C9EB32184D3E0002F4500 /* Assets.xcassets in Resources */,
 				8C3C9F1A2185C852002F4500 /* ListViewController.xib in Resources */,
@@ -864,38 +942,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3C9FB4218741FD002F4500 /* TaskViewController.swift in Sources */,
 				8C3C9F3A21860E8E002F4500 /* ConfigurableCell.swift in Sources */,
 				8C3C9F4221862381002F4500 /* KeyboardObserver.swift in Sources */,
 				8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */,
+				8C3C9FBA218741FD002F4500 /* TaskAssembly.swift in Sources */,
 				8C3C9F5E218714DD002F4500 /* ActivityDisplaybleImpl.swift in Sources */,
 				8C3C9F0A2185BEC6002F4500 /* ListPresenter.swift in Sources */,
 				8C3C9F0D2185BF88002F4500 /* TransitionHandler.swift in Sources */,
 				8C3C9EED2185959C002F4500 /* StorageError.swift in Sources */,
 				8C3C9F40218613D5002F4500 /* TableDirector.swift in Sources */,
+				8C3C9FBE21874E5A002F4500 /* DialogBuilder.swift in Sources */,
 				8C3C9F062185BE98002F4500 /* ListViewInput.swift in Sources */,
 				8C3C9EEB21859545002F4500 /* RealmTask.swift in Sources */,
 				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
 				8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */,
+				8C3C9FB0218741FD002F4500 /* TaskViewInput.swift in Sources */,
 				8C3C9F112185BFF7002F4500 /* ListAssembly.swift in Sources */,
 				8C3C9ED12184D90C002F4500 /* List.swift in Sources */,
 				8C3C9F87218724CD002F4500 /* UIAccessibilityIdentificationExtensions.swift in Sources */,
+				8C3C9FB5218741FD002F4500 /* TaskViewTableDirector.swift in Sources */,
 				8C3C9EDF2184E160002F4500 /* ListStorageImpl.swift in Sources */,
 				8C3C9EF121859DB0002F4500 /* RealmList.swift in Sources */,
 				8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */,
 				8C3C9F5C218714CA002F4500 /* ActivityDisplayble.swift in Sources */,
 				8C3C9EE12184E17F002F4500 /* TaskStorageImpl.swift in Sources */,
+				8C3C9FB6218741FD002F4500 /* TaskDataFlow.swift in Sources */,
 				8C3C9F282185CDDC002F4500 /* UITableViewExtensions.swift in Sources */,
 				8C3C9F192185C852002F4500 /* ListViewController.swift in Sources */,
 				8C3C9F082185BEAF002F4500 /* ListInteractor.swift in Sources */,
 				8C3C9EEF21859628002F4500 /* StorageTypealiases.swift in Sources */,
+				8C3C9FBB218741FD002F4500 /* TaskPresenter.swift in Sources */,
 				8C3C9F482186D5A5002F4500 /* ListViewModel.swift in Sources */,
 				8C3C9F042185BE7F002F4500 /* ListRouter.swift in Sources */,
+				8C3C9FB7218741FD002F4500 /* TaskViewModel.swift in Sources */,
 				8C3C9F3E21861290002F4500 /* ListViewTableDirector.swift in Sources */,
 				8C3C9F452186D0EE002F4500 /* Alert.swift in Sources */,
 				8C3C9F2A2185D1AA002F4500 /* ListDataFlow.swift in Sources */,
 				8C3C9EDB2184DED1002F4500 /* ListStorage.swift in Sources */,
 				8C3C9F242185CD9C002F4500 /* ListCell.swift in Sources */,
+				8C3C9FB8218741FD002F4500 /* TaskInteractor.swift in Sources */,
 				8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */,
+				8C3C9FB1218741FD002F4500 /* TaskCell.swift in Sources */,
 				8C3C9F3C21860EF1002F4500 /* ArrayExtensions.swift in Sources */,
 				8C3C9EAC2184D3DF002F4500 /* AppDelegate.swift in Sources */,
 			);

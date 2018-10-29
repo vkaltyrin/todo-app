@@ -59,7 +59,7 @@ final class ListViewController: UIViewController {
 
         state = .loading
 
-        tableDirector?.onListTap = { [weak self] listIdentifier in
+        tableDirector?.onListTap = { [weak self] viewModel in
             guard let self = `self` else {
                 return
             }
@@ -67,7 +67,10 @@ final class ListViewController: UIViewController {
             case .editing:
                 break
             default:
-                let request = ListDataFlow.OpenListActions.Request(identifier: listIdentifier)
+                let request = ListDataFlow.OpenListActions.Request(
+                    identifier: viewModel.identifier,
+                    name: viewModel.name
+                )
                 self.interactor?.openListActions(request: request)
             }
         }
@@ -127,8 +130,8 @@ extension ListViewController: ListViewInput {
         interactor?.deleteItem(request: request)
     }
 
-    func openTasks(_ identifier: Identifier) {
-        router?.openTasks(listIdentifier: identifier)
+    func openTasks(_ identifier: Identifier, name: String) {
+        router?.openTasks(listIdentifier: identifier, name: name)
     }
 
     func showItems(_ viewModel: ListDataFlow.ShowLists.ViewModel) {

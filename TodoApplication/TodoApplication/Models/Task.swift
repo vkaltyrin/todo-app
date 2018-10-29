@@ -1,13 +1,15 @@
 import Foundation
 
 struct Task {
-    @objc enum Status: Int {
-        case undone
-        case done
-    }
-
     let identifier: Identifier?
     let name: String
-    let status: Status
     let creationDate: Date
+
+    init(name: String,
+         identifier: Identifier? = nil,
+         creationDate: Date = Date()) {
+        self.name = name
+        self.identifier = identifier
+        self.creationDate = creationDate
+    }
 }

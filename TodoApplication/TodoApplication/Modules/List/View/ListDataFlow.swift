@@ -53,6 +53,7 @@ struct ListDataFlow {
     struct OpenListActions {
         struct Request {
             let identifier: Identifier
+            let name: String
         }
 
         struct ViewModel {

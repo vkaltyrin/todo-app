@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ListRouter: class {
-    func openTasks(listIdentifier: String)
+    func openTasks(listIdentifier: String, name: String)
 }
 
 final class ListRouterImpl: ListRouter {
@@ -11,7 +11,9 @@ final class ListRouterImpl: ListRouter {
         self.transitionHandler = transitionHandler
     }
 
-    func openTasks(listIdentifier: String) {
-
+    func openTasks(listIdentifier: String, name: String) {
+        let assembly = TaskAssemblyImpl()
+        let module = assembly.module(listIdentifier: listIdentifier, name: name)
+        transitionHandler.openModule(module)
     }
 }

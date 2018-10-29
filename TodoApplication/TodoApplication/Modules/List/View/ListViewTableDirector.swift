@@ -6,7 +6,7 @@ protocol ListViewTableDirector: TableDirector {
 
     var items: [ListViewModel] { get set }
 
-    var onListTap: ((Identifier) -> ())? { get set }
+    var onListTap: ((ListViewModel) -> ())? { get set }
     var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())? { get set }
     var onDeleteTap: ((_ identifier: Identifier) -> ())? { get set }
 }
@@ -43,7 +43,7 @@ final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         cell?.focus()
     }
 
-    var onListTap: ((Identifier) -> ())?
+    var onListTap: ((ListViewModel) -> ())?
     var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())?
     var onDeleteTap: ((_ identifier: Identifier) -> ())?
 
@@ -55,7 +55,7 @@ final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
             return
         }
 
-        onListTap?(viewModel.identifier)
+        onListTap?(viewModel)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

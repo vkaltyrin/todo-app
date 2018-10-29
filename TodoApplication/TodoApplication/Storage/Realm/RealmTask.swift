@@ -2,9 +2,8 @@ import Foundation
 import RealmSwift
 
 final class RealmTask: Object {
-    @objc dynamic var identifier: Identifier?
+    @objc dynamic var identifier: Identifier = ""
     @objc dynamic var name = ""
-    @objc dynamic var status = Task.Status.undone
     @objc dynamic var creationDate = Date()
     let owner = LinkingObjects(fromType: RealmList.self, property: "tasks")
 }
@@ -12,9 +11,8 @@ final class RealmTask: Object {
 extension RealmTask {
     func toTask() -> Task {
         return Task(
-            identifier: identifier,
             name: name,
-            status: status,
+            identifier: identifier,
             creationDate: creationDate
         )
     }
@@ -29,9 +27,8 @@ extension Array where Element == Task {
 extension Task {
     func toRealm() -> RealmTask {
         let result = RealmTask()
-        result.identifier = identifier
+        result.identifier = identifier ?? Identifier.generateUniqueIdentifier()
         result.name = name
-        result.status = status
         result.creationDate = creationDate
         return result
     }
