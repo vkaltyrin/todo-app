@@ -39,6 +39,5 @@ class CreateNewListTestCase: BaseTestCase {
                 XCTAssertEqual(text, TestData.listName)
             }
         }
-        
     }
 }

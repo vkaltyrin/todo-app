@@ -45,12 +45,12 @@ final class TaskViewTableDirectorMock: NSObject, TaskViewTableDirector {
     }
     var invokedOnCellTextDidEndEditingSetter = false
     var invokedOnCellTextDidEndEditingSetterCount = 0
-    var invokedOnCellTextDidEndEditing: ((Identifier, String) -> ())?
-    var invokedOnCellTextDidEndEditingList = [((Identifier, String) -> ())?]()
+    var invokedOnCellTextDidEndEditing: ((TaskViewModel) -> ())?
+    var invokedOnCellTextDidEndEditingList = [((TaskViewModel) -> ())?]()
     var invokedOnCellTextDidEndEditingGetter = false
     var invokedOnCellTextDidEndEditingGetterCount = 0
-    var stubbedOnCellTextDidEndEditing: ((Identifier, String) -> ())!
-    var onCellTextDidEndEditing: ((Identifier, String) -> ())? {
+    var stubbedOnCellTextDidEndEditing: ((TaskViewModel) -> ())!
+    var onCellTextDidEndEditing: ((TaskViewModel) -> ())? {
         set {
             invokedOnCellTextDidEndEditingSetter = true
             invokedOnCellTextDidEndEditingSetterCount += 1
@@ -83,16 +83,16 @@ final class TaskViewTableDirectorMock: NSObject, TaskViewTableDirector {
             return stubbedOnDeleteTap
         }
     }
-    var invokedFocusOnTask = false
-    var invokedFocusOnTaskCount = 0
-    var invokedFocusOnTaskParameters: (identifier: Identifier, Void)?
-    var invokedFocusOnTaskParametersList = [(identifier: Identifier, Void)]()
+    var invokedFocusOnCell = false
+    var invokedFocusOnCellCount = 0
+    var invokedFocusOnCellParameters: (identifier: Identifier, Void)?
+    var invokedFocusOnCellParametersList = [(identifier: Identifier, Void)]()
 
-    func focusOnTask(_ identifier: Identifier) {
-        invokedFocusOnTask = true
-        invokedFocusOnTaskCount += 1
-        invokedFocusOnTaskParameters = (identifier, ())
-        invokedFocusOnTaskParametersList.append((identifier, ()))
+    func focusOnCell(_ identifier: Identifier) {
+        invokedFocusOnCell = true
+        invokedFocusOnCellCount += 1
+        invokedFocusOnCellParameters = (identifier, ())
+        invokedFocusOnCellParametersList.append((identifier, ()))
     }
 
     var invokedSetup = false

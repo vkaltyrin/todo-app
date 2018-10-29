@@ -26,7 +26,7 @@ final class TaskViewController: UIViewController {
                 }
             case .editing(let identifier):
                 stopActivity()
-                tableDirector?.focusOnTask(identifier)
+                tableDirector?.focusOnCell(identifier)
             }
         }
     }
@@ -59,21 +59,12 @@ final class TaskViewController: UIViewController {
         state = .loading
 
         tableDirector?.onTaskTap = { [weak self] identifier in
-            guard let self = `self` else {
-                return
-            }
-            switch self.state {
-            case .editing:
-                break
-            default:
-                let request = TaskDataFlow.OpenTaskActions.Request(identifier: identifier)
-                self.interactor?.openTaskActions(request: request)
-            }
+            self?.onTaskTap(identifier: identifier)
         }
-        tableDirector?.onCellTextDidEndEditing = { [weak self] identifier, text in
+        tableDirector?.onCellTextDidEndEditing = { [weak self] viewModel in
             let request = TaskDataFlow.UpdateTask.Request(
-                identifier: identifier,
-                name: text
+                identifier: viewModel.identifier,
+                name: viewModel.name
             )
             self?.interactor?.updateItem(request: request)
         }
@@ -99,6 +90,16 @@ final class TaskViewController: UIViewController {
     }
 
     // MARK: - Private
+
+    private func onTaskTap(identifier: Identifier) {
+        switch state {
+        case .editing:
+            break
+        default:
+            let request = TaskDataFlow.OpenTaskActions.Request(identifier: identifier)
+            interactor?.openTaskActions(request: request)
+        }
+    }
 
     @objc private func onAddTaskTap() {
         let request = TaskDataFlow.CreateTask.Request(name: "")

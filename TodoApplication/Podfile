@@ -16,7 +16,7 @@ target 'TodoApplication' do
   
   target 'TodoApplicationUITests' do
       inherit! :search_paths
-      
+
       pod 'EarlGrey'
       pod 'RealmSwift'
   end

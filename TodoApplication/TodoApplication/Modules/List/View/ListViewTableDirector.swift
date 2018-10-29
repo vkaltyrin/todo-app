@@ -2,17 +2,13 @@ import Foundation
 import UIKit
 
 protocol ListViewTableDirector: TableDirector {
-    func focusOnList(_ identifier: Identifier)
-
     var items: [ListViewModel] { get set }
 
     var onListTap: ((ListViewModel) -> ())? { get set }
-    var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())? { get set }
-    var onDeleteTap: ((_ identifier: Identifier) -> ())? { get set }
+    var onCellTextDidEndEditing: ((ListViewModel) -> ())? { get set }
 }
 
 final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableViewDataSource, ListViewTableDirector {
-
     // MARK: - State
     private weak var tableView: UITableView?
 
@@ -34,7 +30,7 @@ final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         self.tableView = tableView
     }
 
-    func focusOnList(_ identifier: Identifier) {
+    func focusOnCell(_ identifier: Identifier) {
         guard let row = items.firstIndex(where: { $0.identifier == identifier }) else {
             return
         }
@@ -44,7 +40,7 @@ final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
     }
 
     var onListTap: ((ListViewModel) -> ())?
-    var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())?
+    var onCellTextDidEndEditing: ((ListViewModel) -> ())?
     var onDeleteTap: ((_ identifier: Identifier) -> ())?
 
     // MARK: - UITableViewDelegate
@@ -98,7 +94,7 @@ final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         cell.configure(viewModel)
         cell.setAccessibilityIdentifierIndex(index: indexPath.row)
         cell.onTextDidEndEditing = { [weak self] text in
-            self?.onCellTextDidEndEditing?(viewModel.identifier, text)
+            self?.onCellTextDidEndEditing?(viewModel)
         }
 
         return cell

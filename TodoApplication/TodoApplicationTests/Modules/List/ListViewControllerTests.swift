@@ -29,7 +29,7 @@ final class ListViewControllerTests: TestCase {
         // when
         view.showEditing(identfier)
         // then
-        XCTAssertEqual(tableDirectorMock.invokedFocusOnListCount, 1)
+        XCTAssertEqual(tableDirectorMock.invokedFocusOnCellCount, 1)
     }
     
     func testDeleteItem_callsInteractorToDeleteItem() {
@@ -98,11 +98,13 @@ final class ListViewControllerTests: TestCase {
     
     func testTableDirector_updateItem_onKeyboardDidHide() {
         // given
-        let identifier = Identifier.generateUniqueIdentifier()
-        let name = Identifier.generateUniqueIdentifier()
+        let viewModel = ListViewModel(
+            identifier: Identifier.generateUniqueIdentifier(),
+            name: Identifier.generateUniqueIdentifier()
+        )
         // when
         view.viewDidLoad()
-        tableDirectorMock.invokedOnCellTextDidEndEditing?(identifier, name)
+        tableDirectorMock.invokedOnCellTextDidEndEditing?(viewModel)
         // then
         XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
     }

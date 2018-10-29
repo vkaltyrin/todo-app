@@ -2,14 +2,10 @@ import Foundation
 import UIKit
 
 protocol TaskViewTableDirector: TableDirector {
-
-    func focusOnTask(_ identifier: Identifier)
-
     var items: [TaskViewModel] { get set }
 
     var onTaskTap: ((Identifier) -> ())? { get set }
-    var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())? { get set }
-    var onDeleteTap: ((_ identifier: Identifier) -> ())? { get set }
+    var onCellTextDidEndEditing: ((TaskViewModel) -> ())? { get set }
 }
 
 final class TaskViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableViewDataSource, TaskViewTableDirector {
@@ -35,7 +31,7 @@ final class TaskViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         self.tableView = tableView
     }
 
-    func focusOnTask(_ identifier: Identifier) {
+    func focusOnCell(_ identifier: Identifier) {
         guard let row = items.firstIndex(where: { $0.identifier == identifier }) else {
             return
         }
@@ -45,7 +41,7 @@ final class TaskViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
     }
 
     var onTaskTap: ((Identifier) -> ())?
-    var onCellTextDidEndEditing: ((_ identifier: Identifier, _ text: String) -> ())?
+    var onCellTextDidEndEditing: ((TaskViewModel) -> ())?
     var onDeleteTap: ((_ identifier: Identifier) -> ())?
 
     // MARK: - UITableViewDelegate
@@ -99,7 +95,7 @@ final class TaskViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         cell.configure(viewModel)
         cell.setAccessibilityIdentifierIndex(index: indexPath.row)
         cell.onTextDidEndEditing = { [weak self] text in
-            self?.onCellTextDidEndEditing?(viewModel.identifier, text)
+            self?.onCellTextDidEndEditing?(viewModel)
         }
 
         return cell

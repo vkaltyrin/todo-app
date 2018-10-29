@@ -26,7 +26,7 @@ final class TaskViewControllerTests: TestCase {
         // when
         view.showEditing(identfier)
         // then
-        XCTAssertEqual(tableDirectorMock.invokedFocusOnTaskCount, 1)
+        XCTAssertEqual(tableDirectorMock.invokedFocusOnCellCount, 1)
     }
     
     func testDeleteItem_callsInteractorToDeleteItem() {
@@ -85,11 +85,13 @@ final class TaskViewControllerTests: TestCase {
     
     func testTableDirector_updateItem_onKeyboardDidHide() {
         // given
-        let identifier = Identifier.generateUniqueIdentifier()
-        let name = Identifier.generateUniqueIdentifier()
+        let viewModel = TaskViewModel(
+            identifier: Identifier.generateUniqueIdentifier(),
+            name: Identifier.generateUniqueIdentifier()
+        )
         // when
         view.viewDidLoad()
-        tableDirectorMock.invokedOnCellTextDidEndEditing?(identifier, name)
+        tableDirectorMock.invokedOnCellTextDidEndEditing?(viewModel)
         // then
         XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
     }

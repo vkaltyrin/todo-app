@@ -27,7 +27,7 @@ final class ListViewController: UIViewController {
                 }
             case .editing(let listIdentifier):
                 stopActivity()
-                tableDirector?.focusOnList(listIdentifier)
+                tableDirector?.focusOnCell(listIdentifier)
             }
         }
     }
@@ -60,24 +60,12 @@ final class ListViewController: UIViewController {
         state = .loading
 
         tableDirector?.onListTap = { [weak self] viewModel in
-            guard let self = `self` else {
-                return
-            }
-            switch self.state {
-            case .editing:
-                break
-            default:
-                let request = ListDataFlow.OpenListActions.Request(
-                    identifier: viewModel.identifier,
-                    name: viewModel.name
-                )
-                self.interactor?.openListActions(request: request)
-            }
+            self?.onListTap(viewModel)
         }
-        tableDirector?.onCellTextDidEndEditing = { [weak self] listIdentifier, text in
+        tableDirector?.onCellTextDidEndEditing = { [weak self] viewModel in
             let request = ListDataFlow.UpdateList.Request(
-                identifier: listIdentifier,
-                name: text
+                identifier: viewModel.identifier,
+                name: viewModel.name
             )
             self?.interactor?.updateItem(request: request)
         }
@@ -103,6 +91,19 @@ final class ListViewController: UIViewController {
     }
 
     // MARK: - Private
+
+    private func onListTap(_ viewModel: ListViewModel) {
+        switch state {
+        case .editing:
+            break
+        default:
+            let request = ListDataFlow.OpenListActions.Request(
+                identifier: viewModel.identifier,
+                name: viewModel.name
+            )
+            interactor?.openListActions(request: request)
+        }
+    }
 
     @objc private func onAddListTap() {
         let request = ListDataFlow.CreateList.Request(name: "")
