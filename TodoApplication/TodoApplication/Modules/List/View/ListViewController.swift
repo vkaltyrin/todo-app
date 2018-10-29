@@ -13,26 +13,27 @@ final class ListViewController: UIViewController {
         didSet {
             switch state {
             case .loading:
-                startLoading()
+                startActivity()
                 interactor?.fetchItems()
             case .error(let dialog):
-                stopLoading()
+                stopActivity()
                 showAlert(dialog)
             case .result(let items, let listIdentifier):
-                stopLoading()
+                stopActivity()
                 tableDirector?.items = items
                 if let listIdentifier = listIdentifier {
                     let request = ListDataFlow.OpenListEditing.Request(identifier: listIdentifier)
                     interactor?.openListEditing(request: request)
                 }
             case .editing(let listIdentifier):
-                stopLoading()
+                stopActivity()
                 tableDirector?.focusOnList(listIdentifier)
             }
         }
     }
 
     private let keyboardObserver: KeyboardObserver = KeyboardObserverImpl()
+    private var activityDisplayble: ActivityDisplayble?
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView! {
@@ -43,7 +44,9 @@ final class ListViewController: UIViewController {
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
-            activityIndicator.hidesWhenStopped = true
+            activityDisplayble = ActivityDisplaybleImpl(
+                activityIndicatorView: activityIndicator
+            )
         }
     }
 
@@ -102,12 +105,14 @@ final class ListViewController: UIViewController {
         interactor?.createItem(request: request)
     }
 
-    private func startLoading() {
-        activityIndicator.startAnimating()
+    // MARK: - ActivityDisplayble
+
+    func startActivity() {
+        activityDisplayble?.startActivity()
     }
 
-    private func stopLoading() {
-        activityIndicator.stopAnimating()
+    func stopActivity() {
+        activityDisplayble?.stopActivity()
     }
 }
 

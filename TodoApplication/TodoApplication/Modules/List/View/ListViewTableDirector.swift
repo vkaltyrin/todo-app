@@ -16,15 +16,10 @@ final class ListViewTableDirectorImpl: NSObject, ListViewTableDirector {
     // MARK: - State
     private weak var tableView: UITableView?
 
-    // MARK: - TableDirector
-    func reload() {
-        tableView?.reloadData()
-    }
-
     // MARK: - State
     var items: [ListViewModel] = [] {
         didSet {
-            reload()
+            tableView?.reloadData()
         }
     }
 
