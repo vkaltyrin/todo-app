@@ -4,6 +4,7 @@ typealias ListResult = StorageResult<[List]>
 typealias TaskResult = StorageResult<[Task]>
 typealias GeneralResult = StorageResult<Void>
 
+typealias OnStorageIndentifier = (StorageResult<Identifier>) -> ()
 typealias OnFetchSingleList = (StorageResult<List>) -> ()
 typealias OnFetchLists = (ListResult) -> ()
 typealias OnFetchTasks = (TaskResult) -> ()

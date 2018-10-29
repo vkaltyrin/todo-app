@@ -41,7 +41,12 @@ struct ListDataFlow {
         }
 
         struct Response {
-            let result: StorageResult<List>
+            let result: CreateListResult
+        }
+
+        enum CreateListResult {
+            case success(identifier: Identifier, lists: [List])
+            case failure(StorageError)
         }
     }
 
@@ -55,12 +60,18 @@ struct ListDataFlow {
         }
     }
 
+    struct OpenListEditing {
+        struct Request {
+            let identifier: Identifier
+        }
+    }
+
     enum ViewControllerState {
         case loading
         case result(items: [ListViewModel])
         case error(dialog: Dialog)
         case editing(listIdentifier: Identifier)
-        //case create(listIdentifier: Identifier, items: [ListViewModel])
+        case create(listIdentifier: Identifier, items: [ListViewModel])
     }
 
 }

@@ -24,10 +24,11 @@ final class ListViewController: UIViewController {
             case .editing(let listIdentifier):
                 stopLoading()
                 tableDirector?.focusOnList(listIdentifier)
-//            case .create(let listIdentifier, let items):
-//                stopLoading()var items: [ListViewModel] = []
-//                tableDirector.items = items
-//                self.state = .editing(listIdentifier: listIdentifier)
+            case .create(let listIdentifier, let items):
+                stopLoading()
+                tableDirector?.items = items
+                let request = ListDataFlow.OpenListEditing.Request(identifier: listIdentifier)
+                interactor?.openListEditing(request: request)
             }
         }
     }

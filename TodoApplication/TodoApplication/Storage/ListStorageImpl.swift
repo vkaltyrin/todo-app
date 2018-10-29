@@ -54,9 +54,9 @@ final class ListStorageImpl: ListStorage {
         }
     }
 
-    func createList(_ list: List, _ completion: @escaping OnStorageResult) {
+    func createList(_ list: List, _ completion: @escaping OnStorageIndentifier) {
         queue.async {
-            let result: GeneralResult
+            let result: StorageResult<Identifier>
             defer {
                 DispatchQueue.main.async {
                     completion(result)
@@ -69,7 +69,7 @@ final class ListStorageImpl: ListStorage {
                 try realm?.write {
                     realm?.add(realmList)
                 }
-                result = .success(())
+                result = .success(realmList.identifier)
             } catch {
                 result = .failure(.internalError)
             }

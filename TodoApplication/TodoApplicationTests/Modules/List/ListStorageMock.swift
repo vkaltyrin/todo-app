@@ -2,6 +2,10 @@
 import XCTest
 
 final class ListStorageMock: ListStorage {
+    func createList(_ list: List, _ completion: @escaping OnStorageIndentifier) {
+        
+    }
+    
     func createList(_ list: List, _ completion: @escaping OnStorageResult) {
         
     }

@@ -1,9 +1,11 @@
 import Foundation
 
 protocol ListPresenter: class {
-    func presentShowList(_ response: ListDataFlow.ShowLists.Response)
+    func presentShowLists(_ response: ListDataFlow.ShowLists.Response)
+    func presentCreateList(_ response: ListDataFlow.CreateList.Response)
     func presentError(_ error: StorageError)
     func presentListActions(_ identifier: Identifier)
+    func presentListEditing(_ identifier: Identifier)
 }
 
 final class ListPresenterImpl: ListPresenter {
@@ -16,7 +18,7 @@ final class ListPresenterImpl: ListPresenter {
     }
 
     // MARK: - ListPresenter
-    func presentShowList(_ response: ListDataFlow.ShowLists.Response) {
+    func presentShowLists(_ response: ListDataFlow.ShowLists.Response) {
         let viewModel: ListDataFlow.ShowLists.ViewModel
         switch response.result {
         case .success(let items):
@@ -27,6 +29,26 @@ final class ListPresenterImpl: ListPresenter {
                 )
             }
             viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(items: resultItems))
+        case .failure(let error):
+            viewModel = errorStateViewModel(error)
+        }
+        view.showItems(viewModel)
+    }
+
+    func presentCreateList(_ response: ListDataFlow.CreateList.Response) {
+        let viewModel: ListDataFlow.ShowLists.ViewModel
+        switch response.result {
+        case .success(let identifier, let items):
+            let resultItems = items.map {
+                ListViewModel(
+                    identifier: $0.identifier ?? "",
+                    name: $0.name
+                )
+            }
+            viewModel = ListDataFlow.ShowLists.ViewModel(state: .create(
+                listIdentifier: identifier,
+                items: resultItems)
+            )
         case .failure(let error):
             viewModel = errorStateViewModel(error)
         }
@@ -63,6 +85,10 @@ final class ListPresenterImpl: ListPresenter {
         ]
         let dialog = Dialog(actions: actions)
         view.showActionSheet(dialog)
+    }
+
+    func presentListEditing(_ identifier: Identifier) {
+        view.showEditing(identifier)
     }
 
     // MARK: - Private

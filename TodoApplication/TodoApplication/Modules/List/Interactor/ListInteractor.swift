@@ -6,6 +6,7 @@ protocol ListInteractor: class {
     func updateItem(request: ListDataFlow.UpdateList.Request)
     func createItem(request: ListDataFlow.CreateList.Request)
     func openListActions(request: ListDataFlow.OpenListActions.Request)
+    func openListEditing(request: ListDataFlow.OpenListEditing.Request)
 }
 
 final class ListInteractorImpl: ListInteractor {
@@ -23,7 +24,7 @@ final class ListInteractorImpl: ListInteractor {
     func fetchItems() {
         listStorage.fetchLists { [weak self] result in
             let response = ListDataFlow.ShowLists.Response(result: result)
-            self?.presenter.presentShowList(response)
+            self?.presenter.presentShowLists(response)
         }
     }
 
@@ -53,12 +54,33 @@ final class ListInteractorImpl: ListInteractor {
 
     func createItem(request: ListDataFlow.CreateList.Request) {
         let list = List(name: request.name)
-        listStorage.createList(list) { [weak self] _ in
-            self?.fetchItems()
+        listStorage.createList(list) { [weak self] result in
+            switch result {
+            case .success(let identifier):
+                self?.listStorage.fetchLists { result in
+                    let response: ListDataFlow.CreateList.Response
+                    switch result {
+                    case .success(let lists):
+                        response = ListDataFlow.CreateList.Response(result: .success(
+                            identifier: identifier,
+                            lists: lists)
+                        )
+                    case .failure(let error):
+                        response = ListDataFlow.CreateList.Response(result: .failure(error))
+                    }
+                    self?.presenter.presentCreateList(response)
+                }
+            case .failure(let error):
+                self?.presenter.presentError(error)
+            }
         }
     }
 
     func openListActions(request: ListDataFlow.OpenListActions.Request) {
         presenter.presentListActions(request.identifier)
+    }
+
+    func openListEditing(request: ListDataFlow.OpenListEditing.Request) {
+        presenter.presentListEditing(request.identifier)
     }
 }

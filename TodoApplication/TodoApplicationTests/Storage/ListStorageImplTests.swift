@@ -110,7 +110,7 @@ final class ListStorageImplTests: StorageTestCase {
         
         // when
         storage.createList(list) { result in
-            result.onSuccess {
+            result.onSuccess { _ in
                 response.fulfill()
             }
             result.onFailure { error in
