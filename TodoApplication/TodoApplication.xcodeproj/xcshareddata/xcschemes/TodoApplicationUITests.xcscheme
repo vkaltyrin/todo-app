@@ -7,8 +7,11 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
+            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForTesting = "YES">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C3C9F6321872153002F4500"
@@ -36,8 +39,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "DYLD_INSERT_LIBRARIES"
@@ -45,6 +46,8 @@
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -56,6 +59,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8C3C9F6321872153002F4500"
+            BuildableName = "TodoApplicationUITests.xctest"
+            BlueprintName = "TodoApplicationUITests"
+            ReferencedContainer = "container:TodoApplication.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
