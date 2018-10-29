@@ -18,7 +18,7 @@ final class TaskPresenterTests: TestCase {
     
     func testPresentShowTasks_showTasks_whenResultIsSuccessful() {
         // given
-        let result = TaskResult.success([])
+        let result = TaskResult.success([Task(name: "Sleep"), Task(name: "Buy gift for a friend")])
         let response = TaskDataFlow.ShowTasks.Response(result: result)
         // when
         presenter.presentShowTasks(response, identifier: nil)

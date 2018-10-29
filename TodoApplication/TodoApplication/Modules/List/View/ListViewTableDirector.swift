@@ -96,10 +96,10 @@ final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         }
 
         cell.configure(viewModel)
+        cell.setAccessibilityIdentifierIndex(index: indexPath.row)
         cell.onTextDidEndEditing = { [weak self] text in
             self?.onCellTextDidEndEditing?(viewModel.identifier, text)
         }
-        cell.textField.qaAccessibilityIdentifier = ListDataFlow.AccessibilityIdentifiers.listTextField(indexPath.row)
 
         return cell
     }

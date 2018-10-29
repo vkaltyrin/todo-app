@@ -18,7 +18,7 @@ final class ListPresenterTests: TestCase {
     
     func testPresentShowLists_showLists_whenResultIsSuccessful() {
         // given
-        let result = ListResult.success([])
+        let result = ListResult.success([List(name: "Tomorrow"), List(name: "Today")])
         let response = ListDataFlow.ShowLists.Response(result: result)
         // when
         presenter.presentShowLists(response, identifier: nil)

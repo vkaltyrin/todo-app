@@ -75,9 +75,7 @@ struct TaskDataFlow {
 
     enum AccessibilityIdentifiers {
         static let createTaskButton = "createTaskButton"
-        static func taskTextField(_ index: Int) -> String {
-            return "TaskTextField \(index)"
-        }
+        static let taskTextField = "taskTextField"
     }
 
 }

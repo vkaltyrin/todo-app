@@ -7,3 +7,12 @@ extension ListCell: ConfigurableCell {
         textField.text = viewModel.name
     }
 }
+
+extension ListCell: AccessibleCell {
+    func setAccessibilityIdentifierIndex(index: Int) {
+        textField.qaAccessibilityIdentifier = CellAccessibilityIdentifierBuilder.build(
+            identifier: ListDataFlow.AccessibilityIdentifiers.listTextField,
+            index: index
+        )
+    }
+}

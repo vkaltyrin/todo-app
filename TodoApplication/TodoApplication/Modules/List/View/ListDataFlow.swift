@@ -76,9 +76,7 @@ struct ListDataFlow {
 
     enum AccessibilityIdentifiers {
         static let createListButton = "createListButton"
-        static func listTextField(_ index: Int) -> String {
-            return "listTextField \(index)"
-        }
+        static let listTextField = "listTextField"
     }
 
 }

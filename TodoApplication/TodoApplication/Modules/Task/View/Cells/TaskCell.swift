@@ -9,3 +9,12 @@ extension TaskCell: ConfigurableCell {
         textField.text = viewModel.name
     }
 }
+
+extension TaskCell: AccessibleCell {
+    func setAccessibilityIdentifierIndex(index: Int) {
+        textField.qaAccessibilityIdentifier = CellAccessibilityIdentifierBuilder.build(
+            identifier: TaskDataFlow.AccessibilityIdentifiers.taskTextField,
+            index: index
+        )
+    }
+}

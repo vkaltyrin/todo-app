@@ -14,9 +14,13 @@ final class EnterListNameAction: BaseTestAction {
     }
     
     override func perform() {
-        EarlGrey.selectElement(with: grey_accessibilityID(ListDataFlow.AccessibilityIdentifiers.listTextField(row)))
+        let accessibilityIdentifier = CellAccessibilityIdentifierBuilder.build(
+            identifier: ListDataFlow.AccessibilityIdentifiers.listTextField,
+            index: row
+        )
+        EarlGrey.selectElement(with: grey_accessibilityID(accessibilityIdentifier))
             .perform(grey_typeText(name))
-        EarlGrey.selectElement(with: grey_accessibilityID(ListDataFlow.AccessibilityIdentifiers.listTextField(row)))
+        EarlGrey.selectElement(with: grey_accessibilityID(accessibilityIdentifier))
             .perform(grey_typeText("\n"))
     }
 }

@@ -97,10 +97,10 @@ final class TaskViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableVie
         }
 
         cell.configure(viewModel)
+        cell.setAccessibilityIdentifierIndex(index: indexPath.row)
         cell.onTextDidEndEditing = { [weak self] text in
             self?.onCellTextDidEndEditing?(viewModel.identifier, text)
         }
-        cell.textField.qaAccessibilityIdentifier = TaskDataFlow.AccessibilityIdentifiers.taskTextField(indexPath.row)
 
         return cell
     }

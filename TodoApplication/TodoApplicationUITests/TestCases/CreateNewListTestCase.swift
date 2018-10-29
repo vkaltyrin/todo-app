@@ -31,7 +31,10 @@ class CreateNewListTestCase: BaseTestCase {
         }
         
         expect("Text is shown on the screen correctly") {
-            let accessibilityIdentifier = ListDataFlow.AccessibilityIdentifiers.listTextField(0)
+            let accessibilityIdentifier = CellAccessibilityIdentifierBuilder.build(
+                identifier: ListDataFlow.AccessibilityIdentifiers.listTextField,
+                index: 0
+            )
             TestUtils.retrieveText(accessibilityIdentifier: accessibilityIdentifier) { text in
                 XCTAssertEqual(text, TestData.listName)
             }
