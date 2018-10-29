@@ -56,7 +56,7 @@
 		8C3C9F4C2186F602002F4500 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F4B2186F601002F4500 /* Stub.swift */; };
 		8C3C9F4E218700C7002F4500 /* ListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F4D218700C7002F4500 /* ListPresenterTests.swift */; };
 		8C3C9F5121870112002F4500 /* ListViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5021870112002F4500 /* ListViewInputMock.swift */; };
-		8C3C9F5321870B03002F4500 /* ListViewInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5221870B03002F4500 /* ListViewInputTests.swift */; };
+		8C3C9F5321870B03002F4500 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5221870B03002F4500 /* ListViewControllerTests.swift */; };
 		8C3C9F5521870B49002F4500 /* ListRouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5421870B49002F4500 /* ListRouterMock.swift */; };
 		8C3C9F5721870B61002F4500 /* ListInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5621870B61002F4500 /* ListInteractorMock.swift */; };
 		8C3C9F5921870B7F002F4500 /* ListViewTableDirectorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5821870B7F002F4500 /* ListViewTableDirectorMock.swift */; };
@@ -134,7 +134,7 @@
 		8C3C9F4B2186F601002F4500 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		8C3C9F4D218700C7002F4500 /* ListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenterTests.swift; sourceTree = "<group>"; };
 		8C3C9F5021870112002F4500 /* ListViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewInputMock.swift; sourceTree = "<group>"; };
-		8C3C9F5221870B03002F4500 /* ListViewInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewInputTests.swift; sourceTree = "<group>"; };
+		8C3C9F5221870B03002F4500 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		8C3C9F5421870B49002F4500 /* ListRouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouterMock.swift; sourceTree = "<group>"; };
 		8C3C9F5621870B61002F4500 /* ListInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractorMock.swift; sourceTree = "<group>"; };
 		8C3C9F5821870B7F002F4500 /* ListViewTableDirectorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewTableDirectorMock.swift; sourceTree = "<group>"; };
@@ -408,7 +408,7 @@
 				8C3C9F2C2185DA31002F4500 /* ListAssemblyTests.swift */,
 				8C3C9F2F2185DDAD002F4500 /* ListInteractorTests.swift */,
 				8C3C9F4D218700C7002F4500 /* ListPresenterTests.swift */,
-				8C3C9F5221870B03002F4500 /* ListViewInputTests.swift */,
+				8C3C9F5221870B03002F4500 /* ListViewControllerTests.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -725,7 +725,7 @@
 				8C3C9EE32184E29A002F4500 /* TaskStorageImplTests.swift in Sources */,
 				8C3C9F4E218700C7002F4500 /* ListPresenterTests.swift in Sources */,
 				8C3C9F5721870B61002F4500 /* ListInteractorMock.swift in Sources */,
-				8C3C9F5321870B03002F4500 /* ListViewInputTests.swift in Sources */,
+				8C3C9F5321870B03002F4500 /* ListViewControllerTests.swift in Sources */,
 				8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */,
 				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,
 				8C3C9EF92185B897002F4500 /* TestStorageUtilityImpl.swift in Sources */,

@@ -1,9 +1,9 @@
 @testable import TodoApplication
 import XCTest
 
-final class ListViewInputTests: TestCase {
+final class ListViewControllerTests: TestCase {
     // MARK: - Subject Under Test
-    var view: ListViewInput!
+    var view: ListViewController!
     var interactorMock: ListInteractorMock!
     var routerMock: ListRouterMock!
     var tableDirectorMock: ListViewTableDirectorMock!
@@ -16,12 +16,10 @@ final class ListViewInputTests: TestCase {
         routerMock = ListRouterMock()
         tableDirectorMock = ListViewTableDirectorMock()
         
-        let viewController = ListViewController()
-        viewController.interactor = interactorMock
-        viewController.router = routerMock
-        viewController.tableDirector = tableDirectorMock
-        
-        view = viewController
+        view = ListViewController()
+        view.interactor = interactorMock
+        view.router = routerMock
+        view.tableDirector = tableDirectorMock
     }
     
     // MARK: - Tests
@@ -86,4 +84,36 @@ final class ListViewInputTests: TestCase {
         // then
         XCTAssertEqual(interactorMock.invokedOpenListEditingCount, 1)
     }
+    
+    func testTableDirector_deleteItem_onSwipeToDelete() {
+        // given
+        let identifier = Identifier.generateUniqueIdentifier()
+        // when
+        view.viewDidLoad()
+        tableDirectorMock.invokedOnDeleteTap?(identifier)
+        // then
+        XCTAssertEqual(interactorMock.invokedDeleteItemCount, 1)
+    }
+    
+    func testTableDirector_updateItem_onKeyboardDidHide() {
+        // given
+        let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
+        // when
+        view.viewDidLoad()
+        tableDirectorMock.invokedOnCellTextDidEndEditing?(identifier, name)
+        // then
+        XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
+    }
+    
+    func testTableDirector_openListActions_onListTap() {
+        // given
+        let identifier = Identifier.generateUniqueIdentifier()
+        // when
+        view.viewDidLoad()
+        tableDirectorMock.invokedOnListTap?(identifier)
+        // then
+        XCTAssertEqual(interactorMock.invokedOpenListActionsCount, 1)
+    }
+    
 }
