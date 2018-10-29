@@ -1,6 +1,7 @@
 excluded:
 - Pods
 - TodoApplicationTests
+- TodoApplicationUITests
 
 opt_in_rules:
 

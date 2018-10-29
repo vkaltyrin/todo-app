@@ -73,5 +73,12 @@ struct ListDataFlow {
         case editing(listIdentifier: Identifier)
     }
 
+    enum AccessibilityIdentifiers {
+        static let createListButton = "createListButton"
+        static func listTextField(_ index: Int) -> String {
+            return "listTextField \(index)"
+        }
+    }
+
 }
 // swiftlint:enable nesting

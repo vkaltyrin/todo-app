@@ -95,6 +95,7 @@ final class ListViewController: UIViewController {
             target: self,
             action: #selector(onAddListTap)
         )
+        addListButton?.qaAccessibilityIdentifier = ListDataFlow.AccessibilityIdentifiers.createListButton
         navigationItem.rightBarButtonItem = addListButton
     }
 
