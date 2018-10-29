@@ -2,9 +2,10 @@ import Foundation
 
 typealias ListResult = StorageResult<[List]>
 typealias TaskResult = StorageResult<[Task]>
+typealias IdentifierResult = StorageResult<Identifier>
 typealias GeneralResult = StorageResult<Void>
 
-typealias OnStorageIndentifier = (StorageResult<Identifier>) -> ()
+typealias OnStorageIndentifier = (IdentifierResult) -> ()
 typealias OnFetchSingleList = (StorageResult<List>) -> ()
 typealias OnFetchLists = (ListResult) -> ()
 typealias OnFetchTasks = (TaskResult) -> ()

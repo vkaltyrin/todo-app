@@ -54,6 +54,7 @@
 		8C3C9F452186D0EE002F4500 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F442186D0EE002F4500 /* Alert.swift */; };
 		8C3C9F482186D5A5002F4500 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F472186D5A5002F4500 /* ListViewModel.swift */; };
 		8C3C9F4A2186D5CC002F4500 /* ListActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F492186D5CC002F4500 /* ListActionsViewModel.swift */; };
+		8C3C9F4C2186F602002F4500 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F4B2186F601002F4500 /* Stub.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 		FD09276803613D2A4944731E /* ListStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD092DB4994C1DD3B859E0E7 /* ListStorageMock.swift */; };
 		FD092B18E00D5DC44B3445AA /* ListPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD092CA450F86D04A3FD6534 /* ListPresenterMock.swift */; };
@@ -124,6 +125,7 @@
 		8C3C9F442186D0EE002F4500 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8C3C9F472186D5A5002F4500 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		8C3C9F492186D5CC002F4500 /* ListActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActionsViewModel.swift; sourceTree = "<group>"; };
+		8C3C9F4B2186F601002F4500 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2C708DAB6C83594CBA66A5D /* Pods-TodoApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplicationTests/Pods-TodoApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FD092CA450F86D04A3FD6534 /* ListPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPresenterMock.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				8C3C9EE72184EE81002F4500 /* TestCase.swift */,
 				8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */,
 				8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */,
+				8C3C9F4B2186F601002F4500 /* Stub.swift */,
 			);
 			path = UnitTestUtilities;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3C9F4C2186F602002F4500 /* Stub.swift in Sources */,
 				8C3C9EE32184E29A002F4500 /* TaskStorageImplTests.swift in Sources */,
 				8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */,
 				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,

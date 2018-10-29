@@ -68,10 +68,9 @@ struct ListDataFlow {
 
     enum ViewControllerState {
         case loading
-        case result(items: [ListViewModel])
+        case result(items: [ListViewModel], listIdentifier: Identifier?)
         case error(dialog: Dialog)
         case editing(listIdentifier: Identifier)
-        case create(listIdentifier: Identifier, items: [ListViewModel])
     }
 
 }

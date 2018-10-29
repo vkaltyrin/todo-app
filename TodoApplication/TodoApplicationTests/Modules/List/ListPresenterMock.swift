@@ -2,31 +2,52 @@
 import XCTest
 
 final class ListPresenterMock: ListPresenter {
-    func presentShowLists(_ response: ListDataFlow.ShowLists.Response) {
-        
+
+    var invokedPresentShowLists = false
+    var invokedPresentShowListsCount = 0
+    var invokedPresentShowListsParameters: (response: ListDataFlow.ShowLists.Response, identifier: Identifier?)?
+    var invokedPresentShowListsParametersList = [(response: ListDataFlow.ShowLists.Response, identifier: Identifier?)]()
+
+    func presentShowLists(_ response: ListDataFlow.ShowLists.Response, identifier: Identifier?) {
+        invokedPresentShowLists = true
+        invokedPresentShowListsCount += 1
+        invokedPresentShowListsParameters = (response, identifier)
+        invokedPresentShowListsParametersList.append((response, identifier))
     }
-    
-    func presentCreateList(_ response: ListDataFlow.CreateList.Response) {
-        
-    }
-    
-    func presentListActions(_ identifier: Identifier) {
-        
-    }
-    
-    func presentListEditing(_ identifier: Identifier) {
-        
-    }
-    
-    func presentShowList(_ response: ListDataFlow.ShowLists.Response) {
-    
-    }
-    
+
+    var invokedPresentError = false
+    var invokedPresentErrorCount = 0
+    var invokedPresentErrorParameters: (error: StorageError, Void)?
+    var invokedPresentErrorParametersList = [(error: StorageError, Void)]()
+
     func presentError(_ error: StorageError) {
-        
+        invokedPresentError = true
+        invokedPresentErrorCount += 1
+        invokedPresentErrorParameters = (error, ())
+        invokedPresentErrorParametersList.append((error, ()))
     }
-    
 
-    
+    var invokedPresentListActions = false
+    var invokedPresentListActionsCount = 0
+    var invokedPresentListActionsParameters: (identifier: Identifier, Void)?
+    var invokedPresentListActionsParametersList = [(identifier: Identifier, Void)]()
 
+    func presentListActions(_ identifier: Identifier) {
+        invokedPresentListActions = true
+        invokedPresentListActionsCount += 1
+        invokedPresentListActionsParameters = (identifier, ())
+        invokedPresentListActionsParametersList.append((identifier, ()))
+    }
+
+    var invokedPresentListEditing = false
+    var invokedPresentListEditingCount = 0
+    var invokedPresentListEditingParameters: (identifier: Identifier, Void)?
+    var invokedPresentListEditingParametersList = [(identifier: Identifier, Void)]()
+
+    func presentListEditing(_ identifier: Identifier) {
+        invokedPresentListEditing = true
+        invokedPresentListEditingCount += 1
+        invokedPresentListEditingParameters = (identifier, ())
+        invokedPresentListEditingParametersList.append((identifier, ()))
+    }
 }

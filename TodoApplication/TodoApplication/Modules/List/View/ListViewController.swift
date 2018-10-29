@@ -18,17 +18,16 @@ final class ListViewController: UIViewController {
             case .error(let dialog):
                 stopLoading()
                 showAlert(dialog)
-            case .result(let items):
+            case .result(let items, let listIdentifier):
                 stopLoading()
                 tableDirector?.items = items
+                if let listIdentifier = listIdentifier {
+                    let request = ListDataFlow.OpenListEditing.Request(identifier: listIdentifier)
+                    interactor?.openListEditing(request: request)
+                }
             case .editing(let listIdentifier):
                 stopLoading()
                 tableDirector?.focusOnList(listIdentifier)
-            case .create(let listIdentifier, let items):
-                stopLoading()
-                tableDirector?.items = items
-                let request = ListDataFlow.OpenListEditing.Request(identifier: listIdentifier)
-                interactor?.openListEditing(request: request)
             }
         }
     }

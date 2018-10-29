@@ -1,8 +1,7 @@
 import Foundation
 
 protocol ListPresenter: class {
-    func presentShowLists(_ response: ListDataFlow.ShowLists.Response)
-    func presentCreateList(_ response: ListDataFlow.CreateList.Response)
+    func presentShowLists(_ response: ListDataFlow.ShowLists.Response, identifier: Identifier?)
     func presentError(_ error: StorageError)
     func presentListActions(_ identifier: Identifier)
     func presentListEditing(_ identifier: Identifier)
@@ -18,7 +17,7 @@ final class ListPresenterImpl: ListPresenter {
     }
 
     // MARK: - ListPresenter
-    func presentShowLists(_ response: ListDataFlow.ShowLists.Response) {
+    func presentShowLists(_ response: ListDataFlow.ShowLists.Response, identifier: Identifier?) {
         let viewModel: ListDataFlow.ShowLists.ViewModel
         switch response.result {
         case .success(let items):
@@ -28,26 +27,10 @@ final class ListPresenterImpl: ListPresenter {
                     name: $0.name
                 )
             }
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(items: resultItems))
-        case .failure(let error):
-            viewModel = errorStateViewModel(error)
-        }
-        view.showItems(viewModel)
-    }
-
-    func presentCreateList(_ response: ListDataFlow.CreateList.Response) {
-        let viewModel: ListDataFlow.ShowLists.ViewModel
-        switch response.result {
-        case .success(let identifier, let items):
-            let resultItems = items.map {
-                ListViewModel(
-                    identifier: $0.identifier ?? "",
-                    name: $0.name
+            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(
+                items: resultItems,
+                listIdentifier: identifier
                 )
-            }
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .create(
-                listIdentifier: identifier,
-                items: resultItems)
             )
         case .failure(let error):
             viewModel = errorStateViewModel(error)

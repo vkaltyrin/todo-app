@@ -22,9 +22,8 @@ final class ListInteractorImpl: ListInteractor {
 
     // MARK: - ListInteractor
     func fetchItems() {
-        listStorage.fetchLists { [weak self] result in
-            let response = ListDataFlow.ShowLists.Response(result: result)
-            self?.presenter.presentShowLists(response)
+        fetchItemsResponse { [weak self] response in
+            self?.presenter.presentShowLists(response, identifier: nil)
         }
     }
 
@@ -57,18 +56,10 @@ final class ListInteractorImpl: ListInteractor {
         listStorage.createList(list) { [weak self] result in
             switch result {
             case .success(let identifier):
-                self?.listStorage.fetchLists { result in
-                    let response: ListDataFlow.CreateList.Response
-                    switch result {
-                    case .success(let lists):
-                        response = ListDataFlow.CreateList.Response(result: .success(
-                            identifier: identifier,
-                            lists: lists)
-                        )
-                    case .failure(let error):
-                        response = ListDataFlow.CreateList.Response(result: .failure(error))
+                self?.listStorage.fetchLists { _ in
+                    self?.fetchItemsResponse { response in
+                        self?.presenter.presentShowLists(response, identifier: identifier)
                     }
-                    self?.presenter.presentCreateList(response)
                 }
             case .failure(let error):
                 self?.presenter.presentError(error)
@@ -82,5 +73,14 @@ final class ListInteractorImpl: ListInteractor {
 
     func openListEditing(request: ListDataFlow.OpenListEditing.Request) {
         presenter.presentListEditing(request.identifier)
+    }
+
+    // MARK: - Private
+
+    private func fetchItemsResponse(completion: @escaping (ListDataFlow.ShowLists.Response) -> ()) {
+        listStorage.fetchLists { result in
+            let response = ListDataFlow.ShowLists.Response(result: result)
+            completion(response)
+        }
     }
 }
