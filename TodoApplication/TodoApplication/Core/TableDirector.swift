@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
 
-protocol TableDirector: class, UITableViewDelegate, UITableViewDataSource {
+protocol TableDirector: class {
     func setup(with tableView: UITableView)
 }

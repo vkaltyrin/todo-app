@@ -11,7 +11,7 @@ protocol ListViewTableDirector: TableDirector {
     var onDeleteTap: ((_ identifier: Identifier) -> ())? { get set }
 }
 
-final class ListViewTableDirectorImpl: NSObject, ListViewTableDirector {
+final class ListViewTableDirectorImpl: NSObject, UITableViewDelegate, UITableViewDataSource, ListViewTableDirector {
 
     // MARK: - State
     private weak var tableView: UITableView?
