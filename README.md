@@ -38,7 +38,7 @@ If Presenter receives the update then it decides what's do next. It can show ano
 
 <a name="di"/>
 
-At that moment, there is no dependency injection framework. But I consider to add it as a feauture improvement.
+At that moment, there is no dependency injection framework. But I consider to add it as a feature improvement.
 For each module there is an Assembly which is supposed to manage dependencies.
 
 ### Tests
