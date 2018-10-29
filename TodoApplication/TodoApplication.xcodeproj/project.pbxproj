@@ -101,6 +101,7 @@
 		8C5F2447218760F600D207A1 /* TaskViewTableDirectorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F243C218760F500D207A1 /* TaskViewTableDirectorMock.swift */; };
 		8C5F2448218760F600D207A1 /* TaskPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F243D218760F500D207A1 /* TaskPresenterMock.swift */; };
 		8C5F244A2187610100D207A1 /* TransitionHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F24492187610100D207A1 /* TransitionHandlerMock.swift */; };
+		8C5F244C218765E800D207A1 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F244B218765E800D207A1 /* BaseCell.swift */; };
 		991C9E411C41FEC5B93054CF /* EarlGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C703D376E6204152F9605 /* EarlGrey.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 		C72E180E779DE45BF60B3BA2 /* Pods_TodoApplicationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1C4C140F247C2F4227EB8C /* Pods_TodoApplicationUITests.framework */; };
@@ -240,6 +241,7 @@
 		8C5F243C218760F500D207A1 /* TaskViewTableDirectorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewTableDirectorMock.swift; sourceTree = "<group>"; };
 		8C5F243D218760F500D207A1 /* TaskPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPresenterMock.swift; sourceTree = "<group>"; };
 		8C5F24492187610100D207A1 /* TransitionHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandlerMock.swift; sourceTree = "<group>"; };
+		8C5F244B218765E800D207A1 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		AE0C703D376E6204152F9605 /* EarlGrey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EarlGrey.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F19CEE97F9FEB255637457 /* EarlGrey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EarlGrey.framework; path = Pods/EarlGrey/EarlGrey/EarlGrey.framework; sourceTree = SOURCE_ROOT; };
@@ -547,6 +549,7 @@
 				8C3C9F442186D0EE002F4500 /* Alert.swift */,
 				8C3C9F5A218712CE002F4500 /* ActivityDisplayble */,
 				8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */,
+				8C5F244B218765E800D207A1 /* BaseCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -996,6 +999,7 @@
 				8C3C9FBE21874E5A002F4500 /* DialogBuilder.swift in Sources */,
 				8C3C9F062185BE98002F4500 /* ListViewInput.swift in Sources */,
 				8C3C9EEB21859545002F4500 /* RealmTask.swift in Sources */,
+				8C5F244C218765E800D207A1 /* BaseCell.swift in Sources */,
 				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
 				8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */,
 				8C3C9FB0218741FD002F4500 /* TaskViewInput.swift in Sources */,
