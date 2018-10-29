@@ -19,8 +19,9 @@ final class ListRouterTests: TestCase {
     // MARK: - Tests
     func testRouter_openModule() {
         // when
-        router.openTasks(listIdentifier: Identifier.generateUniqueIdentifier(),
-                         name: Identifier.generateUniqueIdentifier()
+        router.openTasks(
+            listIdentifier: Identifier.generateUniqueIdentifier(),
+            name: Identifier.generateUniqueIdentifier()
         )
         // then
         XCTAssertEqual(transitionHandlerMock.invokedOpenModuleCount, 1)
