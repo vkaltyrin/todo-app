@@ -44,8 +44,9 @@ final class ListViewControllerTests: TestCase {
     func testOpenTasks_callsRouterToOpenTasks() {
         // given
         let identfier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        view.openTasks(identfier)
+        view.openTasks(identfier, name: name)
         // then
         XCTAssertEqual(routerMock.invokedOpenTasksCount, 1)
     }
@@ -108,10 +109,10 @@ final class ListViewControllerTests: TestCase {
     
     func testTableDirector_openListActions_onListTap() {
         // given
-        let identifier = Identifier.generateUniqueIdentifier()
+        let viewModel = ListViewModel(identifier: "", name: "")
         // when
         view.viewDidLoad()
-        tableDirectorMock.invokedOnListTap?(identifier)
+        tableDirectorMock.invokedOnListTap?(viewModel)
         // then
         XCTAssertEqual(interactorMock.invokedOpenListActionsCount, 1)
     }

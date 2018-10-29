@@ -124,7 +124,8 @@ final class ListInteractorTests: TestCase {
     func testOpenListActions_presentListActions() {
         // given
         let request = ListDataFlow.OpenListActions.Request(
-            identifier: Identifier.generateUniqueIdentifier()
+            identifier: Identifier.generateUniqueIdentifier(),
+            name: Identifier.generateUniqueIdentifier()
         )
         // when
         interactor.openListActions(request: request)

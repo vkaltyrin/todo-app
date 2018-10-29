@@ -36,7 +36,7 @@ final class ListStorageMock: ListStorage {
     var invokedCreateListCount = 0
     var invokedCreateListParameters: (list: List, Void)?
     var invokedCreateListParametersList = [(list: List, Void)]()
-    var stubbedCreateListCompletionResult: (StorageResult<Identifier>, Void)?
+    var stubbedCreateListCompletionResult: (IdentifierResult, Void)?
 
     func createList(_ list: List, _ completion: @escaping OnStorageIndentifier) {
         invokedCreateList = true

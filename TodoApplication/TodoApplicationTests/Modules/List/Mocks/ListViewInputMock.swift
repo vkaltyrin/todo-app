@@ -41,14 +41,14 @@ final class ListViewInputMock: ListViewInput {
 
     var invokedOpenTasks = false
     var invokedOpenTasksCount = 0
-    var invokedOpenTasksParameters: (identifier: Identifier, Void)?
-    var invokedOpenTasksParametersList = [(identifier: Identifier, Void)]()
+    var invokedOpenTasksParameters: (identifier: Identifier, name: String)?
+    var invokedOpenTasksParametersList = [(identifier: Identifier, name: String)]()
 
-    func openTasks(_ identifier: Identifier) {
+    func openTasks(_ identifier: Identifier, name: String) {
         invokedOpenTasks = true
         invokedOpenTasksCount += 1
-        invokedOpenTasksParameters = (identifier, ())
-        invokedOpenTasksParametersList.append((identifier, ()))
+        invokedOpenTasksParameters = (identifier, name)
+        invokedOpenTasksParametersList.append((identifier, name))
     }
 
     var invokedShowAlert = false

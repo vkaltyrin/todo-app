@@ -89,8 +89,9 @@ final class ListPresenterTests: TestCase {
     func testPresentListActions_showActionSheet() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        presenter.presentListActions(identifier)
+        presenter.presentListActions(identifier, name: name)
         // then
         XCTAssertEqual(viewMock.invokedShowActionSheetCount, 1)
         XCTAssertNotNil(viewMock.invokedShowActionSheetParameters)
@@ -100,8 +101,9 @@ final class ListPresenterTests: TestCase {
     func testPresentListActions_showEditing_whenEditingActionIsTapped() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        presenter.presentListActions(identifier)
+        presenter.presentListActions(identifier, name: name)
         let action = viewMock.invokedShowActionSheetParameters?.dialog.actions[safe: 0]
         action?.onTap?()
         // then
@@ -111,8 +113,9 @@ final class ListPresenterTests: TestCase {
     func testPresentListActions_deleteItem_whenDeleteActionIsTapped() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        presenter.presentListActions(identifier)
+        presenter.presentListActions(identifier, name: name)
         let action = viewMock.invokedShowActionSheetParameters?.dialog.actions[safe: 1]
         action?.onTap?()
         // then
@@ -122,8 +125,9 @@ final class ListPresenterTests: TestCase {
     func testPresentListActions_openTasks_whenOpenTasksActionIsTapped() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        presenter.presentListActions(identifier)
+        presenter.presentListActions(identifier, name: name)
         let action = viewMock.invokedShowActionSheetParameters?.dialog.actions[safe: 2]
         action?.onTap?()
         // then

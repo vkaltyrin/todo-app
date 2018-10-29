@@ -29,14 +29,14 @@ final class ListPresenterMock: ListPresenter {
 
     var invokedPresentListActions = false
     var invokedPresentListActionsCount = 0
-    var invokedPresentListActionsParameters: (identifier: Identifier, Void)?
-    var invokedPresentListActionsParametersList = [(identifier: Identifier, Void)]()
+    var invokedPresentListActionsParameters: (identifier: Identifier, name: String)?
+    var invokedPresentListActionsParametersList = [(identifier: Identifier, name: String)]()
 
-    func presentListActions(_ identifier: Identifier) {
+    func presentListActions(_ identifier: Identifier, name: String) {
         invokedPresentListActions = true
         invokedPresentListActionsCount += 1
-        invokedPresentListActionsParameters = (identifier, ())
-        invokedPresentListActionsParametersList.append((identifier, ()))
+        invokedPresentListActionsParameters = (identifier, name)
+        invokedPresentListActionsParametersList.append((identifier, name))
     }
 
     var invokedPresentListEditing = false

@@ -25,12 +25,12 @@ final class ListViewTableDirectorMock: NSObject, ListViewTableDirector {
     }
     var invokedOnListTapSetter = false
     var invokedOnListTapSetterCount = 0
-    var invokedOnListTap: ((Identifier) -> ())?
-    var invokedOnListTapList = [((Identifier) -> ())?]()
+    var invokedOnListTap: ((ListViewModel) -> ())?
+    var invokedOnListTapList = [((ListViewModel) -> ())?]()
     var invokedOnListTapGetter = false
     var invokedOnListTapGetterCount = 0
-    var stubbedOnListTap: ((Identifier) -> ())!
-    var onListTap: ((Identifier) -> ())? {
+    var stubbedOnListTap: ((ListViewModel) -> ())!
+    var onListTap: ((ListViewModel) -> ())? {
         set {
             invokedOnListTapSetter = true
             invokedOnListTapSetterCount += 1

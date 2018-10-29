@@ -49,14 +49,16 @@ final class TaskStorageImplTests: StorageTestCase {
         XCTAssertEqual(receivedTasks[1], TestData.runMarathonTask)
     }
     
-    func testFetchTask_returnError_withWrongListIdentifier() {
+    func testFetchTask_returnEmptyList_withWrongListIdentifier() {
         // given
         var receivedError: StorageError?
         let response = expectation(description: "wait for return")
+        var receivedTasks: [Task] = []
         
         // when
         storage.fetchTasks(listId: TestData.wrongIdentifier) { result in
-            result.onSuccess { _ in
+            result.onSuccess { result in
+                receivedTasks = result
                 response.fulfill()
             }
             result.onFailure { error in
@@ -67,17 +69,8 @@ final class TaskStorageImplTests: StorageTestCase {
         waitForExpectations(timeout: expectationTimeout)
         
         // then
-        guard let error = receivedError else {
-            XCTFail("fetchTask should return an error")
-            return
-        }
-        
-        switch error {
-        case .cannotFetch:
-            break
-        default:
-            XCTFail("fetchTask should return corrent error")
-        }
+        XCTAssertEqual(receivedTasks.count, 0)
+        XCTAssertNil(receivedError)
     }
     
     func testDeleteTask_deleteTask_withSuccess() {
@@ -141,7 +134,7 @@ final class TaskStorageImplTests: StorageTestCase {
         
         // when
         storage.createTask(listId: TestData.listIdentifier, task: task) { result in
-            result.onSuccess {
+            result.onSuccess { _ in
                 response.fulfill()
             }
             result.onFailure { error in
@@ -159,10 +152,11 @@ final class TaskStorageImplTests: StorageTestCase {
         // given
         let task = TestData.writeTestsTask
         var receivedError: StorageError?
+        let name = Identifier.generateUniqueIdentifier()
         let response = expectation(description: "wait for return")
         
         // when
-        storage.updateTask(task: task) { result in
+        storage.updateTask(taskId: task.identifier ?? "", name: name) { result in
             result.onSuccess {
                 response.fulfill()
             }
@@ -181,10 +175,11 @@ final class TaskStorageImplTests: StorageTestCase {
         // given
         let task = TestData.makeCoffeeTask
         var receivedError: StorageError?
+        let name = Identifier.generateUniqueIdentifier()
         let response = expectation(description: "wait for return")
         
         // when
-        storage.updateTask(task: task) { result in
+        storage.updateTask(taskId: task.identifier ?? "", name: name) { result in
             result.onSuccess {
                 response.fulfill()
             }
@@ -234,33 +229,28 @@ extension TaskStorageImplTests {
         static let wrongIdentifier = Identifier.generateUniqueIdentifier()
         static let runMarathonTaskIdentifier = Identifier.generateUniqueIdentifier()
         static let runMarathonTask = Task(
-            identifier: runMarathonTaskIdentifier,
             name: "Run a marathon",
-            status: .undone,
+            identifier: runMarathonTaskIdentifier,
             creationDate: Date(timeIntervalSince1970: 0)
         )
         static let buyTeaTask = Task(
-            identifier: "ID-2",
             name: "Buy a pu-erh tea",
-            status: .done,
+            identifier: "ID-2",
             creationDate: Date(timeIntervalSince1970: 1)
         )
         static let writeTestsTask = Task(
-            identifier: runMarathonTaskIdentifier,
             name: "Write tests",
-            status: .done,
+            identifier: runMarathonTaskIdentifier,
             creationDate: Date(timeIntervalSince1970: 2)
         )
         static let makeCoffeeTask = Task(
-            identifier: "ID",
             name: "Make a coffee",
-            status: .done,
+            identifier: "ID",
             creationDate: Date(timeIntervalSince1970: 3)
         )
         static let nonExistingTask = Task(
-            identifier: Identifier.generateUniqueIdentifier(),
             name: "Non existing",
-            status: .done,
+            identifier: Identifier.generateUniqueIdentifier(),
             creationDate: Date(timeIntervalSince1970: 4)
         )
     }
