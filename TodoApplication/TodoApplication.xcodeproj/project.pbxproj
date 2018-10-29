@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0071464AE98095B12778ED15 /* Pods_TodoApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1DAC8422F13C2259D57BC8 /* Pods_TodoApplication.framework */; };
 		8C3C9EAC2184D3DF002F4500 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EAB2184D3DF002F4500 /* AppDelegate.swift */; };
-		8C3C9EAE2184D3DF002F4500 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9EAD2184D3DF002F4500 /* ViewController.swift */; };
 		8C3C9EB12184D3DF002F4500 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9EAF2184D3DF002F4500 /* Main.storyboard */; };
 		8C3C9EB32184D3E0002F4500 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9EB22184D3E0002F4500 /* Assets.xcassets */; };
 		8C3C9EB62184D3E0002F4500 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3C9EB42184D3E0002F4500 /* LaunchScreen.storyboard */; };
@@ -84,7 +83,6 @@
 		6B8A785DE6E421C002381DD9 /* Pods-TodoApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApplication.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodoApplication/Pods-TodoApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		8C3C9EA82184D3DF002F4500 /* TodoApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3C9EAB2184D3DF002F4500 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C3C9EAD2184D3DF002F4500 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8C3C9EB02184D3DF002F4500 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C3C9EB22184D3E0002F4500 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C3C9EB52184D3E0002F4500 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 				8C3C9ED22184D93C002F4500 /* Core */,
 				8C3C9ECD2184D784002F4500 /* Models */,
 				8C3C9EAB2184D3DF002F4500 /* AppDelegate.swift */,
-				8C3C9EAD2184D3DF002F4500 /* ViewController.swift */,
 				8C3C9EAF2184D3DF002F4500 /* Main.storyboard */,
 				8C3C9EB22184D3E0002F4500 /* Assets.xcassets */,
 				8C3C9EB42184D3E0002F4500 /* LaunchScreen.storyboard */,
@@ -683,7 +680,6 @@
 				8C3C9F4221862381002F4500 /* KeyboardObserver.swift in Sources */,
 				8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */,
 				8C3C9F5E218714DD002F4500 /* ActivityDisplaybleImpl.swift in Sources */,
-				8C3C9EAE2184D3DF002F4500 /* ViewController.swift in Sources */,
 				8C3C9F0A2185BEC6002F4500 /* ListPresenter.swift in Sources */,
 				8C3C9F0D2185BF88002F4500 /* TransitionHandler.swift in Sources */,
 				8C3C9EED2185959C002F4500 /* StorageError.swift in Sources */,
