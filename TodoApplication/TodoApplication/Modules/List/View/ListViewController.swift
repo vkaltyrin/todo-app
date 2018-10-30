@@ -33,7 +33,7 @@ final class ListViewController: UIViewController {
     }
 
     private let keyboardObserver: KeyboardObserver = KeyboardObserverImpl()
-    private var activityDisplayble: ActivityDisplayble?
+    private var activityDisplayable: ActivityDisplayable?
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView! {
@@ -44,7 +44,7 @@ final class ListViewController: UIViewController {
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
-            activityDisplayble = ActivityDisplaybleImpl(
+            activityDisplayable = ActivityDisplayableImpl(
                 activityIndicatorView: activityIndicator
             )
         }
@@ -110,14 +110,14 @@ final class ListViewController: UIViewController {
         interactor?.createItem(request: request)
     }
 
-    // MARK: - ActivityDisplayble
+    // MARK: - ActivityDisplayable
 
     func startActivity() {
-        activityDisplayble?.startActivity()
+        activityDisplayable?.startActivity()
     }
 
     func stopActivity() {
-        activityDisplayble?.stopActivity()
+        activityDisplayable?.stopActivity()
     }
 }
 

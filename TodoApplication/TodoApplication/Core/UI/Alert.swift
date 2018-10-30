@@ -35,15 +35,15 @@ struct Dialog {
     }
 }
 
-protocol AlertDisplayble: class {
+protocol AlertDisplayable: class {
     func showAlert(_ dialog: Dialog)
 }
 
-protocol ActionSheetDisplayble: class {
+protocol ActionSheetDisplayable: class {
     func showActionSheet(_ dialog: Dialog)
 }
 
-extension UIViewController: AlertDisplayble, ActionSheetDisplayble {
+extension UIViewController: AlertDisplayable, ActionSheetDisplayable {
 
     func showActionSheet(_ dialog: Dialog) {
         showDialog(dialog, style: .actionSheet)

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-final class ActivityDisplaybleImpl: ActivityDisplayble {
+final class ActivityDisplayableImpl: ActivityDisplayable {
     // MARK: - Dependencies
     private weak var activityIndicatorView: UIActivityIndicatorView?
 
@@ -11,7 +11,7 @@ final class ActivityDisplaybleImpl: ActivityDisplayble {
         self.activityIndicatorView = activityIndicatorView
     }
 
-    // MARK: - ActivityDisplayble
+    // MARK: - ActivityDisplayable
     func startActivity() {
         activityIndicatorView?.startAnimating()
     }

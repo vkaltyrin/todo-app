@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ActivityDisplayble: class {
+protocol ActivityDisplayable: class {
     func startActivity()
     func stopActivity()
 }
