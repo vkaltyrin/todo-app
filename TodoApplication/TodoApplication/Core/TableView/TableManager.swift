@@ -1,59 +1,8 @@
 import Foundation
 import UIKit
 
-protocol CellConfigurator {
-    func configure(_ cell: UITableViewCell)
-
-    var reuseIdentifier: String { get }
-    var cellType: AnyClass { get }
-}
-
-final class TableCell<CellType: ConfigurableCell>: CellConfigurator where CellType: UITableViewCell {
-
-    // MARK: - State
-
-    let viewModel: CellType.ViewModel
-
-    // MARK: - Init
-
-    init(viewModel: CellType.ViewModel) {
-        self.viewModel = viewModel
-    }
-
-    // MARK: - CellConfigurator
-
-    var reuseIdentifier: String {
-        return CellType.reuseIdentifier
-    }
-
-    var cellType: AnyClass {
-        return CellType.self
-    }
-
-    func configure(_ cell: UITableViewCell) {
-
-    }
-
-}
-
-final class Section {
-    private let cells: [CellConfigurator]
-
-    init(cells: [CellConfigurator]) {
-        self.cells = cells
-    }
-
-    var numberOfRows: Int {
-        return cells.count
-    }
-
-    subscript(index: Int) -> CellConfigurator? {
-        return cells[safe: index]
-    }
-}
-
 protocol TableManager: class {
-    func reload(_ sections: [Section])
+    func reload(_ sections: [TableSection])
 }
 
 final class TableManagerImpl: NSObject {
@@ -63,17 +12,25 @@ final class TableManagerImpl: NSObject {
 
     // MARK: - State
 
-    private var sections: [Section] = []
+    private var sections: [TableSection] = []
 
     // MARK: - Init
 
     init(tableView: UITableView) {
         self.tableView = tableView
     }
+
+    // MARK: - Private
+
+    @discardableResult
+    private func call(action: CellActionType, cell: UITableViewCell?, indexPath: IndexPath) -> Any? {
+        let function = sections[safe: indexPath.section]?[indexPath.row]
+        return function?.call(action: action, cell: cell, indexPath: indexPath)
+    }
 }
 
 extension TableManagerImpl: TableManager {
-    func reload(_ sections: [Section]) {
+    func reload(_ sections: [TableSection]) {
         self.sections = sections
         tableView?.reloadData()
     }
@@ -82,6 +39,37 @@ extension TableManagerImpl: TableManager {
 extension TableManagerImpl: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+
+        call(action: .tap, cell: cell, indexPath: indexPath)
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+
+        if call(action: .canDelete, cell: tableView.cellForRow(at: indexPath), indexPath: indexPath) as? Bool ?? false {
+            return UITableViewCell.EditingStyle.delete
+        }
+
+        return UITableViewCell.EditingStyle.none
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+            call(action: .swipeToDelete, cell: tableView.cellForRow(at: indexPath), indexPath: indexPath)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        call(action: .willDisplay, cell: cell, indexPath: indexPath)
     }
 }
 
@@ -109,6 +97,7 @@ extension TableManagerImpl: UITableViewDataSource {
         )
 
         cellConfigurator.configure(cell)
+        call(action: .configure, cell: cell, indexPath: indexPath)
 
         return cell
     }
