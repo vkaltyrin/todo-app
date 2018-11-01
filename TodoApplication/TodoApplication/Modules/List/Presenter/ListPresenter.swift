@@ -27,15 +27,33 @@ final class ListPresenterImpl: ListPresenter {
                     name: $0.name
                 )
             }
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(
+
+            let builder = ListTableBuilder(
                 items: resultItems,
+                focusIdentifier: identifier,
+                onDeleteTap: { [weak self] identifier in
+                    self?.view.deleteItem(identifier)
+                },
+                onListTap: { [weak self] item in
+                    self?.onListTap(item: item)
+                },
+                onCellTextDidEndEditing: { [weak self] item in
+                    self?.view.updateItem(item.identifier, name: item.name)
+                }
+            )
+            let sections = builder.build()
+
+            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(
+                items: sections,
                 listIdentifier: identifier
                 )
             )
         case .failure(let error):
             viewModel = errorStateViewModel(error)
         }
-        view.showItems(viewModel)
+
+        state = viewModel.state
+        //view.showItems(viewModel)
     }
 
     func presentError(_ error: StorageError) {
@@ -71,13 +89,46 @@ final class ListPresenterImpl: ListPresenter {
     }
 
     func presentListEditing(_ identifier: Identifier) {
-        view.showEditing(identifier)
+        //view.showEditing(identifier)
+        self.state = .editing(listIdentifier: identifier)
     }
 
     // MARK: - Private
-    func errorStateViewModel(_ error: StorageError) -> ListDataFlow.ShowLists.ViewModel {
+    private func onListTap(item: ListViewModel) {
+        switch state {
+        case .editing:
+            break
+        default:
+            view.selectItem(item.identifier, name: item.name)
+        }
+    }
+
+    private func errorStateViewModel(_ error: StorageError) -> ListDataFlow.ShowLists.ViewModel {
         let dialogBuilder = DialogBuilder()
         let dialog = dialogBuilder.build(storageError: error)
         return ListDataFlow.ShowLists.ViewModel(state: .error(dialog: dialog))
+    }
+
+    private var state: ListDataFlow.ViewControllerState = .loading {
+        didSet {
+            switch state {
+            case .loading:
+                view.startActivity()
+                view.fetchItems()
+            case .error(let dialog):
+                view.stopActivity()
+                view.showAlert(dialog)
+            case .result(let sections, let identifier):
+                view.stopActivity()
+                view.reloadTable(sections)
+                if let identifier = identifier {
+                    //view.showEditing(identifier)
+                    self.state = .editing(listIdentifier: identifier)
+                }
+            case .editing(let identifier):
+                view.stopActivity()
+                view.focusOn(identifier)
+            }
+        }
     }
 }

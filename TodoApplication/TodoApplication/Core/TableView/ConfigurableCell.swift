@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol ConfigurableCell {
+protocol ConfigurableCell: CellFocusable {
     associatedtype ViewModel
 
     static var reuseIdentifier: String { get }

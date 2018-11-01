@@ -108,6 +108,9 @@
 		8CDDC095218A39C100D23170 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC094218A39C100D23170 /* TableCell.swift */; };
 		8CDDC097218A39DA00D23170 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC096218A39DA00D23170 /* TableSection.swift */; };
 		8CDDC099218A3A6400D23170 /* TableCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC098218A3A6400D23170 /* TableCellAction.swift */; };
+		8CDDC09B218A4B6800D23170 /* ListTableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC09A218A4B6800D23170 /* ListTableBuilder.swift */; };
+		8CDDC09D218A4B9700D23170 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC09C218A4B9700D23170 /* TableBuilder.swift */; };
+		8CDDC09F218ABD9A00D23170 /* CellFocusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC09E218ABD9A00D23170 /* CellFocusable.swift */; };
 		991C9E411C41FEC5B93054CF /* EarlGrey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C703D376E6204152F9605 /* EarlGrey.swift */; };
 		9D12448EB1B0A3E0A78DD378 /* Pods_TodoApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */; };
 		C72E180E779DE45BF60B3BA2 /* Pods_TodoApplicationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1C4C140F247C2F4227EB8C /* Pods_TodoApplicationUITests.framework */; };
@@ -254,6 +257,9 @@
 		8CDDC094218A39C100D23170 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		8CDDC096218A39DA00D23170 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		8CDDC098218A3A6400D23170 /* TableCellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellAction.swift; sourceTree = "<group>"; };
+		8CDDC09A218A4B6800D23170 /* ListTableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableBuilder.swift; sourceTree = "<group>"; };
+		8CDDC09C218A4B9700D23170 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
+		8CDDC09E218ABD9A00D23170 /* CellFocusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFocusable.swift; sourceTree = "<group>"; };
 		AE0C703D376E6204152F9605 /* EarlGrey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EarlGrey.swift; sourceTree = "<group>"; };
 		B079FCFBA6A51118F88A244D /* Pods_TodoApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1F19CEE97F9FEB255637457 /* EarlGrey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EarlGrey.framework; path = Pods/EarlGrey/EarlGrey/EarlGrey.framework; sourceTree = SOURCE_ROOT; };
@@ -461,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				8C3C9F092185BEC6002F4500 /* ListPresenter.swift */,
+				8CDDC09A218A4B6800D23170 /* ListTableBuilder.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -696,6 +703,8 @@
 				8CDDC094218A39C100D23170 /* TableCell.swift */,
 				8CDDC096218A39DA00D23170 /* TableSection.swift */,
 				8CDDC098218A3A6400D23170 /* TableCellAction.swift */,
+				8CDDC09C218A4B9700D23170 /* TableBuilder.swift */,
+				8CDDC09E218ABD9A00D23170 /* CellFocusable.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -1016,6 +1025,7 @@
 				8C3C9F3A21860E8E002F4500 /* ConfigurableCell.swift in Sources */,
 				8C3C9F4221862381002F4500 /* KeyboardObserver.swift in Sources */,
 				8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */,
+				8CDDC09F218ABD9A00D23170 /* CellFocusable.swift in Sources */,
 				8C3C9FBA218741FD002F4500 /* TaskAssembly.swift in Sources */,
 				8C3C9F5E218714DD002F4500 /* ActivityDisplaybleImpl.swift in Sources */,
 				8C3C9F0A2185BEC6002F4500 /* ListPresenter.swift in Sources */,
@@ -1044,12 +1054,14 @@
 				8C3C9F192185C852002F4500 /* ListViewController.swift in Sources */,
 				8C3C9F082185BEAF002F4500 /* ListInteractor.swift in Sources */,
 				8C3C9EEF21859628002F4500 /* StorageTypealiases.swift in Sources */,
+				8CDDC09B218A4B6800D23170 /* ListTableBuilder.swift in Sources */,
 				8CDDC095218A39C100D23170 /* TableCell.swift in Sources */,
 				8C3C9FBB218741FD002F4500 /* TaskPresenter.swift in Sources */,
 				8C3C9F482186D5A5002F4500 /* ListViewModel.swift in Sources */,
 				8C3C9F042185BE7F002F4500 /* ListRouter.swift in Sources */,
 				8C3C9FB7218741FD002F4500 /* TaskViewModel.swift in Sources */,
 				8C3C9F3E21861290002F4500 /* ListViewTableDirector.swift in Sources */,
+				8CDDC09D218A4B9700D23170 /* TableBuilder.swift in Sources */,
 				8CDDC093218A39A900D23170 /* CellConfigurator.swift in Sources */,
 				8C3C9F452186D0EE002F4500 /* Alert.swift in Sources */,
 				8C3C9F2A2185D1AA002F4500 /* ListDataFlow.swift in Sources */,

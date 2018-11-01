@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 final class TableSection {
-    private let cells: [CellConfigurator]
+    private(set) var cells: [CellConfigurator]
 
     init(cells: [CellConfigurator]) {
         self.cells = cells

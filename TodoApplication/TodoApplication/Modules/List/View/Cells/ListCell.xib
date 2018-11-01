@@ -29,9 +29,9 @@
                 <color key="backgroundColor" red="1" green="0.88176666800000003" blue="0.77186901949999998" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="Rtt-6m-aZq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="95I-OK-Bht"/>
+                    <constraint firstItem="Rtt-6m-aZq" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="CNQ-eU-ipy"/>
+                    <constraint firstItem="Rtt-6m-aZq" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="F3j-aL-XK9"/>
                     <constraint firstItem="Rtt-6m-aZq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GxJ-gc-yI7"/>
-                    <constraint firstAttribute="bottom" secondItem="Rtt-6m-aZq" secondAttribute="bottom" id="I7V-LG-WV4"/>
-                    <constraint firstAttribute="trailing" secondItem="Rtt-6m-aZq" secondAttribute="trailing" id="KJh-e8-jut"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

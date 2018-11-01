@@ -3,6 +3,8 @@ import UIKit
 
 protocol TableManager: class {
     func reload(_ sections: [TableSection])
+
+    func focusOn<T>(sectionIndex: Int, _ predicate: (T) -> Bool) where T: CellConfigurator
 }
 
 final class TableManagerImpl: NSObject {
@@ -18,6 +20,11 @@ final class TableManagerImpl: NSObject {
 
     init(tableView: UITableView) {
         self.tableView = tableView
+
+        super.init()
+
+        self.tableView?.delegate = self
+        self.tableView?.dataSource = self
     }
 
     // MARK: - Private
@@ -34,11 +41,26 @@ extension TableManagerImpl: TableManager {
         self.sections = sections
         tableView?.reloadData()
     }
+
+    func focusOn<T>(sectionIndex: Int, _ predicate: (T) -> Bool) where T: CellConfigurator {
+        let section = sections[safe: sectionIndex]
+        let index = section?.cells.firstIndex(where: { cellConfigurator in
+            if let cell = cellConfigurator as? T {
+                return predicate(cell)
+            } else {
+                return false
+            }
+        }) ?? 0
+        let cell = tableView?.cellForRow(at: IndexPath(row: index, section: sectionIndex))
+        if let focusable = cell as? CellFocusable {
+            focusable.focus()
+        }
+    }
 }
 
 extension TableManagerImpl: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 60
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -90,6 +112,8 @@ extension TableManagerImpl: UITableViewDataSource {
             assertionFailure("Row does not exist")
             return UITableViewCell()
         }
+
+        tableView.registerNib(cellClass: cellConfigurator.cellType)
 
         let cell = tableView.dequeueReusableCell(
             withIdentifier: cellConfigurator.reuseIdentifier,

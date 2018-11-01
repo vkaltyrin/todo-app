@@ -47,7 +47,7 @@ final class TableCell<CellType: ConfigurableCell>: CellConfigurator where CellTy
     func on<T>(
         _ type: CellActionType,
         function: @escaping (_ options: CellActionParameters<CellType>) -> T) -> Self {
-        return on(TableCellAction<CellType>(type: type, function: function))
+        return on(TableCellAction<CellType>(type, function: function))
     }
 }
 

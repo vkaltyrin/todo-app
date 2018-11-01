@@ -54,7 +54,7 @@ final class TableCellAction<CellType: ConfigurableCell> where CellType: UITableV
     let type: CellActionType
     let function: CellActionFunction<CellType>
 
-    init<T>(type: CellActionType, function: @escaping (_ parameters: CellActionParameters<CellType>) -> T) {
+    init<T>(_ type: CellActionType, function: @escaping (_ parameters: CellActionParameters<CellType>) -> T) {
         self.type = type
         self.function = .any(function)
     }

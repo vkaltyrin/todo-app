@@ -22,13 +22,15 @@ class BaseCell: UITableViewCell {
         self.selectionStyle = .none
     }
 
+    func disableFocus() {
+        textField.isUserInteractionEnabled = false
+    }
+}
+
+extension BaseCell: CellFocusable {
     func focus() {
         textField.isUserInteractionEnabled = true
         textField.becomeFirstResponder()
-    }
-
-    func disableFocus() {
-        textField.isUserInteractionEnabled = false
     }
 }
 

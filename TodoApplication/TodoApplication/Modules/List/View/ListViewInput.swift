@@ -1,8 +1,12 @@
 import Foundation
 
 protocol ListViewInput: AlertDisplayable, ActionSheetDisplayable, ActivityDisplayable {
-    func showItems(_ viewModel: ListDataFlow.ShowLists.ViewModel)
     func showEditing(_ identifier: Identifier)
     func deleteItem(_ identifier: Identifier)
     func openTasks(_ identifier: Identifier, name: String)
+    func selectItem(_ identifier: Identifier, name: String)
+    func updateItem(_ identifier: Identifier, name: String)
+    func fetchItems()
+    func reloadTable(_ sections: [TableSection])
+    func focusOn(_ identifier: Identifier)
 }
