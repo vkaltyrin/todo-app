@@ -25,8 +25,8 @@ final class ListViewController: UIViewController {
         }
     }
 
-    // MARK: - Private views
-    private var addListButton: UIBarButtonItem?
+    // MARK: - Private
+    private var onAddTap: (() -> ())?
 
     // MARK: - ViewController life-cycle
     override func viewDidLoad() {
@@ -41,20 +41,19 @@ final class ListViewController: UIViewController {
             self?.tableViewBottomConstraint.constant = 0
         }
 
-        addListButton = UIBarButtonItem(
+        let addButton = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(onAddListTap)
         )
-        addListButton?.qaAccessibilityIdentifier = ListDataFlow.AccessibilityIdentifiers.createListButton
-        navigationItem.rightBarButtonItem = addListButton
+        addButton.qaAccessibilityIdentifier = ListDataFlow.AccessibilityIdentifiers.createListButton
+        navigationItem.rightBarButtonItem = addButton
     }
 
     // MARK: - Private
 
     @objc private func onAddListTap() {
-        let request = ListDataFlow.CreateList.Request(name: "")
-        interactor?.createItem(request: request)
+        onAddTap?()
     }
 
     // MARK: - ActivityDisplayable
@@ -69,6 +68,15 @@ final class ListViewController: UIViewController {
 }
 
 extension ListViewController: ListViewInput {
+    func setOnAddTap(_ onAddTap: (() -> ())?) {
+        self.onAddTap = onAddTap
+    }
+
+    func createTask(name: String) {
+        let request = ListDataFlow.CreateList.Request(name: name)
+        interactor?.createItem(request: request)
+    }
+
     func focusOn(_ identifier: Identifier) {
         tableManager?.focusOn(sectionIndex: 0) { (cell: TableCell<ListCell>) -> Bool in
             cell.viewModel.identifier == identifier

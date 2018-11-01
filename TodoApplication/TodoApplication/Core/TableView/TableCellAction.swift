@@ -10,7 +10,6 @@ protocol CellActionable {
 
 enum CellActionType: Hashable {
     case tap
-    case canDelete
     case swipeToDelete
     case configure
     case willDisplay

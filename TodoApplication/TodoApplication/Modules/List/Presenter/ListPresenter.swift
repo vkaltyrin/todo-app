@@ -5,6 +5,7 @@ protocol ListPresenter: class {
     func presentError(_ error: StorageError)
     func presentListActions(_ identifier: Identifier, name: String)
     func presentListEditing(_ identifier: Identifier)
+    func presentLoading()
 }
 
 final class ListPresenterImpl: ListPresenter {
@@ -14,6 +15,7 @@ final class ListPresenterImpl: ListPresenter {
     // MARK: - Init
     init(view: ListViewInput) {
         self.view = view
+        initialSetup()
     }
 
     // MARK: - ListPresenter
@@ -49,16 +51,15 @@ final class ListPresenterImpl: ListPresenter {
                 )
             )
         case .failure(let error):
-            viewModel = errorStateViewModel(error)
+            viewModel = ListDataFlow.ShowLists.ViewModel(state: .error(dialog: errorDialog(error))
+            )
         }
 
         state = viewModel.state
-        //view.showItems(viewModel)
     }
 
     func presentError(_ error: StorageError) {
-        let viewModel = errorStateViewModel(error)
-        view.showItems(viewModel)
+        state = .error(dialog: errorDialog(error))
     }
 
     func presentListActions(_ identifier: Identifier, name: String) {
@@ -89,11 +90,20 @@ final class ListPresenterImpl: ListPresenter {
     }
 
     func presentListEditing(_ identifier: Identifier) {
-        //view.showEditing(identifier)
         self.state = .editing(listIdentifier: identifier)
     }
 
+    func presentLoading() {
+        self.state = .loading
+    }
+
     // MARK: - Private
+    private func initialSetup() {
+        view.setOnAddTap { [weak self] in
+            self?.view.createTask(name: "")
+        }
+    }
+
     private func onListTap(item: ListViewModel) {
         switch state {
         case .editing:
@@ -103,10 +113,10 @@ final class ListPresenterImpl: ListPresenter {
         }
     }
 
-    private func errorStateViewModel(_ error: StorageError) -> ListDataFlow.ShowLists.ViewModel {
+    private func errorDialog(_ error: StorageError) -> Dialog {
         let dialogBuilder = DialogBuilder()
         let dialog = dialogBuilder.build(storageError: error)
-        return ListDataFlow.ShowLists.ViewModel(state: .error(dialog: dialog))
+        return dialog
     }
 
     private var state: ListDataFlow.ViewControllerState = .loading {
@@ -114,7 +124,6 @@ final class ListPresenterImpl: ListPresenter {
             switch state {
             case .loading:
                 view.startActivity()
-                view.fetchItems()
             case .error(let dialog):
                 view.stopActivity()
                 view.showAlert(dialog)
@@ -122,7 +131,6 @@ final class ListPresenterImpl: ListPresenter {
                 view.stopActivity()
                 view.reloadTable(sections)
                 if let identifier = identifier {
-                    //view.showEditing(identifier)
                     self.state = .editing(listIdentifier: identifier)
                 }
             case .editing(let identifier):

@@ -6,7 +6,9 @@ protocol ListViewInput: AlertDisplayable, ActionSheetDisplayable, ActivityDispla
     func openTasks(_ identifier: Identifier, name: String)
     func selectItem(_ identifier: Identifier, name: String)
     func updateItem(_ identifier: Identifier, name: String)
+    func createTask(name: String)
     func fetchItems()
     func reloadTable(_ sections: [TableSection])
     func focusOn(_ identifier: Identifier)
+    func setOnAddTap(_ onAddTap: (() -> ())?)
 }

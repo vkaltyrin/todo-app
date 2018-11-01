@@ -71,17 +71,6 @@ extension TableManagerImpl: UITableViewDelegate {
 
     func tableView(
         _ tableView: UITableView,
-        editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-
-        if call(action: .canDelete, cell: tableView.cellForRow(at: indexPath), indexPath: indexPath) as? Bool ?? false {
-            return UITableViewCell.EditingStyle.delete
-        }
-
-        return UITableViewCell.EditingStyle.none
-    }
-
-    func tableView(
-        _ tableView: UITableView,
         commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath) {
 

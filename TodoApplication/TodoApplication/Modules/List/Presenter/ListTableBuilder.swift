@@ -37,6 +37,9 @@ final class ListTableBuilder: TableBuilder {
                             ListViewModel(identifier: viewModel.identifier, name: name)
                         )
                     }
+                    parameters.cell?.setAccessibilityIdentifierIndex(
+                        index: parameters.indexPath.row
+                    )
                 }
                 .on(.willDisplay) { [focusIdentifier] parameters in
                     if let focusIdentifier = focusIdentifier, parameters.viewModel.identifier == focusIdentifier {

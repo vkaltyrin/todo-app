@@ -22,12 +22,14 @@ final class ListInteractorImpl: ListInteractor {
 
     // MARK: - ListInteractor
     func fetchItems() {
+        presenter.presentLoading()
         fetchItemsResponse { [weak self] response in
             self?.presenter.presentShowLists(response, identifier: nil)
         }
     }
 
     func deleteItem(request: ListDataFlow.DeleteList.Request) {
+        presenter.presentLoading()
         listStorage.deleteList(listId: request.identifier) { [weak self] result in
             let response = ListDataFlow.DeleteList.Response(result: result)
             switch response.result {
@@ -40,6 +42,7 @@ final class ListInteractorImpl: ListInteractor {
     }
 
     func updateItem(request: ListDataFlow.UpdateList.Request) {
+        presenter.presentLoading()
         listStorage.updateList(listId: request.identifier, name: request.name) { [weak self] result in
             let response = ListDataFlow.UpdateList.Response(result: result)
             switch response.result {
@@ -53,6 +56,7 @@ final class ListInteractorImpl: ListInteractor {
 
     func createItem(request: ListDataFlow.CreateList.Request) {
         let list = List(name: request.name)
+        presenter.presentLoading()
         listStorage.createList(list) { [weak self] result in
             switch result {
             case .success(let identifier):
