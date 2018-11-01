@@ -49,7 +49,6 @@
 		8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F2F2185DDAD002F4500 /* ListInteractorTests.swift */; };
 		8C3C9F3A21860E8E002F4500 /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F3921860E8D002F4500 /* ConfigurableCell.swift */; };
 		8C3C9F3C21860EF1002F4500 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F3B21860EF1002F4500 /* ArrayExtensions.swift */; };
-		8C3C9F3E21861290002F4500 /* ListViewTableDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F3D21861290002F4500 /* ListViewTableDirector.swift */; };
 		8C3C9F40218613D5002F4500 /* TableDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F3F218613D5002F4500 /* TableDirector.swift */; };
 		8C3C9F4221862381002F4500 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F4121862381002F4500 /* KeyboardObserver.swift */; };
 		8C3C9F452186D0EE002F4500 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F442186D0EE002F4500 /* Alert.swift */; };
@@ -198,7 +197,6 @@
 		8C3C9F2F2185DDAD002F4500 /* ListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractorTests.swift; sourceTree = "<group>"; };
 		8C3C9F3921860E8D002F4500 /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
 		8C3C9F3B21860EF1002F4500 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
-		8C3C9F3D21861290002F4500 /* ListViewTableDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewTableDirector.swift; sourceTree = "<group>"; };
 		8C3C9F3F218613D5002F4500 /* TableDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDirector.swift; sourceTree = "<group>"; };
 		8C3C9F4121862381002F4500 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		8C3C9F442186D0EE002F4500 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -481,7 +479,6 @@
 				8C3C9F172185C852002F4500 /* ListViewController.swift */,
 				8C3C9F182185C852002F4500 /* ListViewController.xib */,
 				8C3C9F292185D1AA002F4500 /* ListDataFlow.swift */,
-				8C3C9F3D21861290002F4500 /* ListViewTableDirector.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1060,7 +1057,6 @@
 				8C3C9F482186D5A5002F4500 /* ListViewModel.swift in Sources */,
 				8C3C9F042185BE7F002F4500 /* ListRouter.swift in Sources */,
 				8C3C9FB7218741FD002F4500 /* TaskViewModel.swift in Sources */,
-				8C3C9F3E21861290002F4500 /* ListViewTableDirector.swift in Sources */,
 				8CDDC09D218A4B9700D23170 /* TableBuilder.swift in Sources */,
 				8CDDC093218A39A900D23170 /* CellConfigurator.swift in Sources */,
 				8C3C9F452186D0EE002F4500 /* Alert.swift in Sources */,
