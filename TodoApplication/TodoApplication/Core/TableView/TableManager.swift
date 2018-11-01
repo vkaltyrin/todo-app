@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 protocol TableManager: class {
+    func setTableView(_ tableView: UITableView)
+
     func reload(_ sections: [TableSection])
 
     func focusOn<T>(sectionIndex: Int, _ predicate: (T) -> Bool) where T: CellConfigurator
@@ -10,24 +12,22 @@ protocol TableManager: class {
 final class TableManagerImpl: NSObject {
     // MARK: - Dependencies
 
-    private weak var tableView: UITableView?
+    private weak var tableView: UITableView? {
+        didSet {
+            configureTableView()
+        }
+    }
 
     // MARK: - State
 
     private var sections: [TableSection] = []
 
-    // MARK: - Init
-
-    init(tableView: UITableView) {
-        self.tableView = tableView
-
-        super.init()
-
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
-    }
-
     // MARK: - Private
+
+    private func configureTableView() {
+        tableView?.delegate = self
+        tableView?.dataSource = self
+    }
 
     @discardableResult
     private func call(action: CellActionType, cell: UITableViewCell?, indexPath: IndexPath) -> Any? {
@@ -37,6 +37,10 @@ final class TableManagerImpl: NSObject {
 }
 
 extension TableManagerImpl: TableManager {
+    func setTableView(_ tableView: UITableView) {
+        self.tableView = tableView
+    }
+
     func reload(_ sections: [TableSection]) {
         self.sections = sections
         tableView?.reloadData()

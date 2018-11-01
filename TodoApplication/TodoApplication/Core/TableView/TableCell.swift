@@ -52,6 +52,7 @@ final class TableCell<CellType: ConfigurableCell>: CellConfigurator where CellTy
 }
 
 extension TableCell: CellActionable {
+    @discardableResult
     func call(action: CellActionType, cell: UITableViewCell?, indexPath: IndexPath) -> Any? {
         let results = actions[action]?.compactMap {
             $0.callActionOn(cell: cell, viewModel: viewModel, indexPath: indexPath)

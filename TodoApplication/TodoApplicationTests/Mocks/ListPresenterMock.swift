@@ -50,4 +50,12 @@ final class ListPresenterMock: ListPresenter {
         invokedPresentListEditingParameters = (identifier, ())
         invokedPresentListEditingParametersList.append((identifier, ()))
     }
+
+    var invokedPresentLoading = false
+    var invokedPresentLoadingCount = 0
+
+    func presentLoading() {
+        invokedPresentLoading = true
+        invokedPresentLoadingCount += 1
+    }
 }

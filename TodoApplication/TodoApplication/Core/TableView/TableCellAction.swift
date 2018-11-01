@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 protocol CellActionable {
+    @discardableResult
     func call(
         action: CellActionType,
         cell: UITableViewCell?,

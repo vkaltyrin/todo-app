@@ -15,7 +15,7 @@ final class ListViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            tableManager = TableManagerImpl(tableView: tableView)
+            tableManager?.setTableView(tableView)
         }
     }
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!

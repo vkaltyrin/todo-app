@@ -6,7 +6,7 @@ final class ListViewControllerTests: TestCase {
     var view: ListViewController!
     var interactorMock: ListInteractorMock!
     var routerMock: ListRouterMock!
-    var tableDirectorMock: ListViewTableDirectorMock!
+    var tableManagerMock: TableManagerMock<CellConfigurator>!
     
     // MARK: - Set Up
     override func setUp() {
@@ -14,109 +14,112 @@ final class ListViewControllerTests: TestCase {
         
         interactorMock = ListInteractorMock()
         routerMock = ListRouterMock()
-        tableDirectorMock = ListViewTableDirectorMock()
+        tableManagerMock = TableManagerMock<CellConfigurator>()
         
         view = ListViewController()
         view.interactor = interactorMock
         view.router = routerMock
-        view.tableDirector = tableDirectorMock
+        view.tableManager = tableManagerMock
     }
     
     // MARK: - Tests
-    func testShowEditing_callsTableDirectorToFocusOnList() {
+    func testShowEditing_callsInteractorToOpenListEditing() {
         // given
-        let identfier = Identifier.generateUniqueIdentifier()
+        let identifier = Identifier.generateUniqueIdentifier()
         // when
-        view.showEditing(identfier)
+        view.showEditing(identifier)
         // then
-        XCTAssertEqual(tableDirectorMock.invokedFocusOnCellCount, 1)
+        XCTAssertEqual(interactorMock.invokedOpenListEditingCount, 1)
+        XCTAssertEqual(interactorMock.invokedOpenListEditingParameters?.request.identifier, identifier)
     }
     
     func testDeleteItem_callsInteractorToDeleteItem() {
         // given
-        let identfier = Identifier.generateUniqueIdentifier()
+        let identifier = Identifier.generateUniqueIdentifier()
         // when
-        view.deleteItem(identfier)
+        view.deleteItem(identifier)
         // then
         XCTAssertEqual(interactorMock.invokedDeleteItemCount, 1)
+        XCTAssertEqual(interactorMock.invokedDeleteItemParameters?.request.identifier, identifier)
     }
     
     func testOpenTasks_callsRouterToOpenTasks() {
         // given
-        let identfier = Identifier.generateUniqueIdentifier()
+        let identifier = Identifier.generateUniqueIdentifier()
         let name = Identifier.generateUniqueIdentifier()
         // when
-        view.openTasks(identfier, name: name)
+        view.openTasks(identifier, name: name)
         // then
         XCTAssertEqual(routerMock.invokedOpenTasksCount, 1)
     }
     
-    func testShowItems_fetchItems_whenStateIsLoading() {
+    func testSelectItem_callsInteractorToOpenListActions() {
         // given
-        let viewModel = ListDataFlow.ShowLists.ViewModel(state: .loading)
+        let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        view.showItems(viewModel)
+        view.selectItem(identifier, name: name)
+        // then
+        XCTAssertEqual(interactorMock.invokedOpenListActionsCount, 1)
+        XCTAssertEqual(interactorMock.invokedOpenListActionsParameters?.request.identifier, identifier)
+        XCTAssertEqual(interactorMock.invokedOpenListActionsParameters?.request.name, name)
+    }
+    
+    func testUpdateItem_callsInteractorToUpdateItem() {
+        // given
+        let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
+        // when
+        view.updateItem(identifier, name: name)
+        // then
+        XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
+        XCTAssertEqual(interactorMock.invokedUpdateItemParameters?.request.identifier, identifier)
+        XCTAssertEqual(interactorMock.invokedUpdateItemParameters?.request.name, name)
+    }
+    
+    func testReloadTable_callsTableManagerReload() {
+        // given
+        let sections = TestData.sections
+        // when
+        view.reloadTable(sections)
+        // then
+        XCTAssertEqual(tableManagerMock.invokedReloadCount, 1)
+    }
+    
+    func testFetchItem_callsInteractorToFetchAllItems() {
+        // when
+        view.fetchItems()
         // then
         XCTAssertEqual(interactorMock.invokedFetchItemsCount, 1)
     }
     
-    func testShowItems_updateTableView_whenStateIsResult() {
-        // given
-        let item = ListViewModel(
-            identifier: Identifier.generateUniqueIdentifier(),
-            name: Identifier.generateUniqueIdentifier()
-        )
-        let viewModel = ListDataFlow.ShowLists.ViewModel(state:
-            .result(items: [item], listIdentifier: nil)
-        )
-        // when
-        view.showItems(viewModel)
-        // then
-        XCTAssertEqual(tableDirectorMock.invokedItemsSetterCount, 1)
-    }
-    
-    func testShowItems_openEditing_whenStateIsResultWithIdentifier() {
-        // given
-        let viewModel = ListDataFlow.ShowLists.ViewModel(state:
-            .result(items: [], listIdentifier: Identifier.generateUniqueIdentifier())
-        )
-        // when
-        view.showItems(viewModel)
-        // then
-        XCTAssertEqual(interactorMock.invokedOpenListEditingCount, 1)
-    }
-    
-    func testTableDirector_deleteItem_onSwipeToDelete() {
+    func testFocusOn_callsTableManagerFocusOnWithFirstSection() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
         // when
-        view.viewDidLoad()
-        tableDirectorMock.invokedOnDeleteTap?(identifier)
+        view.focusOn(identifier)
         // then
-        XCTAssertEqual(interactorMock.invokedDeleteItemCount, 1)
+        XCTAssertEqual(tableManagerMock.invokedFocusOnCount, 1)
+        XCTAssertEqual(tableManagerMock.invokedFocusOnParameters?.sectionIndex, 0)
     }
     
-    func testTableDirector_updateItem_onKeyboardDidHide() {
+    func testCreateTask_callsInteractorToCreateItem() {
         // given
-        let viewModel = ListViewModel(
+        let name = Identifier.generateUniqueIdentifier()
+        // when
+        view.createTask(name: name)
+        // then
+        XCTAssertEqual(interactorMock.invokedCreateItemCount, 1)
+        XCTAssertEqual(interactorMock.invokedCreateItemParameters?.request.name, name)
+    }
+}
+
+extension ListViewControllerTests {
+    struct TestData {
+        static let viewModel = ListViewModel(
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier()
         )
-        // when
-        view.viewDidLoad()
-        tableDirectorMock.invokedOnCellTextDidEndEditing?(viewModel)
-        // then
-        XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
+        static let sections = [TableSection(cells: [TableCell<ListCell>(viewModel: TestData.viewModel)])]
     }
-    
-    func testTableDirector_openListActions_onListTap() {
-        // given
-        let viewModel = ListViewModel(identifier: "", name: "")
-        // when
-        view.viewDidLoad()
-        tableDirectorMock.invokedOnListTap?(viewModel)
-        // then
-        XCTAssertEqual(interactorMock.invokedOpenListActionsCount, 1)
-    }
-    
 }

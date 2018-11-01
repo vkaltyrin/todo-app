@@ -3,18 +3,6 @@ import XCTest
 
 final class ListViewInputMock: ListViewInput {
 
-    var invokedShowItems = false
-    var invokedShowItemsCount = 0
-    var invokedShowItemsParameters: (viewModel: ListDataFlow.ShowLists.ViewModel, Void)?
-    var invokedShowItemsParametersList = [(viewModel: ListDataFlow.ShowLists.ViewModel, Void)]()
-
-    func showItems(_ viewModel: ListDataFlow.ShowLists.ViewModel) {
-        invokedShowItems = true
-        invokedShowItemsCount += 1
-        invokedShowItemsParameters = (viewModel, ())
-        invokedShowItemsParametersList.append((viewModel, ()))
-    }
-
     var invokedShowEditing = false
     var invokedShowEditingCount = 0
     var invokedShowEditingParameters: (identifier: Identifier, Void)?
@@ -49,6 +37,86 @@ final class ListViewInputMock: ListViewInput {
         invokedOpenTasksCount += 1
         invokedOpenTasksParameters = (identifier, name)
         invokedOpenTasksParametersList.append((identifier, name))
+    }
+
+    var invokedSelectItem = false
+    var invokedSelectItemCount = 0
+    var invokedSelectItemParameters: (identifier: Identifier, name: String)?
+    var invokedSelectItemParametersList = [(identifier: Identifier, name: String)]()
+
+    func selectItem(_ identifier: Identifier, name: String) {
+        invokedSelectItem = true
+        invokedSelectItemCount += 1
+        invokedSelectItemParameters = (identifier, name)
+        invokedSelectItemParametersList.append((identifier, name))
+    }
+
+    var invokedUpdateItem = false
+    var invokedUpdateItemCount = 0
+    var invokedUpdateItemParameters: (identifier: Identifier, name: String)?
+    var invokedUpdateItemParametersList = [(identifier: Identifier, name: String)]()
+
+    func updateItem(_ identifier: Identifier, name: String) {
+        invokedUpdateItem = true
+        invokedUpdateItemCount += 1
+        invokedUpdateItemParameters = (identifier, name)
+        invokedUpdateItemParametersList.append((identifier, name))
+    }
+
+    var invokedCreateTask = false
+    var invokedCreateTaskCount = 0
+    var invokedCreateTaskParameters: (name: String, Void)?
+    var invokedCreateTaskParametersList = [(name: String, Void)]()
+
+    func createTask(name: String) {
+        invokedCreateTask = true
+        invokedCreateTaskCount += 1
+        invokedCreateTaskParameters = (name, ())
+        invokedCreateTaskParametersList.append((name, ()))
+    }
+
+    var invokedFetchItems = false
+    var invokedFetchItemsCount = 0
+
+    func fetchItems() {
+        invokedFetchItems = true
+        invokedFetchItemsCount += 1
+    }
+
+    var invokedReloadTable = false
+    var invokedReloadTableCount = 0
+    var invokedReloadTableParameters: (sections: [TableSection], Void)?
+    var invokedReloadTableParametersList = [(sections: [TableSection], Void)]()
+
+    func reloadTable(_ sections: [TableSection]) {
+        invokedReloadTable = true
+        invokedReloadTableCount += 1
+        invokedReloadTableParameters = (sections, ())
+        invokedReloadTableParametersList.append((sections, ()))
+    }
+
+    var invokedFocusOn = false
+    var invokedFocusOnCount = 0
+    var invokedFocusOnParameters: (identifier: Identifier, Void)?
+    var invokedFocusOnParametersList = [(identifier: Identifier, Void)]()
+
+    func focusOn(_ identifier: Identifier) {
+        invokedFocusOn = true
+        invokedFocusOnCount += 1
+        invokedFocusOnParameters = (identifier, ())
+        invokedFocusOnParametersList.append((identifier, ()))
+    }
+
+    var invokedSetOnAddTap = false
+    var invokedSetOnAddTapCount = 0
+    var shouldInvokeSetOnAddTapOnAddTap = false
+
+    func setOnAddTap(_ onAddTap: (() -> ())?) {
+        invokedSetOnAddTap = true
+        invokedSetOnAddTapCount += 1
+        if shouldInvokeSetOnAddTapOnAddTap {
+            onAddTap?()
+        }
     }
 
     var invokedShowAlert = false

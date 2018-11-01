@@ -32,6 +32,13 @@ final class ListInteractorTests: TestCase {
         XCTAssertNotNil(presenterMock.invokedPresentShowListsParameters?.response)
     }
     
+    func testFetchItems_presentLoading() {
+        // when
+        interactor.fetchItems()
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
+    }
+    
     func testDeleteItem_presentUpdatedLists_whenDeleteIsSuccessful() {
         // given
         listStorageMock.stubbedDeleteListCompletionResult = Stub<GeneralResult>.create(.success(()))
@@ -43,6 +50,15 @@ final class ListInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentShowListsCount, 1)
         XCTAssertNil(presenterMock.invokedPresentShowListsParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowListsParameters?.response)
+    }
+    
+    func testDeleteItem_presentLoading() {
+        // given
+        let request = ListDataFlow.DeleteList.Request(identifier: Identifier.generateUniqueIdentifier())
+        // when
+        interactor.deleteItem(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
     func testDeleteItem_presentError_whenDeleteIsFailed() {
@@ -72,6 +88,18 @@ final class ListInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentShowListsCount, 1)
         XCTAssertNil(presenterMock.invokedPresentShowListsParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowListsParameters?.response)
+    }
+    
+    func testUpdateItem_presentLoading() {
+        // given
+        let request = ListDataFlow.UpdateList.Request(
+            identifier: Identifier.generateUniqueIdentifier(),
+            name: Identifier.generateUniqueIdentifier()
+        )
+        // when
+        interactor.updateItem(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
     func testUpdateItem_presentUpdatedLists_whenUpdateIsFailed() {
@@ -104,6 +132,17 @@ final class ListInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentShowListsCount, 1)
         XCTAssertNotNil(presenterMock.invokedPresentShowListsParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowListsParameters?.response)
+    }
+    
+    func testCreate_presentLoading() {
+        // given
+        let request = ListDataFlow.CreateList.Request(
+            name: Identifier.generateUniqueIdentifier()
+        )
+        // when
+        interactor.createItem(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
     func testCreateItem_presentUpdatedLists_whenCreateIsFailed() {
