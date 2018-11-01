@@ -19,5 +19,6 @@ final class ListAssemblyTests: TestCase {
         // then
         XCTAssertNotNil(module.interactor)
         XCTAssertNotNil(module.router)
+        XCTAssertNotNil(module.tableManager)
     }
 }
