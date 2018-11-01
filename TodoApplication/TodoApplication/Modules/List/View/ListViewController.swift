@@ -7,6 +7,8 @@ final class ListViewController: UIViewController {
     var router: ListRouter?
     var tableManager: TableManager?
 
+    // MARK: - Private
+    private var onAddTap: (() -> ())?
     private let keyboardObserver: KeyboardObserver = KeyboardObserverImpl()
     private var activityDisplayable: ActivityDisplayable?
 
@@ -24,9 +26,6 @@ final class ListViewController: UIViewController {
             )
         }
     }
-
-    // MARK: - Private
-    private var onAddTap: (() -> ())?
 
     // MARK: - ViewController life-cycle
     override func viewDidLoad() {
@@ -55,9 +54,9 @@ final class ListViewController: UIViewController {
     @objc private func onAddListTap() {
         onAddTap?()
     }
+}
 
-    // MARK: - ActivityDisplayable
-
+extension ListViewController: ActivityDisplayable {
     func startActivity() {
         activityDisplayable?.startActivity()
     }

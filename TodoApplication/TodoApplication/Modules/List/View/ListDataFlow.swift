@@ -10,7 +10,7 @@ struct ListDataFlow {
         }
 
         struct ViewModel {
-            let state: ViewControllerState
+            let state: ViewState
         }
     }
 
@@ -67,7 +67,7 @@ struct ListDataFlow {
         }
     }
 
-    enum ViewControllerState {
+    enum ViewState {
         case loading
         case result(items: [TableSection], listIdentifier: Identifier?)
         case error(dialog: Dialog)

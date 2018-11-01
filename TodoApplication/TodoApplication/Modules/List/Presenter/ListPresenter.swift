@@ -114,12 +114,10 @@ final class ListPresenterImpl: ListPresenter {
     }
 
     private func errorDialog(_ error: StorageError) -> Dialog {
-        let dialogBuilder = DialogBuilder()
-        let dialog = dialogBuilder.build(storageError: error)
-        return dialog
+        return DialogBuilder().build(storageError: error)
     }
 
-    private var state: ListDataFlow.ViewControllerState = .loading {
+    private var state: ListDataFlow.ViewState = .loading {
         didSet {
             switch state {
             case .loading:
