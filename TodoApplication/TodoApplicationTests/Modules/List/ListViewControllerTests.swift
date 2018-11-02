@@ -136,6 +136,20 @@ final class ListViewControllerTests: TestCase {
         // then
         XCTAssertEqual(activityDisplayableMock.invokedStopActivityCount, 1)
     }
+    
+    func testAddListTap_callsAddListTapClosure() {
+        // given
+        var setOnAddTapCalled = false
+        view.setOnAddTap {
+            setOnAddTapCalled = true
+        }
+        // when
+        view.viewDidLoad()
+        let barButtonItem = view.navigationItem.rightBarButtonItem
+        view.perform(barButtonItem?.action)
+        // then
+        XCTAssertTrue(setOnAddTapCalled)
+    }
 }
 
 extension ListViewControllerTests {

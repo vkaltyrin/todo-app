@@ -134,6 +134,20 @@ final class TaskViewControllerTests: TestCase {
         // then
         XCTAssertEqual(activityDisplayableMock.invokedStopActivityCount, 1)
     }
+    
+    func testAddListTap_callsAddTaskTapClosure() {
+        // given
+        var setOnAddTapCalled = false
+        view.setOnAddTap {
+            setOnAddTapCalled = true
+        }
+        // when
+        view.viewDidLoad()
+        let barButtonItem = view.navigationItem.rightBarButtonItem
+        view.perform(barButtonItem?.action)
+        // then
+        XCTAssertTrue(setOnAddTapCalled)
+    }
 }
 
 extension TaskViewControllerTests {
