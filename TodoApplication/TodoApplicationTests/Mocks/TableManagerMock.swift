@@ -38,5 +38,8 @@ final class TableManagerMock<T>: TableManager {
         invokedFocusOnCount += 1
         invokedFocusOnParameters = (sectionIndex, ())
         invokedFocusOnParametersList.append((sectionIndex, ()))
+        if let result = stubbedFocusOnPredicateResult?.0 as? T  {
+            _ = predicate(result)
+        }
     }
 }

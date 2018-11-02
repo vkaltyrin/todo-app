@@ -6,7 +6,7 @@ final class ListViewControllerTests: TestCase {
     var view: ListViewController!
     var interactorMock: ListInteractorMock!
     var routerMock: ListRouterMock!
-    var tableManagerMock: TableManagerMock<CellConfigurator>!
+    var tableManagerMock: TableManagerMock<TableCell<ListCell>>!
     var activityDisplayableMock: ActivityDisplayableMock!
     
     // MARK: - Set Up
@@ -15,7 +15,7 @@ final class ListViewControllerTests: TestCase {
         
         interactorMock = ListInteractorMock()
         routerMock = ListRouterMock()
-        tableManagerMock = TableManagerMock<CellConfigurator>()
+        tableManagerMock = TableManagerMock<TableCell<ListCell>>()
         activityDisplayableMock = ActivityDisplayableMock()
         
         view = ListViewController()
@@ -106,6 +106,8 @@ final class ListViewControllerTests: TestCase {
     func testFocusOn_callsTableManagerFocusOnWithFirstSection() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
+        let cell = TableCell<ListCell>(viewModel: TestData.viewModel)
+        tableManagerMock.stubbedFocusOnPredicateResult = Stub<TableCell<ListCell>>.create(cell)
         // when
         view.focusOn(identifier)
         // then

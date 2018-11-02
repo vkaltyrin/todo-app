@@ -5,7 +5,7 @@ final class TaskViewControllerTests: TestCase {
     // MARK: - Subject Under Test
     var view: TaskViewController!
     var interactorMock: TaskInteractorMock!
-    var tableManagerMock: TableManagerMock<CellConfigurator>!
+    var tableManagerMock: TableManagerMock<TableCell<TaskCell>>!
     var activityDisplayableMock: ActivityDisplayableMock!
     
     // MARK: - Set Up
@@ -13,7 +13,7 @@ final class TaskViewControllerTests: TestCase {
         super.setUp()
         
         interactorMock = TaskInteractorMock()
-        tableManagerMock = TableManagerMock<CellConfigurator>()
+        tableManagerMock = TableManagerMock<TableCell<TaskCell>>()
         activityDisplayableMock = ActivityDisplayableMock()
         
         view = TaskViewController()
@@ -104,6 +104,8 @@ final class TaskViewControllerTests: TestCase {
     func testFocusOn_callsTableManagerFocusOnWithFirstSection() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
+        let cell = TableCell<TaskCell>(viewModel: TestData.viewModel)
+        tableManagerMock.stubbedFocusOnPredicateResult = Stub<TableCell<TaskCell>>.create(cell)
         // when
         view.focusOn(identifier)
         // then
