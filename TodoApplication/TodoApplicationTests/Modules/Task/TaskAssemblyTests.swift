@@ -21,6 +21,6 @@ final class TaskAssemblyTests: TestCase {
         
         // then
         XCTAssertNotNil(module.interactor)
-        XCTAssertNotNil(module.tableDirector)
+        XCTAssertNotNil(module.tableManager)
     }
 }

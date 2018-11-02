@@ -50,4 +50,12 @@ final class TaskPresenterMock: TaskPresenter {
         invokedPresentTaskEditingParameters = (identifier, ())
         invokedPresentTaskEditingParametersList.append((identifier, ()))
     }
+
+    var invokedPresentLoading = false
+    var invokedPresentLoadingCount = 0
+
+    func presentLoading() {
+        invokedPresentLoading = true
+        invokedPresentLoadingCount += 1
+    }
 }

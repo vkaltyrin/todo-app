@@ -5,105 +5,107 @@ final class TaskViewControllerTests: TestCase {
     // MARK: - Subject Under Test
     var view: TaskViewController!
     var interactorMock: TaskInteractorMock!
-    var tableDirectorMock: TaskViewTableDirectorMock!
+    var tableManagerMock: TableManagerMock<CellConfigurator>!
     
     // MARK: - Set Up
     override func setUp() {
         super.setUp()
         
         interactorMock = TaskInteractorMock()
-        tableDirectorMock = TaskViewTableDirectorMock()
+        tableManagerMock = TableManagerMock<CellConfigurator>()
         
         view = TaskViewController()
         view.interactor = interactorMock
-        view.tableDirector = tableDirectorMock
+        view.tableManager = tableManagerMock
     }
     
     // MARK: - Tests
-    func testShowEditing_callsTableDirectorToFocusOnTask() {
+    func testShowEditing_callsInteractorToOpenTaskEditing() {
         // given
-        let identfier = Identifier.generateUniqueIdentifier()
+        let identifier = Identifier.generateUniqueIdentifier()
         // when
-        view.showEditing(identfier)
+        view.showEditing(identifier)
         // then
-        XCTAssertEqual(tableDirectorMock.invokedFocusOnCellCount, 1)
+        XCTAssertEqual(interactorMock.invokedOpenTaskEditingCount, 1)
+        XCTAssertEqual(interactorMock.invokedOpenTaskEditingParameters?.request.identifier, identifier)
     }
     
     func testDeleteItem_callsInteractorToDeleteItem() {
         // given
-        let identfier = Identifier.generateUniqueIdentifier()
+        let identifier = Identifier.generateUniqueIdentifier()
         // when
-        view.deleteItem(identfier)
+        view.deleteItem(identifier)
         // then
         XCTAssertEqual(interactorMock.invokedDeleteItemCount, 1)
+        XCTAssertEqual(interactorMock.invokedDeleteItemParameters?.request.identifier, identifier)
     }
     
-    func testShowItems_fetchItems_whenStateIsLoading() {
+    func testSelectItem_callsInteractorToOpenTaskActions() {
         // given
-        let viewModel = TaskDataFlow.ShowTasks.ViewModel(state: .loading)
+        let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
         // when
-        view.showItems(viewModel)
+        view.selectItem(identifier, name: name)
+        // then
+        XCTAssertEqual(interactorMock.invokedOpenTaskActionsCount, 1)
+        XCTAssertEqual(interactorMock.invokedOpenTaskActionsParameters?.request.identifier, identifier)
+    }
+    
+    func testUpdateItem_callsInteractorToUpdateItem() {
+        // given
+        let identifier = Identifier.generateUniqueIdentifier()
+        let name = Identifier.generateUniqueIdentifier()
+        // when
+        view.updateItem(identifier, name: name)
+        // then
+        XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
+        XCTAssertEqual(interactorMock.invokedUpdateItemParameters?.request.identifier, identifier)
+        XCTAssertEqual(interactorMock.invokedUpdateItemParameters?.request.name, name)
+    }
+    
+    func testReloadTable_callsTableManagerReload() {
+        // given
+        let sections = TestData.sections
+        // when
+        view.reloadTable(sections)
+        // then
+        XCTAssertEqual(tableManagerMock.invokedReloadCount, 1)
+    }
+    
+    func testFetchItem_callsInteractorToFetchAllItems() {
+        // when
+        view.fetchItems()
         // then
         XCTAssertEqual(interactorMock.invokedFetchItemsCount, 1)
     }
     
-    func testShowItems_updateTableView_whenStateIsResult() {
-        // given
-        let item = TaskViewModel(
-            identifier: Identifier.generateUniqueIdentifier(),
-            name: Identifier.generateUniqueIdentifier()
-        )
-        let viewModel = TaskDataFlow.ShowTasks.ViewModel(state:
-            .result(items: [item], identifier: nil)
-        )
-        // when
-        view.showItems(viewModel)
-        // then
-        XCTAssertEqual(tableDirectorMock.invokedItemsSetterCount, 1)
-    }
-    
-    func testShowItems_openEditing_whenStateIsResultWithIdentifier() {
-        // given
-        let viewModel = TaskDataFlow.ShowTasks.ViewModel(state:
-            .result(items: [], identifier: Identifier.generateUniqueIdentifier())
-        )
-        // when
-        view.showItems(viewModel)
-        // then
-        XCTAssertEqual(interactorMock.invokedOpenTaskEditingCount, 1)
-    }
-    
-    func testTableDirector_deleteItem_onSwipeToDelete() {
+    func testFocusOn_callsTableManagerFocusOnWithFirstSection() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
         // when
-        view.viewDidLoad()
-        tableDirectorMock.invokedOnDeleteTap?(identifier)
+        view.focusOn(identifier)
         // then
-        XCTAssertEqual(interactorMock.invokedDeleteItemCount, 1)
+        XCTAssertEqual(tableManagerMock.invokedFocusOnCount, 1)
+        XCTAssertEqual(tableManagerMock.invokedFocusOnParameters?.sectionIndex, 0)
     }
     
-    func testTableDirector_updateItem_onKeyboardDidHide() {
+    func testCreateTask_callsInteractorToCreateItem() {
         // given
-        let viewModel = TaskViewModel(
+        let name = Identifier.generateUniqueIdentifier()
+        // when
+        view.createItem(name: name)
+        // then
+        XCTAssertEqual(interactorMock.invokedCreateItemCount, 1)
+        XCTAssertEqual(interactorMock.invokedCreateItemParameters?.request.name, name)
+    }
+}
+
+extension TaskViewControllerTests {
+    struct TestData {
+        static let viewModel = TaskViewModel(
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier()
         )
-        // when
-        view.viewDidLoad()
-        tableDirectorMock.invokedOnCellTextDidEndEditing?(viewModel)
-        // then
-        XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
+        static let sections = [TableSection(cells: [TableCell<TaskCell>(viewModel: TestData.viewModel)])]
     }
-    
-    func testTableDirector_openTaskActions_onTaskTap() {
-        // given
-        let identifier = Identifier.generateUniqueIdentifier()
-        // when
-        view.viewDidLoad()
-        tableDirectorMock.invokedOnTaskTap?(identifier)
-        // then
-        XCTAssertEqual(interactorMock.invokedOpenTaskActionsCount, 1)
-    }
-    
 }

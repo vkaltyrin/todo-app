@@ -28,12 +28,14 @@ final class TaskInteractorImpl: TaskInteractor {
 
     // MARK: - TaskInteractor
     func fetchItems() {
+        presenter.presentLoading()
         fetchItemsResponse { [weak self] response in
             self?.presenter.presentShowTasks(response, identifier: nil)
         }
     }
 
     func deleteItem(request: TaskDataFlow.DeleteTask.Request) {
+        presenter.presentLoading()
         taskStorage.deleteTask(taskId: request.identifier) { [weak self] result in
             let response = TaskDataFlow.DeleteTask.Response(result: result)
             switch response.result {
@@ -46,6 +48,7 @@ final class TaskInteractorImpl: TaskInteractor {
     }
 
     func updateItem(request: TaskDataFlow.UpdateTask.Request) {
+        presenter.presentLoading()
         taskStorage.updateTask(taskId: request.identifier, name: request.name) { [weak self] result in
             let response = TaskDataFlow.UpdateTask.Response(result: result)
             switch response.result {
@@ -59,6 +62,7 @@ final class TaskInteractorImpl: TaskInteractor {
 
     func createItem(request: TaskDataFlow.CreateTask.Request) {
         let task = Task(name: request.name)
+        presenter.presentLoading()
         taskStorage.createTask(listId: listIdentifier, task: task) { [weak self] result in
             switch result {
             case .success(let createdTaskIdentifier):

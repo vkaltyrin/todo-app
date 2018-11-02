@@ -107,7 +107,7 @@ final class ListViewControllerTests: TestCase {
         // given
         let name = Identifier.generateUniqueIdentifier()
         // when
-        view.createTask(name: name)
+        view.createItem(name: name)
         // then
         XCTAssertEqual(interactorMock.invokedCreateItemCount, 1)
         XCTAssertEqual(interactorMock.invokedCreateItemParameters?.request.name, name)

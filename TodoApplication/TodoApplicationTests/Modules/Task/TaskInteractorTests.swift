@@ -33,6 +33,13 @@ final class TaskInteractorTests: TestCase {
         XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
     }
     
+    func testFetchItems_presentLoading() {
+        // when
+        interactor.fetchItems()
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
+    }
+    
     func testDeleteItem_presentUpdatedTasks_whenDeleteIsSuccessful() {
         // given
         taskStorageMock.stubbedDeleteTaskCompletionResult = Stub<GeneralResult>.create(.success(()))
@@ -44,6 +51,15 @@ final class TaskInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentShowTasksCount, 1)
         XCTAssertNil(presenterMock.invokedPresentShowTasksParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
+    }
+    
+    func testDeleteItem_presentLoading() {
+        // given
+        let request = TaskDataFlow.DeleteTask.Request(identifier: Identifier.generateUniqueIdentifier())
+        // when
+        interactor.deleteItem(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
     func testDeleteItem_presentError_whenDeleteIsFailed() {
@@ -73,6 +89,18 @@ final class TaskInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentShowTasksCount, 1)
         XCTAssertNil(presenterMock.invokedPresentShowTasksParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
+    }
+    
+    func testUpdateItem_presentLoading() {
+        // given
+        let request = TaskDataFlow.UpdateTask.Request(
+            identifier: Identifier.generateUniqueIdentifier(),
+            name: Identifier.generateUniqueIdentifier()
+        )
+        // when
+        interactor.updateItem(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
     func testUpdateItem_presentUpdatedTasks_whenUpdateIsFailed() {
@@ -105,6 +133,17 @@ final class TaskInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentShowTasksCount, 1)
         XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
+    }
+    
+    func testCreate_presentLoading() {
+        // given
+        let request = TaskDataFlow.CreateTask.Request(
+            name: Identifier.generateUniqueIdentifier()
+        )
+        // when
+        interactor.createItem(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
     func testCreateItem_presentUpdatedTasks_whenCreateIsFailed() {
@@ -145,5 +184,5 @@ final class TaskInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentTaskEditingCount, 1)
         XCTAssertEqual(presenterMock.invokedPresentTaskEditingParameters?.identifier, request.identifier)
     }
-
+    
 }

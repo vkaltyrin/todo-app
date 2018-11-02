@@ -63,16 +63,16 @@ final class ListViewInputMock: ListViewInput {
         invokedUpdateItemParametersList.append((identifier, name))
     }
 
-    var invokedCreateTask = false
-    var invokedCreateTaskCount = 0
-    var invokedCreateTaskParameters: (name: String, Void)?
-    var invokedCreateTaskParametersList = [(name: String, Void)]()
+    var invokedCreateItem = false
+    var invokedCreateItemCount = 0
+    var invokedCreateItemParameters: (name: String, Void)?
+    var invokedCreateItemParametersList = [(name: String, Void)]()
 
-    func createTask(name: String) {
-        invokedCreateTask = true
-        invokedCreateTaskCount += 1
-        invokedCreateTaskParameters = (name, ())
-        invokedCreateTaskParametersList.append((name, ()))
+    func createItem(name: String) {
+        invokedCreateItem = true
+        invokedCreateItemCount += 1
+        invokedCreateItemParameters = (name, ())
+        invokedCreateItemParametersList.append((name, ()))
     }
 
     var invokedFetchItems = false
