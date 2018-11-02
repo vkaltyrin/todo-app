@@ -26,6 +26,15 @@ final class TaskPresenterImpl {
         }
     }
 
+    private func onTaskEndEditing(newText: String) {
+        switch state {
+        case .editing(let identifier):
+            view.updateItem(identifier, name: newText)
+        default:
+            break
+        }
+    }
+
     private func errorDialog(_ error: StorageError) -> Dialog {
         return DialogBuilder().build(storageError: error)
     }
@@ -65,6 +74,9 @@ extension TaskPresenterImpl: TaskPresenter {
                         isDone: item.isDone,
                         onSwitchTap: { [weak self] isDone in
                             self?.view.updateItem(identifier, isDone: isDone)
+                        },
+                        onTextDidEndEditing: { [weak self] newText in
+                            self?.onTaskEndEditing(newText: newText)
                         }
                     )
                 } else {
@@ -80,9 +92,6 @@ extension TaskPresenterImpl: TaskPresenter {
                 },
                 onTaskTap: { [weak self] item in
                     self?.onTaskTap(item: item)
-                },
-                onCellTextDidEndEditing: { [weak self] identifier, newText in
-                    self?.view.updateItem(identifier, name: newText)
                 }
             )
             let sections = builder.build()

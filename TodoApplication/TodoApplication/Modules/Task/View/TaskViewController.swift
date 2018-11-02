@@ -71,6 +71,7 @@ extension TaskViewController: TaskViewInput {
     }
 
     func createItem(name: String) {
+        view.endEditing(true)
         let request = TaskDataFlow.CreateTask.Request(name: name)
         interactor?.createItem(request: request)
     }

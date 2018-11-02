@@ -50,12 +50,18 @@ final class TaskPresenterTests: TestCase {
         let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
         // when
         presenter.presentShowTasks(response, identifier: nil)
-        let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[safe: 0]?.cells[safe: 0]
-        let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
+        
+        let cell = viewMock.invokedReloadTableParameters?.sections[safe: 0]?.cells[safe: 0]
+        guard let tableCell = cell as? TableCell<TaskCell> else {
+            XCTFail("Wrong cell type")
+            return
+        }
+        
+        let viewModel = tableCell.viewModel
+        viewModel.onSwitchTap?(true)
+        
         // then
-        XCTAssertNotNil(result)
-        XCTAssertEqual(viewMock.invokedSelectItemCount, 1)
+        XCTAssertEqual(viewMock.invokedUpdateItemIsDoneCount, 1)
     }
     
     func testPresenter_doesNotAllowSelectItem_onTaskTap_forEditingState() {
@@ -215,6 +221,47 @@ final class TaskPresenterTests: TestCase {
         XCTAssertEqual(dialog?.actions[safe: 0]?.title, TestData.Text.editTask)
         XCTAssertEqual(dialog?.actions[safe: 1]?.title, TestData.Text.deleteTask)
         XCTAssertEqual(dialog?.actions[safe: 2]?.title, TestData.Text.cancel)
+    }
+    
+    func testPresenter_updateItemName_onTaskEndEditing() {
+        // given
+        let tasks = TestData.tasks
+        let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
+        // when
+        presenter.presentShowTasks(response, identifier: nil)
+        presenter.presentTaskEditing(Identifier.generateUniqueIdentifier())
+        
+        let cell = viewMock.invokedReloadTableParameters?.sections[safe: 0]?.cells[safe: 0]
+        guard let tableCell = cell as? TableCell<TaskCell> else {
+            XCTFail("Wrong cell type")
+            return
+        }
+        
+        let viewModel = tableCell.viewModel
+        viewModel.onTextDidEndEditing?(Identifier.generateUniqueIdentifier())
+        
+        // then
+        XCTAssertEqual(viewMock.invokedUpdateItemNameCount, 1)
+    }
+    
+    func testPresenter_doesNotUpdateItemName_onListEndEditing_whenStateIsNotEditing() {
+        // given
+        let tasks = TestData.tasks
+        let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
+        // when
+        presenter.presentShowTasks(response, identifier: nil)
+        
+        let cell = viewMock.invokedReloadTableParameters?.sections[safe: 0]?.cells[safe: 0]
+        guard let tableCell = cell as? TableCell<TaskCell> else {
+            XCTFail("Wrong cell type")
+            return
+        }
+        
+        let viewModel = tableCell.viewModel
+        viewModel.onTextDidEndEditing?(Identifier.generateUniqueIdentifier())
+        
+        // then
+        XCTAssertEqual(viewMock.invokedUpdateItemNameCount, 0)
     }
     
     // MARK: - Private

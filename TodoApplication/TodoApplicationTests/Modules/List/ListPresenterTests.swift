@@ -219,6 +219,47 @@ final class ListPresenterTests: TestCase {
         XCTAssertEqual(dialog?.actions[safe: 3]?.title, TestData.Text.cancel)
     }
     
+    func testPresenter_updateItemName_onListEndEditing() {
+        // given
+        let lists = TestData.lists
+        let response = ListDataFlow.ShowLists.Response(result: .success(lists))
+        // when
+        presenter.presentShowLists(response, identifier: nil)
+        presenter.presentListEditing(Identifier.generateUniqueIdentifier())
+        
+        let cell = viewMock.invokedReloadTableParameters?.sections[safe: 0]?.cells[safe: 0]
+        guard let tableCell = cell as? TableCell<ListCell> else {
+            XCTFail("Wrong cell type")
+            return
+        }
+        
+        let viewModel = tableCell.viewModel
+        viewModel.onTextDidEndEditing?(Identifier.generateUniqueIdentifier())
+        
+        // then
+        XCTAssertEqual(viewMock.invokedUpdateItemCount, 1)
+    }
+    
+    func testPresenter_doesNotUpdateItemName_onListEndEditing_whenStateIsNotEditing() {
+        // given
+        let lists = TestData.lists
+        let response = ListDataFlow.ShowLists.Response(result: .success(lists))
+        // when
+        presenter.presentShowLists(response, identifier: nil)
+        
+        let cell = viewMock.invokedReloadTableParameters?.sections[safe: 0]?.cells[safe: 0]
+        guard let tableCell = cell as? TableCell<ListCell> else {
+            XCTFail("Wrong cell type")
+            return
+        }
+        
+        let viewModel = tableCell.viewModel
+        viewModel.onTextDidEndEditing?(Identifier.generateUniqueIdentifier())
+        
+        // then
+        XCTAssertEqual(viewMock.invokedUpdateItemCount, 0)
+    }
+    
     // MARK: - Private
     
     private func testPresentError_showError_forText(error: StorageError, text: String) {

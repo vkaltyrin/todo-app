@@ -5,4 +5,5 @@ struct TaskViewModel {
     let name: String
     let isDone: Bool
     let onSwitchTap: ((Bool) -> ())?
+    let onTextDidEndEditing: ((_ newText: String) -> ())?
 }

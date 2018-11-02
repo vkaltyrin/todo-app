@@ -10,8 +10,7 @@ final class ListTableBuilderTests: TestCase {
             items: items,
             focusIdentifier: nil,
             onDeleteTap: nil,
-            onListTap: nil,
-            onCellTextDidEndEditing: nil
+            onListTap: nil
         )
         
         // when
@@ -35,8 +34,7 @@ final class ListTableBuilderTests: TestCase {
             items: items,
             focusIdentifier: nil,
             onDeleteTap: onDeleteTap,
-            onListTap: nil,
-            onCellTextDidEndEditing: nil
+            onListTap: nil
         )
         
         // when
@@ -65,8 +63,7 @@ final class ListTableBuilderTests: TestCase {
             items: items,
             focusIdentifier: nil,
             onDeleteTap: nil,
-            onListTap: onListTap,
-            onCellTextDidEndEditing: nil
+            onListTap: onListTap
         )
         
         // when
@@ -77,36 +74,6 @@ final class ListTableBuilderTests: TestCase {
         // then
         let result = cellConfigurator?.call(
             action: .tap,
-            cell: nil,
-            indexPath: TestData.indexPath
-        )
-        XCTAssertNotNil(result)
-    }
-    
-    func testBuilder_buildCell_whereOnCellTextDidEndEditingReturnsCorrectValue() {
-        // given
-        let items = [TestData.viewData]
-        let onCellTextDidEndEditing: ListTableBuilder.OnCellTextDidEndEditing = { identifier, newText in
-            XCTAssertEqual(identifier, items.first?.identifier)
-            XCTAssertEqual(newText, items.first?.name)
-        }
-        
-        let builder = ListTableBuilder(
-            items: items,
-            focusIdentifier: nil,
-            onDeleteTap: nil,
-            onListTap: nil,
-            onCellTextDidEndEditing: onCellTextDidEndEditing
-        )
-        
-        // when
-        let sections = builder.build()
-        let cellConfigurator = getCellConfigurator(sections: sections)
-        XCTAssertNotNil(cellConfigurator)
-        
-        // then
-        let result = cellConfigurator?.call(
-            action: .configure,
             cell: nil,
             indexPath: TestData.indexPath
         )
@@ -123,7 +90,8 @@ extension ListTableBuilderTests {
     struct TestData {
         static let viewData = ListViewModel(
             identifier: Identifier.generateUniqueIdentifier(),
-            name: Identifier.generateUniqueIdentifier()
+            name: Identifier.generateUniqueIdentifier(),
+            onTextDidEndEditing: nil
         )
         static let indexPath = IndexPath(row: 0, section: 0)
     }

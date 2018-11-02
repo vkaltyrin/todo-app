@@ -26,6 +26,15 @@ final class ListPresenterImpl {
         }
     }
 
+    private func onListEndEditing(newText: String) {
+        switch state {
+        case .editing(let listIdentifier):
+            view.updateItem(listIdentifier, name: newText)
+        default:
+            break
+        }
+    }
+
     private func errorDialog(_ error: StorageError) -> Dialog {
         return DialogBuilder().build(storageError: error)
     }
@@ -61,7 +70,10 @@ extension ListPresenterImpl: ListPresenter {
                 if let identifier = item.identifier {
                     return ListViewModel(
                         identifier: identifier,
-                        name: item.name
+                        name: item.name,
+                        onTextDidEndEditing: { [weak self] newText in
+                            self?.onListEndEditing(newText: newText)
+                        }
                     )
                 } else {
                     return nil
@@ -76,9 +88,6 @@ extension ListPresenterImpl: ListPresenter {
                 },
                 onListTap: { [weak self] item in
                     self?.onListTap(item: item)
-                },
-                onCellTextDidEndEditing: { [weak self] identifier, newText in
-                    self?.view.updateItem(identifier, name: newText)
                 }
             )
             let sections = builder.build()

@@ -10,8 +10,7 @@ final class TaskTableBuilderTests: TestCase {
             items: items,
             focusIdentifier: nil,
             onDeleteTap: nil,
-            onTaskTap: nil,
-            onCellTextDidEndEditing: nil
+            onTaskTap: nil
         )
         
         // when
@@ -35,8 +34,7 @@ final class TaskTableBuilderTests: TestCase {
             items: items,
             focusIdentifier: nil,
             onDeleteTap: onDeleteTap,
-            onTaskTap: nil,
-            onCellTextDidEndEditing: nil
+            onTaskTap: nil
         )
         
         // when
@@ -65,8 +63,7 @@ final class TaskTableBuilderTests: TestCase {
             items: items,
             focusIdentifier: nil,
             onDeleteTap: nil,
-            onTaskTap: onTaskTap,
-            onCellTextDidEndEditing: nil
+            onTaskTap: onTaskTap
         )
         
         // when
@@ -77,36 +74,6 @@ final class TaskTableBuilderTests: TestCase {
         // then
         let result = cellConfigurator?.call(
             action: .tap,
-            cell: nil,
-            indexPath: TestData.indexPath
-        )
-        XCTAssertNotNil(result)
-    }
-    
-    func testBuilder_buildCell_whereOnCellTextDidEndEditingReturnsCorrectValue() {
-        // given
-        let items = [TestData.viewData]
-        let onCellTextDidEndEditing: TaskTableBuilder.OnCellTextDidEndEditing = { identifier, newText in
-            XCTAssertEqual(identifier, items.first?.identifier)
-            XCTAssertEqual(newText, items.first?.name)
-        }
-        
-        let builder = TaskTableBuilder(
-            items: items,
-            focusIdentifier: nil,
-            onDeleteTap: nil,
-            onTaskTap: nil,
-            onCellTextDidEndEditing: onCellTextDidEndEditing
-        )
-        
-        // when
-        let sections = builder.build()
-        let cellConfigurator = getCellConfigurator(sections: sections)
-        XCTAssertNotNil(cellConfigurator)
-        
-        // then
-        let result = cellConfigurator?.call(
-            action: .configure,
             cell: nil,
             indexPath: TestData.indexPath
         )
@@ -125,7 +92,8 @@ extension TaskTableBuilderTests {
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier(),
             isDone: false,
-            onSwitchTap: nil
+            onSwitchTap: nil,
+            onTextDidEndEditing: nil
         )
         static let indexPath = IndexPath(row: 0, section: 0)
     }

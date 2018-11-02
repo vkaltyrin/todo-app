@@ -21,6 +21,7 @@ extension TaskCell: ConfigurableCell {
 
     func configure(_ viewModel: TaskViewModel) {
         self.onSwitchTap = viewModel.onSwitchTap
+        self.onTextDidEndEditing = viewModel.onTextDidEndEditing
         textField.text = viewModel.name
         switchView.setOn(viewModel.isDone, animated: false)
     }

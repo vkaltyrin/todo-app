@@ -158,7 +158,8 @@ extension ListViewControllerTests {
     struct TestData {
         static let viewModel = ListViewModel(
             identifier: Identifier.generateUniqueIdentifier(),
-            name: Identifier.generateUniqueIdentifier()
+            name: Identifier.generateUniqueIdentifier(),
+            onTextDidEndEditing: nil
         )
         static let sections = [TableSection(cells: [TableCell<ListCell>(viewModel: TestData.viewModel)])]
     }

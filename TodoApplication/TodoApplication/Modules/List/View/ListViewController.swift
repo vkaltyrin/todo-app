@@ -72,6 +72,7 @@ extension ListViewController: ListViewInput {
     }
 
     func createItem(name: String) {
+        view.endEditing(true)
         let request = ListDataFlow.CreateList.Request(name: name)
         interactor?.createItem(request: request)
     }

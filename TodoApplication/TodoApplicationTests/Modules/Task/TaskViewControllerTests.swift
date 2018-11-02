@@ -158,7 +158,8 @@ extension TaskViewControllerTests {
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier(),
             isDone: false,
-            onSwitchTap: nil
+            onSwitchTap: nil,
+            onTextDidEndEditing: nil
         )
         static let sections = [TableSection(cells: [TableCell<TaskCell>(viewModel: TestData.viewModel)])]
     }

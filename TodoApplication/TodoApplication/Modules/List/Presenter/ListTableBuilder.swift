@@ -4,24 +4,20 @@ final class ListTableBuilder: TableBuilder {
 
     typealias OnDeleteTap = ((_ identifier: Identifier) -> ())
     typealias OnListTap = ((ListViewModel) -> ())
-    typealias OnCellTextDidEndEditing = ((_ identifier: Identifier, _ newText: String) -> ())
 
     private let items: [ListViewModel]
     private let focusIdentifier: Identifier?
     private let onDeleteTap: OnDeleteTap?
     private let onListTap: OnListTap?
-    private let onCellTextDidEndEditing: OnCellTextDidEndEditing?
 
     init(items: [ListViewModel],
          focusIdentifier: Identifier?,
          onDeleteTap: OnDeleteTap?,
-         onListTap: OnListTap?,
-         onCellTextDidEndEditing: OnCellTextDidEndEditing?) {
+         onListTap: OnListTap?) {
         self.items = items
         self.focusIdentifier = focusIdentifier
         self.onDeleteTap = onDeleteTap
         self.onListTap = onListTap
-        self.onCellTextDidEndEditing = onCellTextDidEndEditing
     }
 
     func build() -> [TableSection] {
@@ -30,11 +26,7 @@ final class ListTableBuilder: TableBuilder {
             let cell = TableCell<ListCell>(viewModel: viewModel)
                 .on(.tap) { [onListTap] parameters in onListTap?(parameters.viewModel) }
                 .on(.swipeToDelete) { [onDeleteTap] parameters in onDeleteTap?(parameters.viewModel.identifier) }
-                .on(.configure) { [onCellTextDidEndEditing] parameters in
-                    let viewModel = parameters.viewModel
-                    parameters.cell?.onTextDidEndEditing = { newText in
-                        onCellTextDidEndEditing?(viewModel.identifier, newText)
-                    }
+                .on(.configure) { parameters in
                     parameters.cell?.setAccessibilityIdentifierIndex(
                         index: parameters.indexPath.row
                     )
