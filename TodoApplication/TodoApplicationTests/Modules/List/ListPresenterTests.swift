@@ -83,9 +83,9 @@ final class ListPresenterTests: TestCase {
     func testPresentShowList_filterNotValidTasks_forSuccessfulResponse() {
         // given
         let lists = TestData.notValidLists
-        let response = TaskDataFlow.ShowTasks.Response(result: .success(lists))
+        let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
-        presenter.presentShowTasks(response, identifier: nil)
+        presenter.presentShowLists(response, identifier: nil)
         // then
         XCTAssertEqual(viewMock.invokedReloadTableParameters?.sections.count, 0)
     }
