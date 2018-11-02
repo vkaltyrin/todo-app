@@ -1,11 +1,11 @@
 import Foundation
 
-final class ListPresenterImpl {
+final class TaskPresenterImpl {
     // MARK: - Dependencies
-    private unowned let view: ListViewInput
+    private unowned let view: TaskViewInput
 
     // MARK: - Init
-    init(view: ListViewInput) {
+    init(view: TaskViewInput) {
         self.view = view
         initialSetup()
     }
@@ -17,7 +17,7 @@ final class ListPresenterImpl {
         }
     }
 
-    private func onListTap(item: ListViewModel) {
+    private func onTaskTap(item: TaskViewModel) {
         switch state {
         case .editing:
             break
@@ -30,7 +30,7 @@ final class ListPresenterImpl {
         return DialogBuilder().build(storageError: error)
     }
 
-    private var state: ListDataFlow.ViewState = .loading {
+    private var state: TaskDataFlow.ViewState = .loading {
         didSet {
             switch state {
             case .loading:
@@ -42,7 +42,7 @@ final class ListPresenterImpl {
                 view.stopActivity()
                 view.reloadTable(sections)
                 if let identifier = identifier {
-                    presentListEditing(identifier)
+                    presentTaskEditing(identifier)
                 }
             case .editing(let identifier):
                 view.stopActivity()
@@ -52,26 +52,26 @@ final class ListPresenterImpl {
     }
 }
 
-extension ListPresenterImpl: ListPresenter {
-    func presentShowLists(_ response: ListDataFlow.ShowLists.Response, identifier: Identifier?) {
-        let viewModel: ListDataFlow.ShowLists.ViewModel
+extension TaskPresenterImpl: TaskPresenter {
+    func presentShowTasks(_ response: TaskDataFlow.ShowTasks.Response, identifier: Identifier?) {
+        let viewModel: TaskDataFlow.ShowTasks.ViewModel
         switch response.result {
         case .success(let items):
             let resultItems = items.map {
-                ListViewModel(
+                TaskViewModel(
                     identifier: $0.identifier ?? "",
                     name: $0.name
                 )
             }
 
-            let builder = ListTableBuilder(
+            let builder = TaskTableBuilder(
                 items: resultItems,
                 focusIdentifier: identifier,
                 onDeleteTap: { [weak self] identifier in
                     self?.view.deleteItem(identifier)
                 },
-                onListTap: { [weak self] item in
-                    self?.onListTap(item: item)
+                onTaskTap: { [weak self] item in
+                    self?.onTaskTap(item: item)
                 },
                 onCellTextDidEndEditing: { [weak self] item in
                     self?.view.updateItem(item.identifier, name: item.name)
@@ -79,13 +79,13 @@ extension ListPresenterImpl: ListPresenter {
             )
             let sections = builder.build()
 
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .result(
+            viewModel = TaskDataFlow.ShowTasks.ViewModel(state: .result(
                 items: sections,
-                listIdentifier: identifier
+                identifier: identifier
                 )
             )
         case .failure(let error):
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .error(dialog: errorDialog(error))
+            viewModel = TaskDataFlow.ShowTasks.ViewModel(state: .error(dialog: errorDialog(error))
             )
         }
 
@@ -96,22 +96,17 @@ extension ListPresenterImpl: ListPresenter {
         state = .error(dialog: errorDialog(error))
     }
 
-    func presentListActions(_ identifier: Identifier, name: String) {
+    func presentTaskActions(_ identifier: Identifier) {
         let actions: [Dialog.Action] = [
             Dialog.Action(
-                title: "Edit list 📝",
+                title: "Edit todo 📝",
                 style: .default) { [weak self] in
                     self?.view.showEditing(identifier)
             },
             Dialog.Action(
-                title: "Delete list and all containing tasks 🗑",
+                title: "Delete 🗑",
                 style: .default) { [weak self] in
                     self?.view.deleteItem(identifier)
-            },
-            Dialog.Action(
-                title: "Look at tasks ▶️",
-                style: .default) { [weak self] in
-                    self?.view.openTasks(identifier, name: name)
             },
             Dialog.Action(
                 title: "Cancel",
@@ -123,8 +118,8 @@ extension ListPresenterImpl: ListPresenter {
         view.showActionSheet(dialog)
     }
 
-    func presentListEditing(_ identifier: Identifier) {
-        self.state = .editing(listIdentifier: identifier)
+    func presentTaskEditing(_ identifier: Identifier) {
+        self.state = .editing(identifier: identifier)
     }
 
     func presentLoading() {

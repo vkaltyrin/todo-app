@@ -4,40 +4,17 @@ final class TaskViewController: UIViewController {
 
     // MARK: - Dependencies
     var interactor: TaskInteractor?
-    var tableDirector: TaskViewTableDirector?
+    var tableManager: TableManager?
 
-    // MARK: - State
-
-    private var state: TaskDataFlow.ViewControllerState = .loading {
-        didSet {
-            switch state {
-            case .loading:
-                startActivity()
-                interactor?.fetchItems()
-            case .error(let dialog):
-                stopActivity()
-                showAlert(dialog)
-            case .result(let items, let identifier):
-                stopActivity()
-                tableDirector?.items = items
-                if let identifier = identifier {
-                    let request = TaskDataFlow.OpenTaskEditing.Request(identifier: identifier)
-                    interactor?.openTaskEditing(request: request)
-                }
-            case .editing(let identifier):
-                stopActivity()
-                tableDirector?.focusOnCell(identifier)
-            }
-        }
-    }
-
+    // MARK: - Private
+    private var onAddTap: (() -> ())?
     private let keyboardObserver: KeyboardObserver = KeyboardObserverImpl()
     private var activityDisplayable: ActivityDisplayable?
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            tableDirector?.setup(with: tableView)
+            tableManager?.setTableView(tableView)
         }
     }
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -49,29 +26,11 @@ final class TaskViewController: UIViewController {
         }
     }
 
-    // MARK: - Private views
-    private var addTaskButton: UIBarButtonItem?
-
     // MARK: - ViewController life-cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        state = .loading
-
-        tableDirector?.onTaskTap = { [weak self] identifier in
-            self?.onTaskTap(identifier: identifier)
-        }
-        tableDirector?.onCellTextDidEndEditing = { [weak self] viewModel in
-            let request = TaskDataFlow.UpdateTask.Request(
-                identifier: viewModel.identifier,
-                name: viewModel.name
-            )
-            self?.interactor?.updateItem(request: request)
-        }
-        tableDirector?.onDeleteTap = { [weak self] identifier in
-            let request = TaskDataFlow.DeleteTask.Request(identifier: identifier)
-            self?.interactor?.deleteItem(request: request)
-        }
+        interactor?.fetchItems()
 
         keyboardObserver.onKeyboardWillShown = { [weak self] frame in
             self?.tableViewBottomConstraint.constant = frame.height
@@ -80,34 +39,23 @@ final class TaskViewController: UIViewController {
             self?.tableViewBottomConstraint.constant = 0
         }
 
-        addTaskButton = UIBarButtonItem(
+        let addButton = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(onAddTaskTap)
         )
-        addTaskButton?.qaAccessibilityIdentifier = TaskDataFlow.AccessibilityIdentifiers.createTaskButton
-        navigationItem.rightBarButtonItem = addTaskButton
+        addButton.qaAccessibilityIdentifier = TaskDataFlow.AccessibilityIdentifiers.createTaskButton
+        navigationItem.rightBarButtonItem = addButton
     }
 
     // MARK: - Private
 
-    private func onTaskTap(identifier: Identifier) {
-        switch state {
-        case .editing:
-            break
-        default:
-            let request = TaskDataFlow.OpenTaskActions.Request(identifier: identifier)
-            interactor?.openTaskActions(request: request)
-        }
-    }
-
     @objc private func onAddTaskTap() {
-        let request = TaskDataFlow.CreateTask.Request(name: "")
-        interactor?.createItem(request: request)
+        onAddTap?()
     }
+}
 
-    // MARK: - ActivityDisplayable
-
+extension TaskViewController: ActivityDisplayable {
     func startActivity() {
         activityDisplayable?.startActivity()
     }
@@ -118,16 +66,51 @@ final class TaskViewController: UIViewController {
 }
 
 extension TaskViewController: TaskViewInput {
+    func setOnAddTap(_ onAddTap: (() -> ())?) {
+        self.onAddTap = onAddTap
+    }
+
+    func createItem(name: String) {
+        let request = TaskDataFlow.CreateTask.Request(name: name)
+        interactor?.createItem(request: request)
+    }
+
+    func focusOn(_ identifier: Identifier) {
+        tableManager?.focusOn(sectionIndex: 0) { (cell: TableCell<TaskCell>) -> Bool in
+            cell.viewModel.identifier == identifier
+        }
+    }
+
+    func fetchItems() {
+        interactor?.fetchItems()
+    }
+
+    func reloadTable(_ sections: [TableSection]) {
+        tableManager?.reload(sections)
+    }
+
+    func updateItem(_ identifier: Identifier, name: String) {
+        let request = TaskDataFlow.UpdateTask.Request(
+            identifier: identifier,
+            name: name
+        )
+        interactor?.updateItem(request: request)
+    }
+
+    func selectItem(_ identifier: Identifier, name: String) {
+        let request = TaskDataFlow.OpenTaskActions.Request(
+            identifier: identifier
+        )
+        interactor?.openTaskActions(request: request)
+    }
+
     func showEditing(_ identifier: Identifier) {
-        self.state = .editing(identifier: identifier)
+        let request = TaskDataFlow.OpenTaskEditing.Request(identifier: identifier)
+        interactor?.openTaskEditing(request: request)
     }
 
     func deleteItem(_ identifier: Identifier) {
         let request = TaskDataFlow.DeleteTask.Request(identifier: identifier)
         interactor?.deleteItem(request: request)
-    }
-
-    func showItems(_ viewModel: TaskDataFlow.ShowTasks.ViewModel) {
-        self.state = viewModel.state
     }
 }

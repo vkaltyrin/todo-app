@@ -71,7 +71,7 @@ extension ListViewController: ListViewInput {
         self.onAddTap = onAddTap
     }
 
-    func createTask(name: String) {
+    func createItem(name: String) {
         let request = ListDataFlow.CreateList.Request(name: name)
         interactor?.createItem(request: request)
     }

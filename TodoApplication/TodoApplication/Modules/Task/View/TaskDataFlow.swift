@@ -10,7 +10,7 @@ struct TaskDataFlow {
         }
 
         struct ViewModel {
-            let state: ViewControllerState
+            let state: ViewState
         }
     }
 
@@ -66,9 +66,9 @@ struct TaskDataFlow {
         }
     }
 
-    enum ViewControllerState {
+    enum ViewState {
         case loading
-        case result(items: [TaskViewModel], identifier: Identifier?)
+        case result(items: [TableSection], identifier: Identifier?)
         case error(dialog: Dialog)
         case editing(identifier: Identifier)
     }
