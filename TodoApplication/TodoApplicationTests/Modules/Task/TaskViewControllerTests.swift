@@ -61,7 +61,7 @@ final class TaskViewControllerTests: TestCase {
         XCTAssertEqual(interactorMock.invokedOpenTaskActionsParameters?.request.identifier, identifier)
     }
     
-    func testUpdateItem_callsInteractorToUpdateItemName() {
+    func testUpdateItemName_callsInteractorToUpdateItemName() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
         let name = Identifier.generateUniqueIdentifier()
@@ -71,6 +71,18 @@ final class TaskViewControllerTests: TestCase {
         XCTAssertEqual(interactorMock.invokedUpdateItemNameCount, 1)
         XCTAssertEqual(interactorMock.invokedUpdateItemNameParameters?.request.identifier, identifier)
         XCTAssertEqual(interactorMock.invokedUpdateItemNameParameters?.request.name, name)
+    }
+    
+    func testUpdateItemDoneness_callsInteractorToUpdateItemDoneness() {
+        // given
+        let identifier = Identifier.generateUniqueIdentifier()
+        let isDone = true
+        // when
+        view.updateItem(identifier, isDone: isDone)
+        // then
+        XCTAssertEqual(interactorMock.invokedUpdateItemDonenessCount, 1)
+        XCTAssertEqual(interactorMock.invokedUpdateItemDonenessParameters?.request.identifier, identifier)
+        XCTAssertEqual(interactorMock.invokedUpdateItemDonenessParameters?.request.isDone, isDone)
     }
     
     func testReloadTable_callsTableManagerReload() {
@@ -128,7 +140,9 @@ extension TaskViewControllerTests {
     struct TestData {
         static let viewModel = TaskViewModel(
             identifier: Identifier.generateUniqueIdentifier(),
-            name: Identifier.generateUniqueIdentifier()
+            name: Identifier.generateUniqueIdentifier(),
+            isDone: false,
+            onSwitchTap: nil
         )
         static let sections = [TableSection(cells: [TableCell<TaskCell>(viewModel: TestData.viewModel)])]
     }

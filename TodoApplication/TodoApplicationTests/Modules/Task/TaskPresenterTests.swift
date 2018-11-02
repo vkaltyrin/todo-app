@@ -44,6 +44,20 @@ final class TaskPresenterTests: TestCase {
         XCTAssertEqual(viewMock.invokedSelectItemCount, 1)
     }
     
+    func testPresenter_updateItemDoneness_onSwitchTap() {
+        // given
+        let tasks = [Task(name: Identifier.generateUniqueIdentifier())]
+        let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
+        // when
+        presenter.presentShowTasks(response, identifier: nil)
+        let sections = viewMock.invokedReloadTableParameters?.sections
+        let cell = sections?[0].cells[0]
+        let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
+        // then
+        XCTAssertNotNil(result)
+        XCTAssertEqual(viewMock.invokedSelectItemCount, 1)
+    }
+    
     func testPresenter_doesNotAllowSelectItem_onTaskTap_forEditingState() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()

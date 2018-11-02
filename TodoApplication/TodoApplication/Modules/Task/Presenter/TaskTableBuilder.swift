@@ -34,7 +34,12 @@ final class TaskTableBuilder: TableBuilder {
                     let viewModel = parameters.viewModel
                     parameters.cell?.onTextDidEndEditing = { name in
                         onCellTextDidEndEditing?(
-                            TaskViewModel(identifier: viewModel.identifier, name: name)
+                            TaskViewModel(
+                                identifier: viewModel.identifier,
+                                name: name,
+                                isDone: viewModel.isDone,
+                                onSwitchTap: viewModel.onSwitchTap
+                            )
                         )
                     }
                     parameters.cell?.setAccessibilityIdentifierIndex(

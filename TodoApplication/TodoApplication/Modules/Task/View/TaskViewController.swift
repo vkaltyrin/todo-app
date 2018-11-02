@@ -97,6 +97,14 @@ extension TaskViewController: TaskViewInput {
         interactor?.updateItemName(request: request)
     }
 
+    func updateItem(_ identifier: Identifier, isDone: Bool) {
+        let request = TaskDataFlow.UpdateTaskDoneness.Request(
+            identifier: identifier,
+            isDone: isDone
+        )
+        interactor?.updateItemDoneness(request: request)
+    }
+
     func selectItem(_ identifier: Identifier, name: String) {
         let request = TaskDataFlow.OpenTaskActions.Request(
             identifier: identifier

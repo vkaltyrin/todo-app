@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rtt-6m-aZq" customClass="UIITextField">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rtt-6m-aZq" customClass="UIITextField">
+                        <rect key="frame" x="8" y="0.0" width="320" height="43.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -31,7 +31,7 @@
                     <constraint firstItem="Rtt-6m-aZq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="95I-OK-Bht"/>
                     <constraint firstItem="Rtt-6m-aZq" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="CNQ-eU-ipy"/>
                     <constraint firstItem="Rtt-6m-aZq" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="F3j-aL-XK9"/>
-                    <constraint firstItem="Rtt-6m-aZq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GxJ-gc-yI7"/>
+                    <constraint firstItem="Rtt-6m-aZq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GxJ-gc-yI7"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

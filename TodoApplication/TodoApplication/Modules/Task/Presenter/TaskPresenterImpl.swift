@@ -57,10 +57,15 @@ extension TaskPresenterImpl: TaskPresenter {
         let viewModel: TaskDataFlow.ShowTasks.ViewModel
         switch response.result {
         case .success(let items):
-            let resultItems = items.map {
-                TaskViewModel(
-                    identifier: $0.identifier ?? "",
-                    name: $0.name
+            let resultItems: [TaskViewModel] = items.map { item in
+                let identifier = item.identifier ?? ""
+                return TaskViewModel(
+                    identifier: identifier,
+                    name: item.name,
+                    isDone: item.isDone,
+                    onSwitchTap: { [weak self] isDone in
+                        self?.view.updateItem(identifier, isDone: isDone)
+                    }
                 )
             }
 

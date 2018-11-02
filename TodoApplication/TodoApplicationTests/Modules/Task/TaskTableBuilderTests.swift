@@ -123,7 +123,9 @@ extension TaskTableBuilderTests {
     struct TestData {
         static let viewData = TaskViewModel(
             identifier: Identifier.generateUniqueIdentifier(),
-            name: Identifier.generateUniqueIdentifier()
+            name: Identifier.generateUniqueIdentifier(),
+            isDone: false,
+            onSwitchTap: nil
         )
         static let indexPath = IndexPath(row: 0, section: 0)
     }

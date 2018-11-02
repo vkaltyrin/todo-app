@@ -39,16 +39,28 @@ final class TaskViewInputMock: TaskViewInput {
         invokedSelectItemParametersList.append((identifier, name))
     }
 
-    var invokedUpdateItem = false
-    var invokedUpdateItemCount = 0
-    var invokedUpdateItemParameters: (identifier: Identifier, name: String)?
-    var invokedUpdateItemParametersList = [(identifier: Identifier, name: String)]()
+    var invokedUpdateItemName = false
+    var invokedUpdateItemNameCount = 0
+    var invokedUpdateItemNameParameters: (identifier: Identifier, name: String)?
+    var invokedUpdateItemNameParametersList = [(identifier: Identifier, name: String)]()
 
     func updateItem(_ identifier: Identifier, name: String) {
-        invokedUpdateItem = true
-        invokedUpdateItemCount += 1
-        invokedUpdateItemParameters = (identifier, name)
-        invokedUpdateItemParametersList.append((identifier, name))
+        invokedUpdateItemName = true
+        invokedUpdateItemNameCount += 1
+        invokedUpdateItemNameParameters = (identifier, name)
+        invokedUpdateItemNameParametersList.append((identifier, name))
+    }
+
+    var invokedUpdateItemIsDone = false
+    var invokedUpdateItemIsDoneCount = 0
+    var invokedUpdateItemIsDoneParameters: (identifier: Identifier, isDone: Bool)?
+    var invokedUpdateItemIsDoneParametersList = [(identifier: Identifier, isDone: Bool)]()
+
+    func updateItem(_ identifier: Identifier, isDone: Bool) {
+        invokedUpdateItemIsDone = true
+        invokedUpdateItemIsDoneCount += 1
+        invokedUpdateItemIsDoneParameters = (identifier, isDone)
+        invokedUpdateItemIsDoneParametersList.append((identifier, isDone))
     }
 
     var invokedCreateItem = false
