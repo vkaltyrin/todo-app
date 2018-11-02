@@ -3,7 +3,6 @@ import XCTest
 
 final class TaskStorageMock: TaskStorage {
 
-
     var invokedFetchTasks = false
     var invokedFetchTasksCount = 0
     var invokedFetchTasksParameters: (listId: Identifier, Void)?
@@ -52,18 +51,34 @@ final class TaskStorageMock: TaskStorage {
         }
     }
 
-    var invokedUpdateTask = false
-    var invokedUpdateTaskCount = 0
-    var invokedUpdateTaskParameters: (taskId: Identifier, name: String)?
-    var invokedUpdateTaskParametersList = [(taskId: Identifier, name: String)]()
-    var stubbedUpdateTaskCompletionResult: (GeneralResult, Void)?
+    var invokedUpdateTaskTaskIdName = false
+    var invokedUpdateTaskTaskIdNameCount = 0
+    var invokedUpdateTaskTaskIdNameParameters: (taskId: Identifier, name: String)?
+    var invokedUpdateTaskTaskIdNameParametersList = [(taskId: Identifier, name: String)]()
+    var stubbedUpdateTaskTaskIdNameCompletionResult: (GeneralResult, Void)?
 
     func updateTask(taskId: Identifier, name: String, _ completion: @escaping OnStorageResult) {
-        invokedUpdateTask = true
-        invokedUpdateTaskCount += 1
-        invokedUpdateTaskParameters = (taskId, name)
-        invokedUpdateTaskParametersList.append((taskId, name))
-        if let result = stubbedUpdateTaskCompletionResult {
+        invokedUpdateTaskTaskIdName = true
+        invokedUpdateTaskTaskIdNameCount += 1
+        invokedUpdateTaskTaskIdNameParameters = (taskId, name)
+        invokedUpdateTaskTaskIdNameParametersList.append((taskId, name))
+        if let result = stubbedUpdateTaskTaskIdNameCompletionResult {
+            completion(result.0)
+        }
+    }
+
+    var invokedUpdateTaskTaskIdIsDone = false
+    var invokedUpdateTaskTaskIdIsDoneCount = 0
+    var invokedUpdateTaskTaskIdIsDoneParameters: (taskId: Identifier, isDone: Bool)?
+    var invokedUpdateTaskTaskIdIsDoneParametersList = [(taskId: Identifier, isDone: Bool)]()
+    var stubbedUpdateTaskTaskIdIsDoneCompletionResult: (GeneralResult, Void)?
+
+    func updateTask(taskId: Identifier, isDone: Bool, _ completion: @escaping OnStorageResult) {
+        invokedUpdateTaskTaskIdIsDone = true
+        invokedUpdateTaskTaskIdIsDoneCount += 1
+        invokedUpdateTaskTaskIdIsDoneParameters = (taskId, isDone)
+        invokedUpdateTaskTaskIdIsDoneParametersList.append((taskId, isDone))
+        if let result = stubbedUpdateTaskTaskIdIsDoneCompletionResult {
             completion(result.0)
         }
     }

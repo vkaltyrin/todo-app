@@ -106,6 +106,31 @@ final class TaskStorageImpl: TaskStorage {
                 result = .failure(.internalError)
             }
         }
+    }
 
+    func updateTask(taskId: Identifier, isDone: Bool, _ completion: @escaping OnStorageResult) {
+        queue.async {
+            let result: GeneralResult
+            defer {
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            }
+            let realm = try? Realm()
+            guard let taskForUpdate = realm?.objects(RealmTask.self).first(where: { realmTask in
+                realmTask.identifier == taskId
+            }) else {
+                result = .failure(.cannotUpdate)
+                return
+            }
+            do {
+                try realm?.write {
+                    taskForUpdate.isDone = isDone
+                }
+                result = .success(())
+            } catch {
+                result = .failure(.internalError)
+            }
+        }
     }
 }

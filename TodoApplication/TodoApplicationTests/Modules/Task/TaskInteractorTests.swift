@@ -77,7 +77,7 @@ final class TaskInteractorTests: TestCase {
     
     func testUpdateItem_presentUpdatedTasks_whenUpdateIsSuccessful() {
         // given
-        taskStorageMock.stubbedUpdateTaskCompletionResult = Stub<GeneralResult>.create(.success(()))
+        taskStorageMock.stubbedUpdateTaskTaskIdNameCompletionResult = Stub<GeneralResult>.create(.success(()))
         taskStorageMock.stubbedFetchTasksCompletionResult = Stub<TaskResult>.create(.success([]))
         let request = TaskDataFlow.UpdateTask.Request(
             identifier: Identifier.generateUniqueIdentifier(),
@@ -106,7 +106,7 @@ final class TaskInteractorTests: TestCase {
     func testUpdateItem_presentUpdatedTasks_whenUpdateIsFailed() {
         // given
         let error = StorageError.cannotUpdate
-        taskStorageMock.stubbedUpdateTaskCompletionResult = Stub<GeneralResult>.create(.failure(error))
+        taskStorageMock.stubbedUpdateTaskTaskIdNameCompletionResult = Stub<GeneralResult>.create(.failure(error))
         taskStorageMock.stubbedFetchTasksCompletionResult = Stub<TaskResult>.create(.success([]))
         let request = TaskDataFlow.UpdateTask.Request(
             identifier: Identifier.generateUniqueIdentifier(),

@@ -148,7 +148,7 @@ final class TaskStorageImplTests: StorageTestCase {
         XCTAssertNil(receivedError)
     }
     
-    func testUpdateTask_updateTask_withSuccess() {
+    func testUpdateTaskName_update_withSuccess() {
         // given
         let task = TestData.writeTestsTask
         var receivedError: StorageError?
@@ -171,7 +171,62 @@ final class TaskStorageImplTests: StorageTestCase {
         XCTAssertNil(receivedError)
     }
     
-    func testUpdateTask_returnError_withWrongTaskIdentifier() {
+    func testUpdateTaskIsDone_update_withSuccess() {
+        // given
+        let task = TestData.writeTestsTask
+        var receivedError: StorageError?
+        let response = expectation(description: "wait for return")
+        
+        // when
+        storage.updateTask(taskId: task.identifier ?? "", isDone: true) { result in
+            result.onSuccess {
+                response.fulfill()
+            }
+            result.onFailure { error in
+                receivedError = error
+                response.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        XCTAssertNil(receivedError)
+    }
+    
+    func testUpdateTaskName_returnError_withWrongTaskIdentifier() {
+        // given
+        let task = TestData.makeCoffeeTask
+        var receivedError: StorageError?
+        let name = Identifier.generateUniqueIdentifier()
+        let response = expectation(description: "wait for return")
+        
+        // when
+        storage.updateTask(taskId: task.identifier ?? "", name: name) { result in
+            result.onSuccess {
+                response.fulfill()
+            }
+            result.onFailure { error in
+                receivedError = error
+                response.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        guard let error = receivedError else {
+            XCTFail("updateTask should return an error")
+            return
+        }
+        
+        switch error {
+        case .cannotUpdate:
+            break
+        default:
+            XCTFail("updateTask should return corrent error")
+        }
+    }
+    
+    func testUpdateTaskIsDone_returnError_withWrongTaskIdentifier() {
         // given
         let task = TestData.makeCoffeeTask
         var receivedError: StorageError?
