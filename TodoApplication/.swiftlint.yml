@@ -38,11 +38,11 @@ opt_in_rules:
 - closure_parameter_position
 - conditional_returns_on_newline
 - function_default_parameter_at_end
-- trailing_closure
 
 disabled_rules:
 
 - void_return
+- trailing_closure
 
 # configurations
 
