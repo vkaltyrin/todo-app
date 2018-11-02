@@ -101,7 +101,7 @@ final class TaskPresenterTests: TestCase {
         // when
         presenter.presentShowTasks(response, identifier: nil)
         // then
-        XCTAssertEqual(viewMock.invokedReloadTableParameters?.sections.count, 0)
+        XCTAssertEqual(viewMock.invokedReloadTableParameters?.sections[safe: 0]?.cells.count, 0)
     }
     
     func testPresentShowTask_stopLoading_forSuccessfulResponse() {
