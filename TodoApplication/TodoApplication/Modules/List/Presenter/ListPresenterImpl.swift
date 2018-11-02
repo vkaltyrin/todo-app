@@ -57,11 +57,15 @@ extension ListPresenterImpl: ListPresenter {
         let viewModel: ListDataFlow.ShowLists.ViewModel
         switch response.result {
         case .success(let items):
-            let resultItems = items.map {
-                ListViewModel(
-                    identifier: $0.identifier ?? "",
-                    name: $0.name
-                )
+            let resultItems: [ListViewModel] = items.compactMap { item in
+                if let identifier = item.identifier {
+                    return ListViewModel(
+                        identifier: identifier,
+                        name: item.name
+                    )
+                } else {
+                    return nil
+                }
             }
 
             let builder = ListTableBuilder(
@@ -73,8 +77,8 @@ extension ListPresenterImpl: ListPresenter {
                 onListTap: { [weak self] item in
                     self?.onListTap(item: item)
                 },
-                onCellTextDidEndEditing: { [weak self] item in
-                    self?.view.updateItem(item.identifier, name: item.name)
+                onCellTextDidEndEditing: { [weak self] identifier, newText in
+                    self?.view.updateItem(identifier, name: newText)
                 }
             )
             let sections = builder.build()
@@ -85,8 +89,7 @@ extension ListPresenterImpl: ListPresenter {
                 )
             )
         case .failure(let error):
-            viewModel = ListDataFlow.ShowLists.ViewModel(state: .error(dialog: errorDialog(error))
-            )
+            viewModel = ListDataFlow.ShowLists.ViewModel(state: .error(dialog: errorDialog(error)))
         }
 
         state = viewModel.state

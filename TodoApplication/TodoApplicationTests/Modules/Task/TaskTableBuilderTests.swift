@@ -86,9 +86,9 @@ final class TaskTableBuilderTests: TestCase {
     func testBuilder_buildCell_whereOnCellTextDidEndEditingReturnsCorrectValue() {
         // given
         let items = [TestData.viewData]
-        let onCellTextDidEndEditing: TaskTableBuilder.OnCellTextDidEndEditing = { item in
-            XCTAssertEqual(item.identifier, items.first?.identifier)
-            XCTAssertEqual(item.name, items.first?.name)
+        let onCellTextDidEndEditing: TaskTableBuilder.OnCellTextDidEndEditing = { identifier, newText in
+            XCTAssertEqual(identifier, items.first?.identifier)
+            XCTAssertEqual(newText, items.first?.name)
         }
         
         let builder = TaskTableBuilder(

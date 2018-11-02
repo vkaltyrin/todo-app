@@ -3,7 +3,6 @@ import UIKit
 class BaseCell: UITableViewCell {
 
     var onTextDidEndEditing: ((String) -> ())?
-    var onTextWillBeginEditing: (() -> ())?
 
     @IBOutlet weak var textField: UITextField!
 

@@ -86,9 +86,9 @@ final class ListTableBuilderTests: TestCase {
     func testBuilder_buildCell_whereOnCellTextDidEndEditingReturnsCorrectValue() {
         // given
         let items = [TestData.viewData]
-        let onCellTextDidEndEditing: ListTableBuilder.OnCellTextDidEndEditing = { item in
-            XCTAssertEqual(item.identifier, items.first?.identifier)
-            XCTAssertEqual(item.name, items.first?.name)
+        let onCellTextDidEndEditing: ListTableBuilder.OnCellTextDidEndEditing = { identifier, newText in
+            XCTAssertEqual(identifier, items.first?.identifier)
+            XCTAssertEqual(newText, items.first?.name)
         }
         
         let builder = ListTableBuilder(

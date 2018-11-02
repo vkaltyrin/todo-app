@@ -57,16 +57,19 @@ extension TaskPresenterImpl: TaskPresenter {
         let viewModel: TaskDataFlow.ShowTasks.ViewModel
         switch response.result {
         case .success(let items):
-            let resultItems: [TaskViewModel] = items.map { item in
-                let identifier = item.identifier ?? ""
-                return TaskViewModel(
-                    identifier: identifier,
-                    name: item.name,
-                    isDone: item.isDone,
-                    onSwitchTap: { [weak self] isDone in
-                        self?.view.updateItem(identifier, isDone: isDone)
-                    }
-                )
+            let resultItems: [TaskViewModel] = items.compactMap { item in
+                if let identifier = item.identifier {
+                    return TaskViewModel(
+                        identifier: identifier,
+                        name: item.name,
+                        isDone: item.isDone,
+                        onSwitchTap: { [weak self] isDone in
+                            self?.view.updateItem(identifier, isDone: isDone)
+                        }
+                    )
+                } else {
+                    return nil
+                }
             }
 
             let builder = TaskTableBuilder(
@@ -78,8 +81,8 @@ extension TaskPresenterImpl: TaskPresenter {
                 onTaskTap: { [weak self] item in
                     self?.onTaskTap(item: item)
                 },
-                onCellTextDidEndEditing: { [weak self] item in
-                    self?.view.updateItem(item.identifier, name: item.name)
+                onCellTextDidEndEditing: { [weak self] identifier, newText in
+                    self?.view.updateItem(identifier, name: newText)
                 }
             )
             let sections = builder.build()
@@ -90,8 +93,7 @@ extension TaskPresenterImpl: TaskPresenter {
                 )
             )
         case .failure(let error):
-            viewModel = TaskDataFlow.ShowTasks.ViewModel(state: .error(dialog: errorDialog(error))
-            )
+            viewModel = TaskDataFlow.ShowTasks.ViewModel(state: .error(dialog: errorDialog(error)))
         }
 
         state = viewModel.state

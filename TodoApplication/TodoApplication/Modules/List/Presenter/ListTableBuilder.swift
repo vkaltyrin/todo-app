@@ -4,7 +4,7 @@ final class ListTableBuilder: TableBuilder {
 
     typealias OnDeleteTap = ((_ identifier: Identifier) -> ())
     typealias OnListTap = ((ListViewModel) -> ())
-    typealias OnCellTextDidEndEditing = ((ListViewModel) -> ())
+    typealias OnCellTextDidEndEditing = ((_ identifier: Identifier, _ newText: String) -> ())
 
     private let items: [ListViewModel]
     private let focusIdentifier: Identifier?
@@ -32,10 +32,8 @@ final class ListTableBuilder: TableBuilder {
                 .on(.swipeToDelete) { [onDeleteTap] parameters in onDeleteTap?(parameters.viewModel.identifier) }
                 .on(.configure) { [onCellTextDidEndEditing] parameters in
                     let viewModel = parameters.viewModel
-                    parameters.cell?.onTextDidEndEditing = { name in
-                        onCellTextDidEndEditing?(
-                            ListViewModel(identifier: viewModel.identifier, name: name)
-                        )
+                    parameters.cell?.onTextDidEndEditing = { newText in
+                        onCellTextDidEndEditing?(viewModel.identifier, newText)
                     }
                     parameters.cell?.setAccessibilityIdentifierIndex(
                         index: parameters.indexPath.row

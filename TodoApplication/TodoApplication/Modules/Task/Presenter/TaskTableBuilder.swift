@@ -4,7 +4,7 @@ final class TaskTableBuilder: TableBuilder {
 
     typealias OnDeleteTap = ((_ identifier: Identifier) -> ())
     typealias OnTaskTap = ((TaskViewModel) -> ())
-    typealias OnCellTextDidEndEditing = ((TaskViewModel) -> ())
+    typealias OnCellTextDidEndEditing = ((_ identifier: Identifier, _ newText: String) -> ())
 
     private let items: [TaskViewModel]
     private let focusIdentifier: Identifier?
@@ -33,14 +33,7 @@ final class TaskTableBuilder: TableBuilder {
                 .on(.configure) { [onCellTextDidEndEditing] parameters in
                     let viewModel = parameters.viewModel
                     parameters.cell?.onTextDidEndEditing = { name in
-                        onCellTextDidEndEditing?(
-                            TaskViewModel(
-                                identifier: viewModel.identifier,
-                                name: name,
-                                isDone: viewModel.isDone,
-                                onSwitchTap: viewModel.onSwitchTap
-                            )
-                        )
+                        onCellTextDidEndEditing?(viewModel.identifier, name)
                     }
                     parameters.cell?.setAccessibilityIdentifierIndex(
                         index: parameters.indexPath.row

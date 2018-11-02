@@ -18,12 +18,12 @@ final class ListPresenterTests: TestCase {
     
     func testPresenter_deleteItem_onSwipeToDelete() {
         // given
-        let lists = [List(name: Identifier.generateUniqueIdentifier())]
+        let lists = TestData.lists
         let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
         presenter.presentShowLists(response, identifier: nil)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .swipeToDelete, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -32,12 +32,12 @@ final class ListPresenterTests: TestCase {
     
     func testPresenter_selectItem_onListTap() {
         // given
-        let lists = [List(name: Identifier.generateUniqueIdentifier())]
+        let lists = TestData.lists
         let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
         presenter.presentShowLists(response, identifier: nil)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -47,13 +47,13 @@ final class ListPresenterTests: TestCase {
     func testPresenter_doesNotAllowSelectItem_onListTap_forEditingState() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
-        let lists = [List(name: identifier)]
+        let lists = TestData.lists
         let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
         presenter.presentShowLists(response, identifier: nil)
         presenter.presentListEditing(identifier)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -72,7 +72,7 @@ final class ListPresenterTests: TestCase {
     
     func testPresentShowList_updateTable_forSuccessfulResponse() {
         // given
-        let lists = [List(name: Identifier.generateUniqueIdentifier())]
+        let lists = TestData.lists
         let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
         presenter.presentShowLists(response, identifier: nil)
@@ -82,7 +82,7 @@ final class ListPresenterTests: TestCase {
     
     func testPresentShowList_stopLoading_forSuccessfulResponse() {
         // given
-        let lists = [List(name: Identifier.generateUniqueIdentifier())]
+        let lists = TestData.lists
         let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
         presenter.presentShowLists(response, identifier: nil)
@@ -93,7 +93,7 @@ final class ListPresenterTests: TestCase {
     func testPresentShowList_focusOnCell_forSuccessfulResponse_andNonnilIdentifier() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
-        let lists = [List(name: Identifier.generateUniqueIdentifier())]
+        let lists = TestData.lists
         let response = ListDataFlow.ShowLists.Response(result: .success(lists))
         // when
         presenter.presentShowLists(response, identifier: identifier)
@@ -237,6 +237,8 @@ extension ListPresenterTests {
             static let ok = "OK"
         }
         static let indexPath = IndexPath(row: 0, section: 0)
-        
+        static let lists = [
+            List(name: Identifier.generateUniqueIdentifier(), identifier: Identifier.generateUniqueIdentifier())
+        ]
     }
 }

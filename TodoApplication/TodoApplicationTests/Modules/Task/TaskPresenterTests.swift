@@ -18,12 +18,12 @@ final class TaskPresenterTests: TestCase {
     
     func testPresenter_deleteItem_onSwipeToDelete() {
         // given
-        let tasks = [Task(name: Identifier.generateUniqueIdentifier())]
+        let tasks = TestData.tasks
         let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
         // when
         presenter.presentShowTasks(response, identifier: nil)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .swipeToDelete, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -32,12 +32,12 @@ final class TaskPresenterTests: TestCase {
     
     func testPresenter_selectItem_onTaskTap() {
         // given
-        let tasks = [Task(name: Identifier.generateUniqueIdentifier())]
+        let tasks = TestData.tasks
         let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
         // when
         presenter.presentShowTasks(response, identifier: nil)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -46,12 +46,12 @@ final class TaskPresenterTests: TestCase {
     
     func testPresenter_updateItemDoneness_onSwitchTap() {
         // given
-        let tasks = [Task(name: Identifier.generateUniqueIdentifier())]
+        let tasks = TestData.tasks
         let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
         // when
         presenter.presentShowTasks(response, identifier: nil)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -61,13 +61,13 @@ final class TaskPresenterTests: TestCase {
     func testPresenter_doesNotAllowSelectItem_onTaskTap_forEditingState() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
-        let tasks = [Task(name: identifier)]
+        let tasks = [Task(name: identifier, identifier: Identifier.generateUniqueIdentifier())]
         let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
         // when
         presenter.presentShowTasks(response, identifier: nil)
         presenter.presentTaskEditing(identifier)
         let sections = viewMock.invokedReloadTableParameters?.sections
-        let cell = sections?[0].cells[0]
+        let cell = sections?[safe: 0]?.cells[safe: 0]
         let result = cell?.call(action: .tap, cell: nil, indexPath: TestData.indexPath)
         // then
         XCTAssertNotNil(result)
@@ -86,7 +86,7 @@ final class TaskPresenterTests: TestCase {
     
     func testPresentShowTask_updateTable_forSuccessfulResponse() {
         // given
-        let tasks = [Task(name: Identifier.generateUniqueIdentifier())]
+        let tasks = TestData.tasks
         let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
         // when
         presenter.presentShowTasks(response, identifier: nil)
@@ -235,6 +235,8 @@ extension TaskPresenterTests {
             static let ok = "OK"
         }
         static let indexPath = IndexPath(row: 0, section: 0)
-        
+        static let tasks = [
+            Task(name: Identifier.generateUniqueIdentifier(), identifier: Identifier.generateUniqueIdentifier())
+        ]
     }
 }
