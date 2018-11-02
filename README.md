@@ -30,7 +30,7 @@ Each screen is represented as a VIP module. Communication between components is 
 
 There is a following idea in the VIP cycle. User produces a sequence of events. View handles it and asks interactor to start a business logic. Interactor holds Services (Storages, Providers, etc). When Interactor receives data from Service then it asks Presenter to map this data to the ViewModel and to present the update on the View. Then this cycle is repeated. ViewController can also ask router to present a screen.
 
-Finally, I modified canonical VIP arhitecture and transfered state to Presenter. This idea improved testability and helped to abstract the UIKit by protocols. The main issue in writing tests for iOS apps usually are a tightly coupled UIKit classes. For this reason I developed TableManager protocol and implementation to hide the UITableView logic and to improve testability. 
+Finally, I modified canonical VIP arhitecture and transfered state to Presenter. This idea improved testability and helped to abstract the UIKit by protocols. The main issue in writing tests for iOS apps usually are tightly coupled UIKit classes. For this reason I developed TableManager protocol and implementation to hide the UITableView logic and to improve testability. 
 
 ### DI
 
