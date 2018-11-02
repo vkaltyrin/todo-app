@@ -90,11 +90,11 @@ extension TaskViewController: TaskViewInput {
     }
 
     func updateItem(_ identifier: Identifier, name: String) {
-        let request = TaskDataFlow.UpdateTask.Request(
+        let request = TaskDataFlow.UpdateTaskName.Request(
             identifier: identifier,
             name: name
         )
-        interactor?.updateItem(request: request)
+        interactor?.updateItemName(request: request)
     }
 
     func selectItem(_ identifier: Identifier, name: String) {

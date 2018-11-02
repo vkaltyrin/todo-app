@@ -75,45 +75,89 @@ final class TaskInteractorTests: TestCase {
         XCTAssertEqual(presenterMock.invokedPresentErrorParameters?.error, error)
     }
     
-    func testUpdateItem_presentUpdatedTasks_whenUpdateIsSuccessful() {
+    func testUpdateItemName_presentUpdatedTask_whenUpdateIsSuccessful() {
         // given
         taskStorageMock.stubbedUpdateTaskTaskIdNameCompletionResult = Stub<GeneralResult>.create(.success(()))
         taskStorageMock.stubbedFetchTasksCompletionResult = Stub<TaskResult>.create(.success([]))
-        let request = TaskDataFlow.UpdateTask.Request(
+        let request = TaskDataFlow.UpdateTaskName.Request(
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier()
         )
         // when
-        interactor.updateItem(request: request)
+        interactor.updateItemName(request: request)
         // then
         XCTAssertEqual(presenterMock.invokedPresentShowTasksCount, 1)
         XCTAssertNil(presenterMock.invokedPresentShowTasksParameters?.identifier)
         XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
     }
     
-    func testUpdateItem_presentLoading() {
+    func testUpdateItemName_presentLoading() {
         // given
-        let request = TaskDataFlow.UpdateTask.Request(
+        let request = TaskDataFlow.UpdateTaskName.Request(
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier()
         )
         // when
-        interactor.updateItem(request: request)
+        interactor.updateItemName(request: request)
         // then
         XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
     }
     
-    func testUpdateItem_presentUpdatedTasks_whenUpdateIsFailed() {
+    func testUpdateItemName_presentUpdatedTasks_whenUpdateIsFailed() {
         // given
         let error = StorageError.cannotUpdate
         taskStorageMock.stubbedUpdateTaskTaskIdNameCompletionResult = Stub<GeneralResult>.create(.failure(error))
         taskStorageMock.stubbedFetchTasksCompletionResult = Stub<TaskResult>.create(.success([]))
-        let request = TaskDataFlow.UpdateTask.Request(
+        let request = TaskDataFlow.UpdateTaskName.Request(
             identifier: Identifier.generateUniqueIdentifier(),
             name: Identifier.generateUniqueIdentifier()
         )
         // when
-        interactor.updateItem(request: request)
+        interactor.updateItemName(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentErrorCount, 1)
+        XCTAssertEqual(presenterMock.invokedPresentErrorParameters?.error, error)
+    }
+    
+    func testUpdateItemDoneness_presentUpdatedTask_whenUpdateIsSuccessful() {
+        // given
+        taskStorageMock.stubbedUpdateTaskTaskIdIsDoneCompletionResult = Stub<GeneralResult>.create(.success(()))
+        taskStorageMock.stubbedFetchTasksCompletionResult = Stub<TaskResult>.create(.success([]))
+        let request = TaskDataFlow.UpdateTaskDoneness.Request(
+            identifier: Identifier.generateUniqueIdentifier(),
+            isDone: true
+        )
+        // when
+        interactor.updateItemDoneness(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentShowTasksCount, 1)
+        XCTAssertNil(presenterMock.invokedPresentShowTasksParameters?.identifier)
+        XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
+    }
+    
+    func testUpdateItemDoneness_presentLoading() {
+        // given
+        let request = TaskDataFlow.UpdateTaskDoneness.Request(
+            identifier: Identifier.generateUniqueIdentifier(),
+            isDone: true
+        )
+        // when
+        interactor.updateItemDoneness(request: request)
+        // then
+        XCTAssertEqual(presenterMock.invokedPresentLoadingCount, 1)
+    }
+    
+    func testUpdateItemDoneness_presentUpdatedTasks_whenUpdateIsFailed() {
+        // given
+        let error = StorageError.cannotUpdate
+        taskStorageMock.stubbedUpdateTaskTaskIdIsDoneCompletionResult = Stub<GeneralResult>.create(.failure(error))
+        taskStorageMock.stubbedFetchTasksCompletionResult = Stub<TaskResult>.create(.success([]))
+        let request = TaskDataFlow.UpdateTaskDoneness.Request(
+            identifier: Identifier.generateUniqueIdentifier(),
+            isDone: true
+        )
+        // when
+        interactor.updateItemDoneness(request: request)
         // then
         XCTAssertEqual(presenterMock.invokedPresentErrorCount, 1)
         XCTAssertEqual(presenterMock.invokedPresentErrorParameters?.error, error)

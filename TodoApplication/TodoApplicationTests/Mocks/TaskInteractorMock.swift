@@ -23,16 +23,28 @@ final class TaskInteractorMock: TaskInteractor {
         invokedDeleteItemParametersList.append((request, ()))
     }
 
-    var invokedUpdateItem = false
-    var invokedUpdateItemCount = 0
-    var invokedUpdateItemParameters: (request: TaskDataFlow.UpdateTask.Request, Void)?
-    var invokedUpdateItemParametersList = [(request: TaskDataFlow.UpdateTask.Request, Void)]()
+    var invokedUpdateItemName = false
+    var invokedUpdateItemNameCount = 0
+    var invokedUpdateItemNameParameters: (request: TaskDataFlow.UpdateTaskName.Request, Void)?
+    var invokedUpdateItemNameParametersList = [(request: TaskDataFlow.UpdateTaskName.Request, Void)]()
 
-    func updateItem(request: TaskDataFlow.UpdateTask.Request) {
-        invokedUpdateItem = true
-        invokedUpdateItemCount += 1
-        invokedUpdateItemParameters = (request, ())
-        invokedUpdateItemParametersList.append((request, ()))
+    func updateItemName(request: TaskDataFlow.UpdateTaskName.Request) {
+        invokedUpdateItemName = true
+        invokedUpdateItemNameCount += 1
+        invokedUpdateItemNameParameters = (request, ())
+        invokedUpdateItemNameParametersList.append((request, ()))
+    }
+
+    var invokedUpdateItemDoneness = false
+    var invokedUpdateItemDonenessCount = 0
+    var invokedUpdateItemDonenessParameters: (request: TaskDataFlow.UpdateTaskDoneness.Request, Void)?
+    var invokedUpdateItemDonenessParametersList = [(request: TaskDataFlow.UpdateTaskDoneness.Request, Void)]()
+
+    func updateItemDoneness(request: TaskDataFlow.UpdateTaskDoneness.Request) {
+        invokedUpdateItemDoneness = true
+        invokedUpdateItemDonenessCount += 1
+        invokedUpdateItemDonenessParameters = (request, ())
+        invokedUpdateItemDonenessParametersList.append((request, ()))
     }
 
     var invokedCreateItem = false

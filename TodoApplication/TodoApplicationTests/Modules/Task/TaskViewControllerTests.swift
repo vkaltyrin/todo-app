@@ -61,16 +61,16 @@ final class TaskViewControllerTests: TestCase {
         XCTAssertEqual(interactorMock.invokedOpenTaskActionsParameters?.request.identifier, identifier)
     }
     
-    func testUpdateItem_callsInteractorToUpdateItem() {
+    func testUpdateItem_callsInteractorToUpdateItemName() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
         let name = Identifier.generateUniqueIdentifier()
         // when
         view.updateItem(identifier, name: name)
         // then
-        XCTAssertEqual(interactorMock.invokedUpdateItemCount, 1)
-        XCTAssertEqual(interactorMock.invokedUpdateItemParameters?.request.identifier, identifier)
-        XCTAssertEqual(interactorMock.invokedUpdateItemParameters?.request.name, name)
+        XCTAssertEqual(interactorMock.invokedUpdateItemNameCount, 1)
+        XCTAssertEqual(interactorMock.invokedUpdateItemNameParameters?.request.identifier, identifier)
+        XCTAssertEqual(interactorMock.invokedUpdateItemNameParameters?.request.name, name)
     }
     
     func testReloadTable_callsTableManagerReload() {

@@ -24,10 +24,21 @@ struct TaskDataFlow {
         }
     }
 
-    struct UpdateTask {
+    struct UpdateTaskName {
         struct Request {
             let identifier: Identifier
             let name: String
+        }
+
+        struct Response {
+            let result: GeneralResult
+        }
+    }
+
+    struct UpdateTaskDoneness {
+        struct Request {
+            let identifier: Identifier
+            let isDone: Bool
         }
 
         struct Response {

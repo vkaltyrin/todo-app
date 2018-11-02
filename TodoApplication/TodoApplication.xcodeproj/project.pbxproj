@@ -79,7 +79,7 @@
 		8C3C9FB4218741FD002F4500 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA3218741FC002F4500 /* TaskViewController.swift */; };
 		8C3C9FB6218741FD002F4500 /* TaskDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA5218741FC002F4500 /* TaskDataFlow.swift */; };
 		8C3C9FB7218741FD002F4500 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA6218741FC002F4500 /* TaskViewModel.swift */; };
-		8C3C9FB8218741FD002F4500 /* TaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA8218741FC002F4500 /* TaskInteractor.swift */; };
+		8C3C9FB8218741FD002F4500 /* TaskInteractorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FA8218741FC002F4500 /* TaskInteractorImpl.swift */; };
 		8C3C9FBA218741FD002F4500 /* TaskAssemblyImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FAB218741FD002F4500 /* TaskAssemblyImpl.swift */; };
 		8C3C9FBB218741FD002F4500 /* TaskPresenterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FAD218741FD002F4500 /* TaskPresenterImpl.swift */; };
 		8C3C9FBE21874E5A002F4500 /* DialogBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */; };
@@ -109,6 +109,7 @@
 		8CB184C3218C280800129C31 /* ListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C2218C280800129C31 /* ListAssembly.swift */; };
 		8CB184C5218C282300129C31 /* TaskAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C4218C282300129C31 /* TaskAssembly.swift */; };
 		8CB184C7218C307600129C31 /* TaskTableBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C6218C307600129C31 /* TaskTableBuilderTests.swift */; };
+		8CB184C9218C3DF200129C31 /* TaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C8218C3DF200129C31 /* TaskInteractor.swift */; };
 		8CDDC091218A2B2F00D23170 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC090218A2B2F00D23170 /* TableManager.swift */; };
 		8CDDC093218A39A900D23170 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC092218A39A900D23170 /* CellConfigurator.swift */; };
 		8CDDC095218A39C100D23170 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC094218A39C100D23170 /* TableCell.swift */; };
@@ -236,7 +237,7 @@
 		8C3C9FA3218741FC002F4500 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		8C3C9FA5218741FC002F4500 /* TaskDataFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDataFlow.swift; sourceTree = "<group>"; };
 		8C3C9FA6218741FC002F4500 /* TaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
-		8C3C9FA8218741FC002F4500 /* TaskInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskInteractor.swift; sourceTree = "<group>"; };
+		8C3C9FA8218741FC002F4500 /* TaskInteractorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskInteractorImpl.swift; sourceTree = "<group>"; };
 		8C3C9FAB218741FD002F4500 /* TaskAssemblyImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAssemblyImpl.swift; sourceTree = "<group>"; };
 		8C3C9FAD218741FD002F4500 /* TaskPresenterImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskPresenterImpl.swift; sourceTree = "<group>"; };
 		8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBuilder.swift; sourceTree = "<group>"; };
@@ -266,6 +267,7 @@
 		8CB184C2218C280800129C31 /* ListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAssembly.swift; sourceTree = "<group>"; };
 		8CB184C4218C282300129C31 /* TaskAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssembly.swift; sourceTree = "<group>"; };
 		8CB184C6218C307600129C31 /* TaskTableBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableBuilderTests.swift; sourceTree = "<group>"; };
+		8CB184C8218C3DF200129C31 /* TaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInteractor.swift; sourceTree = "<group>"; };
 		8CDDC090218A2B2F00D23170 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
 		8CDDC092218A39A900D23170 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
 		8CDDC094218A39C100D23170 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
@@ -662,7 +664,8 @@
 		8C3C9FA7218741FC002F4500 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9FA8218741FC002F4500 /* TaskInteractor.swift */,
+				8CB184C8218C3DF200129C31 /* TaskInteractor.swift */,
+				8C3C9FA8218741FC002F4500 /* TaskInteractorImpl.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1062,6 +1065,7 @@
 				8C3C9F062185BE98002F4500 /* ListViewInput.swift in Sources */,
 				8CB184BF218C260200129C31 /* TaskTableBuilder.swift in Sources */,
 				8C3C9EEB21859545002F4500 /* RealmTask.swift in Sources */,
+				8CB184C9218C3DF200129C31 /* TaskInteractor.swift in Sources */,
 				8C5F244C218765E800D207A1 /* BaseCell.swift in Sources */,
 				8C3C9ED42184D947002F4500 /* Identifier.swift in Sources */,
 				8C3C9ED72184DAC4002F4500 /* TaskStorage.swift in Sources */,
@@ -1098,7 +1102,7 @@
 				8C5F24632187842800D207A1 /* AccessibleCell.swift in Sources */,
 				8C3C9F242185CD9C002F4500 /* ListCell.swift in Sources */,
 				8CDDC091218A2B2F00D23170 /* TableManager.swift in Sources */,
-				8C3C9FB8218741FD002F4500 /* TaskInteractor.swift in Sources */,
+				8C3C9FB8218741FD002F4500 /* TaskInteractorImpl.swift in Sources */,
 				8C3C9ECF2184D7A4002F4500 /* Task.swift in Sources */,
 				8C3C9FB1218741FD002F4500 /* TaskCell.swift in Sources */,
 				8C3C9F3C21860EF1002F4500 /* ArrayExtensions.swift in Sources */,
