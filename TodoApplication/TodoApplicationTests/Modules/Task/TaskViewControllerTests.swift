@@ -6,6 +6,7 @@ final class TaskViewControllerTests: TestCase {
     var view: TaskViewController!
     var interactorMock: TaskInteractorMock!
     var tableManagerMock: TableManagerMock<CellConfigurator>!
+    var activityDisplayableMock: ActivityDisplayableMock!
     
     // MARK: - Set Up
     override func setUp() {
@@ -13,13 +14,22 @@ final class TaskViewControllerTests: TestCase {
         
         interactorMock = TaskInteractorMock()
         tableManagerMock = TableManagerMock<CellConfigurator>()
+        activityDisplayableMock = ActivityDisplayableMock()
         
         view = TaskViewController()
         view.interactor = interactorMock
         view.tableManager = tableManagerMock
+        view.activityDisplayable = activityDisplayableMock
     }
     
     // MARK: - Tests
+    func testView_callsInteractorToFetchItems_onViewDidLoad() {
+        // when
+        view.viewDidLoad()
+        // then
+        XCTAssertEqual(interactorMock.invokedFetchItemsCount, 1)
+    }
+    
     func testShowEditing_callsInteractorToOpenTaskEditing() {
         // given
         let identifier = Identifier.generateUniqueIdentifier()
@@ -97,6 +107,20 @@ final class TaskViewControllerTests: TestCase {
         // then
         XCTAssertEqual(interactorMock.invokedCreateItemCount, 1)
         XCTAssertEqual(interactorMock.invokedCreateItemParameters?.request.name, name)
+    }
+    
+    func testStartActivity_startsActivityWithActivityDisplayable() {
+        // when
+        view.startActivity()
+        // then
+        XCTAssertEqual(activityDisplayableMock.invokedStartActivityCount, 1)
+    }
+    
+    func testStopActivity_stopsActivityWithActivityDisplayable() {
+        // when
+        view.stopActivity()
+        // then
+        XCTAssertEqual(activityDisplayableMock.invokedStopActivityCount, 1)
     }
 }
 

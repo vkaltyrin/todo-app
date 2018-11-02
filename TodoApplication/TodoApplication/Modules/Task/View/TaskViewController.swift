@@ -5,11 +5,11 @@ final class TaskViewController: UIViewController {
     // MARK: - Dependencies
     var interactor: TaskInteractor?
     var tableManager: TableManager?
+    var activityDisplayable: ActivityDisplayable?
 
     // MARK: - Private
     private var onAddTap: (() -> ())?
     private let keyboardObserver: KeyboardObserver = KeyboardObserverImpl()
-    private var activityDisplayable: ActivityDisplayable?
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView! {
