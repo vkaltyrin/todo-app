@@ -24,7 +24,7 @@ final class KeyboardObserverImpl: KeyboardObserver {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillShown(_:)),
+            selector: #selector(keyboardWillHide(_:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )

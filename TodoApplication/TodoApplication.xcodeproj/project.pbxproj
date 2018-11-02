@@ -466,8 +466,8 @@
 		8C3C9EFE2185BE32002F4500 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9F102185BFF7002F4500 /* ListAssemblyImpl.swift */,
 				8CB184C2218C280800129C31 /* ListAssembly.swift */,
+				8C3C9F102185BFF7002F4500 /* ListAssemblyImpl.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -670,8 +670,8 @@
 		8C3C9FAA218741FD002F4500 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9FAB218741FD002F4500 /* TaskAssemblyImpl.swift */,
 				8CB184C4218C282300129C31 /* TaskAssembly.swift */,
+				8C3C9FAB218741FD002F4500 /* TaskAssemblyImpl.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
