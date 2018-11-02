@@ -80,6 +80,16 @@ final class ListPresenterTests: TestCase {
         XCTAssertEqual(viewMock.invokedReloadTableCount, 1)
     }
     
+    func testPresentShowList_filterNotValidTasks_forSuccessfulResponse() {
+        // given
+        let lists = TestData.notValidLists
+        let response = TaskDataFlow.ShowTasks.Response(result: .success(lists))
+        // when
+        presenter.presentShowTasks(response, identifier: nil)
+        // then
+        XCTAssertEqual(viewMock.invokedReloadTableParameters?.sections.count, 0)
+    }
+    
     func testPresentShowList_stopLoading_forSuccessfulResponse() {
         // given
         let lists = TestData.lists
@@ -239,6 +249,9 @@ extension ListPresenterTests {
         static let indexPath = IndexPath(row: 0, section: 0)
         static let lists = [
             List(name: Identifier.generateUniqueIdentifier(), identifier: Identifier.generateUniqueIdentifier())
+        ]
+        static let notValidLists = [
+            List(name: Identifier.generateUniqueIdentifier())
         ]
     }
 }

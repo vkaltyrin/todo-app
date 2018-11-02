@@ -94,6 +94,16 @@ final class TaskPresenterTests: TestCase {
         XCTAssertEqual(viewMock.invokedReloadTableCount, 1)
     }
     
+    func testPresentShowTask_filterNotValidTasks_forSuccessfulResponse() {
+        // given
+        let tasks = TestData.notValidTasks
+        let response = TaskDataFlow.ShowTasks.Response(result: .success(tasks))
+        // when
+        presenter.presentShowTasks(response, identifier: nil)
+        // then
+        XCTAssertEqual(viewMock.invokedReloadTableParameters?.sections.count, 0)
+    }
+    
     func testPresentShowTask_stopLoading_forSuccessfulResponse() {
         // given
         let tasks = [Task(name: Identifier.generateUniqueIdentifier())]
@@ -237,6 +247,9 @@ extension TaskPresenterTests {
         static let indexPath = IndexPath(row: 0, section: 0)
         static let tasks = [
             Task(name: Identifier.generateUniqueIdentifier(), identifier: Identifier.generateUniqueIdentifier())
+        ]
+        static let notValidTasks = [
+            Task(name: Identifier.generateUniqueIdentifier())
         ]
     }
 }
