@@ -49,14 +49,14 @@ final class ListStorageImplTests: StorageTestCase {
         
         // then
         guard receivedLists.count == lists.count else {
-            XCTFail("fetchLists should return tasks")
+            XCTFail("received lists count must be equal to expected lists count")
             return
         }
         let receivedStrings = receivedLists.map { $0.name }
         XCTAssertEqual(receivedStrings, expectedStrings)
     }
     
-    func testFetchLists_returnList_sortedAscendingByName_forEmptyLists() {
+    func testFetchLists_returnEmptyResult_forEmptyLists() {
         // given
         var receivedLists: [List] = []
         
@@ -75,7 +75,7 @@ final class ListStorageImplTests: StorageTestCase {
         
         // then
         guard receivedLists.count == 0 else {
-            XCTFail()
+            XCTFail("received lists count must be equal to expected lists count")
             return
         }
     }
