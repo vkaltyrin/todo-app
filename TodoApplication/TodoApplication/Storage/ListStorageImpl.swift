@@ -17,10 +17,13 @@ final class ListStorageImpl: ListStorage {
 
             let realm = try? Realm()
 
-            if let lists = realm?.objects(RealmList.self).sorted(
-                byKeyPath: "name",
-                ascending: true) {
-                result = .success(lists.map { $0.toList() })
+            // There is an issue in Realm Cocoa regarded wrong sorting order for strings
+            // https://github.com/realm/realm-cocoa/issues/3417
+            if let realmLists = realm?.objects(RealmList.self) {
+                let lists = realmLists.map { $0.toList() }.sorted(by: { lhs, rhs -> Bool in
+                    lhs.name < rhs.name
+                })
+                result = .success(lists)
             } else {
                 result = .failure(.cannotFetch)
             }

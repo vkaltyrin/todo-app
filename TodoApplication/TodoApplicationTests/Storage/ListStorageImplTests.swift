@@ -13,7 +13,6 @@ final class ListStorageImplTests: StorageTestCase {
     override func setUp() {
         super.setUp()
         storage = ListStorageImpl()
-        createLists()
     }
     
     // MARK: - Tear Down
@@ -26,9 +25,17 @@ final class ListStorageImplTests: StorageTestCase {
     func testFetchLists_returnList_sortedAscendingByName() {
         // given
         var receivedLists: [List] = []
-        let response = expectation(description: "wait for return")
-        
+        let lists = TestData.allStrings.map { List(name: $0) }
+        let expectedStrings = TestData.allStrings.sorted()
+    
         // when
+        let createListsExpectation = expectation(description: "wait for creating of lists")
+        createLists(lists: lists) {
+            createListsExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.fetchLists() { result in
             result.onSuccess { lists in
                 receivedLists = lists
@@ -45,17 +52,47 @@ final class ListStorageImplTests: StorageTestCase {
             XCTFail("fetchLists should return tasks")
             return
         }
-//        XCTAssertEqual(receivedLists[0], TestData.buyTeaTask)
-//        XCTAssertEqual(receivedLists[1], TestData.runMarathonTask)
+        let receivedStrings = receivedLists.map { $0.name }
+        XCTAssertEqual(receivedStrings, expectedStrings)
+    }
+    
+    func testFetchLists_returnList_sortedAscendingByName_forEmptyLists() {
+        // given
+        var receivedLists: [List] = []
+        
+        // when
+        let response = expectation(description: "wait for return")
+        storage.fetchLists() { result in
+            result.onSuccess { lists in
+                receivedLists = lists
+                response.fulfill()
+            }
+            result.onFailure { error in
+                XCTFail("fetchLists should not return a error \(error)")
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        guard receivedLists.count == 0 else {
+            XCTFail()
+            return
+        }
     }
     
     func testDeleteList_deleteList_withSuccess() {
         // given
         let identifier = TestData.listIdentifier
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListsExpectation = expectation(description: "wait for creating of lists")
+        createLists(lists: TestData.lists) {
+            createListsExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.deleteList(listId: identifier) { result in
             result.onSuccess {
                 response.fulfill()
@@ -74,9 +111,15 @@ final class ListStorageImplTests: StorageTestCase {
     func testDeleteList_returnError_withWrongListIdentifier() {
         // given
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListsExpectation = expectation(description: "wait for creating of lists")
+        createLists(lists: TestData.lists) {
+            createListsExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.deleteList(listId: TestData.wrongIdentifier) { result in
             result.onSuccess {
                 response.fulfill()
@@ -106,9 +149,15 @@ final class ListStorageImplTests: StorageTestCase {
         // given
         let list = TestData.todayList
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListsExpectation = expectation(description: "wait for creating of lists")
+        createLists(lists: TestData.lists) {
+            createListsExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.createList(list) { result in
             result.onSuccess { _ in
                 response.fulfill()
@@ -128,9 +177,15 @@ final class ListStorageImplTests: StorageTestCase {
         // given
         let list = TestData.newTodayList
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListsExpectation = expectation(description: "wait for creating of lists")
+        createLists(lists: TestData.lists) {
+            createListsExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.updateList(listId: list.identifier ?? "", name: list.name) { result in
             result.onSuccess {
                 response.fulfill()
@@ -150,9 +205,15 @@ final class ListStorageImplTests: StorageTestCase {
         // given
         let list = TestData.notExistingList
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListsExpectation = expectation(description: "wait for creating of lists")
+        createLists(lists: TestData.lists) {
+            createListsExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.updateList(listId: list.identifier ?? "", name: list.name) { result in
             result.onSuccess {
                 response.fulfill()
@@ -179,18 +240,16 @@ final class ListStorageImplTests: StorageTestCase {
     }
     
     // MARK: - Private
-    private func createLists() {
-        let lists = [TestData.todayList, TestData.tomorrowList]
-        
-        lists.forEach { [weak self] list in
-            let createTaskExpectation = expectation(description: "wait for return")
-            self?.storage.createList(list) { result in
-                createTaskExpectation.fulfill()
-            }
-            waitForExpectations(timeout: expectationTimeout)
-        }
-        
+    private func createLists(lists: [List], completion: @escaping () -> ()) {
         self.lists = lists
+        let group = DispatchGroup()
+        lists.forEach { [weak self] list in
+            group.enter()
+            self?.storage.createList(list) { result in
+                group.leave()
+            }
+        }
+        group.notify(queue: .main, execute: completion)
     }
 }
 
@@ -226,5 +285,14 @@ extension ListStorageImplTests {
             tasks: [],
             identifier: Identifier.generateUniqueIdentifier()
         )
+        
+        static let lists = [todayList, tomorrowList]
+        static let someTextArray =
+            """
+            Generics are one of the most powerful features of Swift, and much of the Swift standard library is built with generic code. In fact, you’ve been using generics throughout the Language Guide, even if you didn’t realize it. For example, Swift’s Array and Dictionary types are both generic collections. You can create an array that holds Int values, or an array that holds String values, or indeed an array for any other type that can be created in Swift. Similarly, you can create a dictionary to store values of any specified type, and there are no limitations on what that type can be.
+            """
+                .components(separatedBy: " ")
+        static let emptyStrings = Array(repeating: "", count: Int(arc4random() % 50))
+        static let allStrings = (someTextArray + emptyStrings).shuffled()
     }
 }
