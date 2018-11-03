@@ -13,7 +13,6 @@ final class TaskStorageImplTests: StorageTestCase {
     override func setUp() {
         super.setUp()
         storage = TaskStorageImpl()
-        createTasks()
     }
     
     // MARK: - Tear Down
@@ -26,9 +25,19 @@ final class TaskStorageImplTests: StorageTestCase {
     func testFetchTasks_returnTasks_sortedDescendingByCreationDate() {
         // given
         var receivedTasks: [Task] = []
-        let response = expectation(description: "wait for return")
+        let tasks = TestData.dates.map { Task(name: Identifier.generateUniqueIdentifier(), creationDate: $0) }.shuffled()
+        let expectedDates = TestData.dates.sorted { (lhs, rhs) -> Bool in
+            return lhs > rhs
+        }
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.fetchTasks(listId: TestData.listIdentifier) { result in
             result.onSuccess { tasks in
                 receivedTasks = tasks
@@ -42,20 +51,56 @@ final class TaskStorageImplTests: StorageTestCase {
         
         // then
         guard receivedTasks.count == tasks.count else {
-            XCTFail("fetchTasks should return tasks")
+            XCTFail("received tasks count must be equal to expected tasks count")
             return
         }
-        XCTAssertEqual(receivedTasks[0], TestData.buyTeaTask)
-        XCTAssertEqual(receivedTasks[1], TestData.runMarathonTask)
+        let receivedDates = receivedTasks.map { $0.creationDate }
+        XCTAssertEqual(receivedDates, expectedDates)
+    }
+    
+    func testFetchTasks_returnEmptyResult_forEmptyTasks() {
+        // given
+        var receivedTasks: [Task] = []
+        
+        // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: []) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
+        storage.fetchTasks(listId: TestData.listIdentifier) { result in
+            result.onSuccess { tasks in
+                receivedTasks = tasks
+                response.fulfill()
+            }
+            result.onFailure { error in
+                XCTFail("fetchTasks should not return a error \(error)")
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        // then
+        guard receivedTasks.count == 0 else {
+            XCTFail("received tasks count must be equal to expected tasks count")
+            return
+        }
     }
     
     func testFetchTask_returnEmptyList_withWrongListIdentifier() {
         // given
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         var receivedTasks: [Task] = []
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.fetchTasks(listId: TestData.wrongIdentifier) { result in
             result.onSuccess { result in
                 receivedTasks = result
@@ -77,9 +122,15 @@ final class TaskStorageImplTests: StorageTestCase {
         // given
         let identifier = TestData.runMarathonTaskIdentifier
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.deleteTask(taskId: identifier) { result in
             result.onSuccess {
                 response.fulfill()
@@ -98,9 +149,15 @@ final class TaskStorageImplTests: StorageTestCase {
     func testDeleteTask_returnError_withWrongTaskIdentifier() {
         // given
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.deleteTask(taskId: TestData.wrongIdentifier) { result in
             result.onSuccess {
                 response.fulfill()
@@ -130,9 +187,15 @@ final class TaskStorageImplTests: StorageTestCase {
         // given
         let task = TestData.makeCoffeeTask
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.createTask(listId: TestData.listIdentifier, task: task) { result in
             result.onSuccess { _ in
                 response.fulfill()
@@ -153,9 +216,15 @@ final class TaskStorageImplTests: StorageTestCase {
         let task = TestData.writeTestsTask
         var receivedError: StorageError?
         let name = Identifier.generateUniqueIdentifier()
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.updateTask(taskId: task.identifier ?? "", name: name) { result in
             result.onSuccess {
                 response.fulfill()
@@ -175,9 +244,15 @@ final class TaskStorageImplTests: StorageTestCase {
         // given
         let task = TestData.writeTestsTask
         var receivedError: StorageError?
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.updateTask(taskId: task.identifier ?? "", isDone: true) { result in
             result.onSuccess {
                 response.fulfill()
@@ -198,9 +273,15 @@ final class TaskStorageImplTests: StorageTestCase {
         let task = TestData.makeCoffeeTask
         var receivedError: StorageError?
         let name = Identifier.generateUniqueIdentifier()
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.updateTask(taskId: task.identifier ?? "", name: name) { result in
             result.onSuccess {
                 response.fulfill()
@@ -231,9 +312,15 @@ final class TaskStorageImplTests: StorageTestCase {
         let task = TestData.makeCoffeeTask
         var receivedError: StorageError?
         let name = Identifier.generateUniqueIdentifier()
-        let response = expectation(description: "wait for return")
         
         // when
+        let createListExpectation = expectation(description: "wait for return")
+        createTasks(tasks: TestData.tasks) {
+            createListExpectation.fulfill()
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let response = expectation(description: "wait for return")
         storage.updateTask(taskId: task.identifier ?? "", name: name) { result in
             result.onSuccess {
                 response.fulfill()
@@ -260,21 +347,19 @@ final class TaskStorageImplTests: StorageTestCase {
     }
     
     // MARK: - Private
-    private func createTasks() {
-        let tasks = [TestData.runMarathonTask, TestData.buyTeaTask]
+    private func createTasks(tasks: [Task], completion: @escaping () -> ()) {
+        self.tasks = tasks
+        
         let list = List(
             name: "Todo list",
             tasks: tasks,
             identifier: TestData.listIdentifier
         )
         let listStorage = ListStorageImpl()
-        let createListExpectation = expectation(description: "wait for return")
-        listStorage.createList(list) { result in
-            createListExpectation.fulfill()
-        }
-        waitForExpectations(timeout: expectationTimeout)
         
-        self.tasks = tasks
+        listStorage.createList(list) { result in
+            completion()
+        }
     }
 }
 
@@ -308,5 +393,7 @@ extension TaskStorageImplTests {
             identifier: Identifier.generateUniqueIdentifier(),
             creationDate: Date(timeIntervalSince1970: 4)
         )
+        static let tasks = [TestData.runMarathonTask, TestData.buyTeaTask]
+        static let dates = (0...100).map { _ in Date(timeIntervalSince1970: TimeInterval(arc4random() % 100)) }
     }
 }
