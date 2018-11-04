@@ -84,6 +84,7 @@ final class ListStorageImplTests: StorageTestCase {
         // given
         let identifier = TestData.listIdentifier
         var receivedError: StorageError?
+        var receivedLists: [List] = []
         
         // when
         let createListsExpectation = expectation(description: "wait for creating of lists")
@@ -92,20 +93,33 @@ final class ListStorageImplTests: StorageTestCase {
         }
         waitForExpectations(timeout: expectationTimeout)
         
-        let response = expectation(description: "wait for return")
+        let deleteListExpectation = expectation(description: "wait for return")
         storage.deleteList(listId: identifier) { result in
             result.onSuccess {
-                response.fulfill()
+                deleteListExpectation.fulfill()
             }
             result.onFailure { error in
                 receivedError = error
-                response.fulfill()
+                deleteListExpectation.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let fetchListsExpectation = expectation(description: "wait for return")
+        storage.fetchLists() { result in
+            result.onSuccess { lists in
+                receivedLists = lists
+                fetchListsExpectation.fulfill()
+            }
+            result.onFailure { error in
+                XCTFail("fetchLists should not return a error \(error)")
             }
         }
         waitForExpectations(timeout: expectationTimeout)
         
         // then
         XCTAssertNil(receivedError)
+        XCTAssertNil(receivedLists.firstIndex(where: { $0.identifier == identifier}))
     }
     
     func testDeleteList_returnError_withWrongListIdentifier() {
@@ -148,18 +162,14 @@ final class ListStorageImplTests: StorageTestCase {
     func testCreateList_createList_withSuccess() {
         // given
         let list = TestData.todayList
+        var receivedIdentifier: Identifier?
         var receivedError: StorageError?
         
         // when
-        let createListsExpectation = expectation(description: "wait for creating of lists")
-        createLists(lists: TestData.lists) {
-            createListsExpectation.fulfill()
-        }
-        waitForExpectations(timeout: expectationTimeout)
-        
         let response = expectation(description: "wait for return")
         storage.createList(list) { result in
-            result.onSuccess { _ in
+            result.onSuccess { identifier in
+                receivedIdentifier = identifier
                 response.fulfill()
             }
             result.onFailure { error in
@@ -171,12 +181,15 @@ final class ListStorageImplTests: StorageTestCase {
         
         // then
         XCTAssertNil(receivedError)
+        XCTAssertEqual(receivedIdentifier, list.identifier)
     }
     
-    func testUpdateList_updateList_withSuccess() {
+    func testUpdateList_updateListName_withSuccess() {
         // given
+        let identifier = TestData.listIdentifier
         let list = TestData.newTodayList
         var receivedError: StorageError?
+        var receivedLists: [List] = []
         
         // when
         let createListsExpectation = expectation(description: "wait for creating of lists")
@@ -185,20 +198,34 @@ final class ListStorageImplTests: StorageTestCase {
         }
         waitForExpectations(timeout: expectationTimeout)
         
-        let response = expectation(description: "wait for return")
-        storage.updateList(listId: list.identifier ?? "", name: list.name) { result in
+        let updateListExpectation = expectation(description: "wait for return")
+        storage.updateList(listId: identifier, name: list.name) { result in
             result.onSuccess {
-                response.fulfill()
+                updateListExpectation.fulfill()
             }
             result.onFailure { error in
                 receivedError = error
-                response.fulfill()
+                updateListExpectation.fulfill()
+            }
+        }
+        waitForExpectations(timeout: expectationTimeout)
+        
+        let fetchListsExpectation = expectation(description: "wait for return")
+        storage.fetchLists() { result in
+            result.onSuccess { lists in
+                receivedLists = lists
+                fetchListsExpectation.fulfill()
+            }
+            result.onFailure { error in
+                XCTFail("fetchLists should not return a error \(error)")
             }
         }
         waitForExpectations(timeout: expectationTimeout)
         
         // then
         XCTAssertNil(receivedError)
+        let receivedList = receivedLists.first(where: { $0.identifier == identifier})
+        XCTAssertEqual(receivedList?.name, list.name)
     }
     
     func testUpdateList_returnError_withWrongListIdentifier() {
@@ -276,8 +303,7 @@ extension ListStorageImplTests {
         
         static let newTodayList = List(
             name: "New Today List",
-            tasks: [TaskStorageImplTests.TestData.makeCoffeeTask],
-            identifier: listIdentifier
+            tasks: [TaskStorageImplTests.TestData.makeCoffeeTask]
         )
         
         static let notExistingList = List(
