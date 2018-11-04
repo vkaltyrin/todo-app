@@ -117,6 +117,9 @@
 		8CB184D8218EBC2900129C31 /* ActionSheetDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D7218EBC2900129C31 /* ActionSheetDisplayable.swift */; };
 		8CB184DA218EBCB400129C31 /* DisplayableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D9218EBCB400129C31 /* DisplayableTests.swift */; };
 		8CB184DC218F56B600129C31 /* TransitionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184DB218F56B600129C31 /* TransitionHandlerTests.swift */; };
+		8CB184E7218F64E000129C31 /* ListCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184E6218F64E000129C31 /* ListCellTests.swift */; };
+		8CB184E9218F71AE00129C31 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184E8218F71AE00129C31 /* UIViewExtensions.swift */; };
+		8CB184EB218F736D00129C31 /* TaskCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184EA218F736D00129C31 /* TaskCellTests.swift */; };
 		8CDDC091218A2B2F00D23170 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC090218A2B2F00D23170 /* TableManager.swift */; };
 		8CDDC093218A39A900D23170 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC092218A39A900D23170 /* CellConfigurator.swift */; };
 		8CDDC095218A39C100D23170 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC094218A39C100D23170 /* TableCell.swift */; };
@@ -282,6 +285,9 @@
 		8CB184D7218EBC2900129C31 /* ActionSheetDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetDisplayable.swift; sourceTree = "<group>"; };
 		8CB184D9218EBCB400129C31 /* DisplayableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableTests.swift; sourceTree = "<group>"; };
 		8CB184DB218F56B600129C31 /* TransitionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandlerTests.swift; sourceTree = "<group>"; };
+		8CB184E6218F64E000129C31 /* ListCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellTests.swift; sourceTree = "<group>"; };
+		8CB184E8218F71AE00129C31 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		8CB184EA218F736D00129C31 /* TaskCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellTests.swift; sourceTree = "<group>"; };
 		8CDDC090218A2B2F00D23170 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
 		8CDDC092218A39A900D23170 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
 		8CDDC094218A39C100D23170 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
@@ -380,6 +386,7 @@
 		8C3C9EBF2184D3E0002F4500 /* TodoApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CB184E5218F64B500129C31 /* Cells */,
 				8CB184D1218EBB9E00129C31 /* Core */,
 				8CB184CC218EB5CA00129C31 /* Models */,
 				8C5F2432218760F500D207A1 /* Mocks */,
@@ -436,6 +443,7 @@
 				8C3C9EF62185B815002F4500 /* TestStorageUtility.swift */,
 				8C3C9EF82185B897002F4500 /* TestStorageUtilityImpl.swift */,
 				8C3C9F4B2186F601002F4500 /* Stub.swift */,
+				8CB184E8218F71AE00129C31 /* UIViewExtensions.swift */,
 			);
 			path = UnitTestUtilities;
 			sourceTree = "<group>";
@@ -764,6 +772,15 @@
 				8CB184D7218EBC2900129C31 /* ActionSheetDisplayable.swift */,
 			);
 			path = Dialog;
+			sourceTree = "<group>";
+		};
+		8CB184E5218F64B500129C31 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8CB184E6218F64E000129C31 /* ListCellTests.swift */,
+				8CB184EA218F736D00129C31 /* TaskCellTests.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8CDDC08F218A260800D23170 /* TableView */ = {
@@ -1173,6 +1190,7 @@
 				8C3C9F4E218700C7002F4500 /* ListPresenterTests.swift in Sources */,
 				8CB184B0218B4C8400129C31 /* TableManagerMock.swift in Sources */,
 				8C3C9F5321870B03002F4500 /* ListViewControllerTests.swift in Sources */,
+				8CB184EB218F736D00129C31 /* TaskCellTests.swift in Sources */,
 				8CB184CE218EB5F300129C31 /* TaskExtensionsTests.swift in Sources */,
 				8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */,
 				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,
@@ -1180,10 +1198,12 @@
 				8C3C9EF92185B897002F4500 /* TestStorageUtilityImpl.swift in Sources */,
 				8C5F2442218760F600D207A1 /* ListPresenterMock.swift in Sources */,
 				8C5F2441218760F600D207A1 /* TaskInteractorMock.swift in Sources */,
+				8CB184E9218F71AE00129C31 /* UIViewExtensions.swift in Sources */,
 				8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */,
 				8C3C9F2D2185DA31002F4500 /* ListAssemblyTests.swift in Sources */,
 				8CDDC0A1218ADCFB00D23170 /* ListTableBuilderTests.swift in Sources */,
 				8CB184DA218EBCB400129C31 /* DisplayableTests.swift in Sources */,
+				8CB184E7218F64E000129C31 /* ListCellTests.swift in Sources */,
 				8C5F243E218760F600D207A1 /* ListRouterMock.swift in Sources */,
 				8CB184DC218F56B600129C31 /* TransitionHandlerTests.swift in Sources */,
 				8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */,
