@@ -81,18 +81,18 @@ final class DisplayableTests: TestCase {
         XCTAssertTrue(isFirstActionTapped)
         XCTAssertTrue(isSecondActionTapped)
     }
-}
-
-private extension DisplayableTests {
-    typealias AlertHandler = @convention(block) (UIAlertAction) -> Void
     
-    func performAlertAction(with action: UIAlertAction) {
+    // MARK: - Private
+    
+    private typealias AlertHandler = @convention(block) (UIAlertAction) -> Void
+    
+    private func performAlertAction(with action: UIAlertAction) {
         let handler = action.value(forKey: "handler")
         let blockPointer = UnsafeRawPointer(Unmanaged<AnyObject>.passUnretained(handler as AnyObject).toOpaque())
         unsafeBitCast(blockPointer, to: AlertHandler.self)(action)
     }
     
-    func buildDialog(onFirstActionTap: (() -> ())?, onSecondActionTap: (() -> ())?) -> Dialog {
+    private func buildDialog(onFirstActionTap: (() -> ())?, onSecondActionTap: (() -> ())?) -> Dialog {
         let actions = [
             Dialog.Action(
                 title: Identifier.generateUniqueIdentifier(),
@@ -112,7 +112,7 @@ private extension DisplayableTests {
         )
     }
     
-    func testDialogIsMappedIntoUIAlertController(dialog: Dialog, style: UIAlertController.Style) {
+    private func testDialogIsMappedIntoUIAlertController(dialog: Dialog, style: UIAlertController.Style) {
         let alertController = viewController.presentedViewController as? UIAlertController
         XCTAssertNotNil(alertController)
         XCTAssertEqual(alertController?.preferredStyle, style)
@@ -124,7 +124,7 @@ private extension DisplayableTests {
         }
     }
     
-    func callUIAlertActions(alert: UIAlertController?) {
+    private func callUIAlertActions(alert: UIAlertController?) {
         let alertController = viewController.presentedViewController as? UIAlertController
         guard let firstAction = alertController?.actions[safe: 0] else {
             XCTFail("First action must exist")
