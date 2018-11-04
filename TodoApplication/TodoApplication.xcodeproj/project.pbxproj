@@ -110,6 +110,8 @@
 		8CB184C5218C282300129C31 /* TaskAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C4218C282300129C31 /* TaskAssembly.swift */; };
 		8CB184C7218C307600129C31 /* TaskTableBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C6218C307600129C31 /* TaskTableBuilderTests.swift */; };
 		8CB184C9218C3DF200129C31 /* TaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184C8218C3DF200129C31 /* TaskInteractor.swift */; };
+		8CB184CE218EB5F300129C31 /* TaskExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184CD218EB5F300129C31 /* TaskExtensionsTests.swift */; };
+		8CB184D0218EB84500129C31 /* ListExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184CF218EB84500129C31 /* ListExtensionsTests.swift */; };
 		8CDDC091218A2B2F00D23170 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC090218A2B2F00D23170 /* TableManager.swift */; };
 		8CDDC093218A39A900D23170 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC092218A39A900D23170 /* CellConfigurator.swift */; };
 		8CDDC095218A39C100D23170 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC094218A39C100D23170 /* TableCell.swift */; };
@@ -268,6 +270,8 @@
 		8CB184C4218C282300129C31 /* TaskAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAssembly.swift; sourceTree = "<group>"; };
 		8CB184C6218C307600129C31 /* TaskTableBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableBuilderTests.swift; sourceTree = "<group>"; };
 		8CB184C8218C3DF200129C31 /* TaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInteractor.swift; sourceTree = "<group>"; };
+		8CB184CD218EB5F300129C31 /* TaskExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskExtensionsTests.swift; sourceTree = "<group>"; };
+		8CB184CF218EB84500129C31 /* ListExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensionsTests.swift; sourceTree = "<group>"; };
 		8CDDC090218A2B2F00D23170 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
 		8CDDC092218A39A900D23170 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
 		8CDDC094218A39C100D23170 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 		8C3C9EBF2184D3E0002F4500 /* TodoApplicationTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CB184CC218EB5CA00129C31 /* Models */,
 				8C5F2432218760F500D207A1 /* Mocks */,
 				8C3C9F2B2185DA19002F4500 /* Modules */,
 				8C3C9F122185C411002F4500 /* Storage */,
@@ -719,6 +724,15 @@
 				FD092B38E4C2CD357BD68A09 /* ActivityDisplayableMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		8CB184CC218EB5CA00129C31 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8CB184CD218EB5F300129C31 /* TaskExtensionsTests.swift */,
+				8CB184CF218EB84500129C31 /* ListExtensionsTests.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8CDDC08F218A260800D23170 /* TableView */ = {
@@ -1125,6 +1139,7 @@
 				8C3C9F4E218700C7002F4500 /* ListPresenterTests.swift in Sources */,
 				8CB184B0218B4C8400129C31 /* TableManagerMock.swift in Sources */,
 				8C3C9F5321870B03002F4500 /* ListViewControllerTests.swift in Sources */,
+				8CB184CE218EB5F300129C31 /* TaskExtensionsTests.swift in Sources */,
 				8C3C9EF72185B815002F4500 /* TestStorageUtility.swift in Sources */,
 				8C3C9EE62184EE64002F4500 /* Task+Equatable.swift in Sources */,
 				8C5F2440218760F600D207A1 /* ListViewInputMock.swift in Sources */,
@@ -1137,6 +1152,7 @@
 				8C5F243E218760F600D207A1 /* ListRouterMock.swift in Sources */,
 				8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */,
 				8C5F24302187606D00D207A1 /* ListRouterTests.swift in Sources */,
+				8CB184D0218EB84500129C31 /* ListExtensionsTests.swift in Sources */,
 				8C1E1EA7218B3D95000C0984 /* ConfigurableCellMock.swift in Sources */,
 				8C3C9EF32185A0CC002F4500 /* ListStorageImplTests.swift in Sources */,
 				8C5F2446218760F600D207A1 /* ListInteractorMock.swift in Sources */,
