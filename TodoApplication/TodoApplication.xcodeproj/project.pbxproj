@@ -115,7 +115,8 @@
 		8CB184D4218EBBED00129C31 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D3218EBBED00129C31 /* Dialog.swift */; };
 		8CB184D6218EBC0A00129C31 /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D5218EBC0A00129C31 /* AlertDisplayable.swift */; };
 		8CB184D8218EBC2900129C31 /* ActionSheetDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D7218EBC2900129C31 /* ActionSheetDisplayable.swift */; };
-		8CB184DA218EBCB400129C31 /* UIViewControllerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D9218EBCB400129C31 /* UIViewControllerExtensionsTests.swift */; };
+		8CB184DA218EBCB400129C31 /* DisplayableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184D9218EBCB400129C31 /* DisplayableTests.swift */; };
+		8CB184DC218F56B600129C31 /* TransitionHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB184DB218F56B600129C31 /* TransitionHandlerTests.swift */; };
 		8CDDC091218A2B2F00D23170 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC090218A2B2F00D23170 /* TableManager.swift */; };
 		8CDDC093218A39A900D23170 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC092218A39A900D23170 /* CellConfigurator.swift */; };
 		8CDDC095218A39C100D23170 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDC094218A39C100D23170 /* TableCell.swift */; };
@@ -279,7 +280,8 @@
 		8CB184D3218EBBED00129C31 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		8CB184D5218EBC0A00129C31 /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		8CB184D7218EBC2900129C31 /* ActionSheetDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetDisplayable.swift; sourceTree = "<group>"; };
-		8CB184D9218EBCB400129C31 /* UIViewControllerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensionsTests.swift; sourceTree = "<group>"; };
+		8CB184D9218EBCB400129C31 /* DisplayableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableTests.swift; sourceTree = "<group>"; };
+		8CB184DB218F56B600129C31 /* TransitionHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandlerTests.swift; sourceTree = "<group>"; };
 		8CDDC090218A2B2F00D23170 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
 		8CDDC092218A39A900D23170 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
 		8CDDC094218A39C100D23170 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
@@ -747,7 +749,8 @@
 		8CB184D1218EBB9E00129C31 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				8CB184D9218EBCB400129C31 /* UIViewControllerExtensionsTests.swift */,
+				8CB184D9218EBCB400129C31 /* DisplayableTests.swift */,
+				8CB184DB218F56B600129C31 /* TransitionHandlerTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1180,8 +1183,9 @@
 				8C3C9EE82184EE81002F4500 /* TestCase.swift in Sources */,
 				8C3C9F2D2185DA31002F4500 /* ListAssemblyTests.swift in Sources */,
 				8CDDC0A1218ADCFB00D23170 /* ListTableBuilderTests.swift in Sources */,
-				8CB184DA218EBCB400129C31 /* UIViewControllerExtensionsTests.swift in Sources */,
+				8CB184DA218EBCB400129C31 /* DisplayableTests.swift in Sources */,
 				8C5F243E218760F600D207A1 /* ListRouterMock.swift in Sources */,
+				8CB184DC218F56B600129C31 /* TransitionHandlerTests.swift in Sources */,
 				8C3C9F302185DDAE002F4500 /* ListInteractorTests.swift in Sources */,
 				8C5F24302187606D00D207A1 /* ListRouterTests.swift in Sources */,
 				8CB184D0218EB84500129C31 /* ListExtensionsTests.swift in Sources */,

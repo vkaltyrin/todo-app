@@ -1,7 +1,7 @@
 @testable import TodoApplication
 import XCTest
 
-final class UIViewControllerExtensionsTests: TestCase {
+final class DisplayableTests: TestCase {
     // MARK: - Subject under test
     var viewController: UIViewController!
     
@@ -13,7 +13,7 @@ final class UIViewControllerExtensionsTests: TestCase {
         UIApplication.shared.keyWindow?.rootViewController = viewController
     }
     
-    // MARK: - Tests
+    // MARK: - Tests for AlertDisplayable
     func testShowAlert_showsUIKitAlert() {
         // given
         let dialog = buildDialog(onFirstActionTap: nil, onSecondActionTap: nil)
@@ -23,17 +23,6 @@ final class UIViewControllerExtensionsTests: TestCase {
         
         // then
         testDialogIsMappedIntoUIAlertController(dialog: dialog, style: .alert)
-    }
-    
-    func testShowActionSheet_showsUIKitActionSheet() {
-        // given
-        let dialog = buildDialog(onFirstActionTap: nil, onSecondActionTap: nil)
-        
-        // when
-        viewController.showActionSheet(dialog)
-        
-        // then
-        testDialogIsMappedIntoUIAlertController(dialog: dialog, style: .actionSheet)
     }
     
     func testShowAlert_showsAlert_withCallableActions() {
@@ -56,6 +45,19 @@ final class UIViewControllerExtensionsTests: TestCase {
         callUIAlertActions(alert: viewController.presentedViewController as? UIAlertController)
         XCTAssertTrue(isFirstActionTapped)
         XCTAssertTrue(isSecondActionTapped)
+    }
+    
+    // MARK: - Tests for ActionSheetDisplayable
+    
+    func testShowActionSheet_showsUIKitActionSheet() {
+        // given
+        let dialog = buildDialog(onFirstActionTap: nil, onSecondActionTap: nil)
+        
+        // when
+        viewController.showActionSheet(dialog)
+        
+        // then
+        testDialogIsMappedIntoUIAlertController(dialog: dialog, style: .actionSheet)
     }
     
     func testShowActionSheet_showsDialog_withCallableActions() {
@@ -81,7 +83,7 @@ final class UIViewControllerExtensionsTests: TestCase {
     }
 }
 
-private extension UIViewControllerExtensionsTests {
+private extension DisplayableTests {
     typealias AlertHandler = @convention(block) (UIAlertAction) -> Void
     
     func performAlertAction(with action: UIAlertAction) {
