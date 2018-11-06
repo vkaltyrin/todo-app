@@ -1,3 +1,6 @@
+[![codecov](https://codecov.io/gh/vkaltyrin/todo-app/branch/master/graph/badge.svg)](https://codecov.io/gh/vkaltyrin/todo-app)
+[![build](https://app.bitrise.io/app/9f1773480cfe7214/status.svg?token=VFT7EQT-yhjEAgOvYBZQNw&branch=master)]
+
 # Todo App
 
 This project is an example of implementation in Clean Swift architecture.
