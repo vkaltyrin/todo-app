@@ -57,8 +57,8 @@
 		8C3C9F4C2186F602002F4500 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F4B2186F601002F4500 /* Stub.swift */; };
 		8C3C9F4E218700C7002F4500 /* ListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F4D218700C7002F4500 /* ListPresenterTests.swift */; };
 		8C3C9F5321870B03002F4500 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5221870B03002F4500 /* ListViewControllerTests.swift */; };
-		8C3C9F5C218714CA002F4500 /* ActivityDisplayble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5B218714CA002F4500 /* ActivityDisplayble.swift */; };
-		8C3C9F5E218714DD002F4500 /* ActivityDisplaybleImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5D218714DD002F4500 /* ActivityDisplaybleImpl.swift */; };
+		8C3C9F5C218714CA002F4500 /* ActivityDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5B218714CA002F4500 /* ActivityDisplayable.swift */; };
+		8C3C9F5E218714DD002F4500 /* ActivityDisplayableImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F5D218714DD002F4500 /* ActivityDisplayableImpl.swift */; };
 		8C3C9F702187221E002F4500 /* BaseTestAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F6F2187221E002F4500 /* BaseTestAction.swift */; };
 		8C3C9F7221872235002F4500 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F7121872235002F4500 /* BaseTestCase.swift */; };
 		8C3C9F742187227C002F4500 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C9F732187227C002F4500 /* TestUtils.swift */; };
@@ -225,8 +225,8 @@
 		8C3C9F4B2186F601002F4500 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		8C3C9F4D218700C7002F4500 /* ListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenterTests.swift; sourceTree = "<group>"; };
 		8C3C9F5221870B03002F4500 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
-		8C3C9F5B218714CA002F4500 /* ActivityDisplayble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDisplayble.swift; sourceTree = "<group>"; };
-		8C3C9F5D218714DD002F4500 /* ActivityDisplaybleImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDisplaybleImpl.swift; sourceTree = "<group>"; };
+		8C3C9F5B218714CA002F4500 /* ActivityDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDisplayable.swift; sourceTree = "<group>"; };
+		8C3C9F5D218714DD002F4500 /* ActivityDisplayableImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDisplayableImpl.swift; sourceTree = "<group>"; };
 		8C3C9F6421872153002F4500 /* TodoApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C3C9F6821872154002F4500 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C3C9F6F2187221E002F4500 /* BaseTestAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestAction.swift; sourceTree = "<group>"; };
@@ -597,13 +597,13 @@
 			path = List;
 			sourceTree = "<group>";
 		};
-		8C3C9F5A218712CE002F4500 /* ActivityDisplayble */ = {
+		8C3C9F5A218712CE002F4500 /* ActivityDisplayable */ = {
 			isa = PBXGroup;
 			children = (
-				8C3C9F5B218714CA002F4500 /* ActivityDisplayble.swift */,
-				8C3C9F5D218714DD002F4500 /* ActivityDisplaybleImpl.swift */,
+				8C3C9F5B218714CA002F4500 /* ActivityDisplayable.swift */,
+				8C3C9F5D218714DD002F4500 /* ActivityDisplayableImpl.swift */,
 			);
-			path = ActivityDisplayble;
+			path = ActivityDisplayable;
 			sourceTree = "<group>";
 		};
 		8C3C9F5F21871E73002F4500 /* UI */ = {
@@ -612,7 +612,7 @@
 				8CB184D2218EBBC500129C31 /* Dialog */,
 				8C3C9F3F218613D5002F4500 /* TableDirector.swift */,
 				8C3C9F4121862381002F4500 /* KeyboardObserver.swift */,
-				8C3C9F5A218712CE002F4500 /* ActivityDisplayble */,
+				8C3C9F5A218712CE002F4500 /* ActivityDisplayable */,
 				8C3C9FBD21874E5A002F4500 /* DialogBuilder.swift */,
 				8C5F244B218765E800D207A1 /* BaseCell.swift */,
 				8C5F24622187842800D207A1 /* AccessibleCell.swift */,
@@ -1118,7 +1118,7 @@
 				8C3C9EDD2184DF33002F4500 /* Typealiases.swift in Sources */,
 				8CDDC09F218ABD9A00D23170 /* CellFocusable.swift in Sources */,
 				8C3C9FBA218741FD002F4500 /* TaskAssemblyImpl.swift in Sources */,
-				8C3C9F5E218714DD002F4500 /* ActivityDisplaybleImpl.swift in Sources */,
+				8C3C9F5E218714DD002F4500 /* ActivityDisplayableImpl.swift in Sources */,
 				8C3C9F0A2185BEC6002F4500 /* ListPresenterImpl.swift in Sources */,
 				8C3C9F0D2185BF88002F4500 /* TransitionHandler.swift in Sources */,
 				8C3C9EED2185959C002F4500 /* StorageError.swift in Sources */,
@@ -1139,7 +1139,7 @@
 				8C3C9EDF2184E160002F4500 /* ListStorageImpl.swift in Sources */,
 				8C3C9EF121859DB0002F4500 /* RealmList.swift in Sources */,
 				8C3C9ED92184DB7C002F4500 /* Result.swift in Sources */,
-				8C3C9F5C218714CA002F4500 /* ActivityDisplayble.swift in Sources */,
+				8C3C9F5C218714CA002F4500 /* ActivityDisplayable.swift in Sources */,
 				8CDDC097218A39DA00D23170 /* TableSection.swift in Sources */,
 				8C3C9EE12184E17F002F4500 /* TaskStorageImpl.swift in Sources */,
 				8C3C9FB6218741FD002F4500 /* TaskDataFlow.swift in Sources */,
