@@ -19,6 +19,8 @@ final class EnterListNameAction: BaseTestAction {
             index: row
         )
         EarlGrey.selectElement(with: grey_accessibilityID(accessibilityIdentifier))
+            .perform(grey_clearText())
+        EarlGrey.selectElement(with: grey_accessibilityID(accessibilityIdentifier))
             .perform(grey_typeText(name))
         EarlGrey.selectElement(with: grey_accessibilityID(accessibilityIdentifier))
             .perform(grey_typeText("\n"))

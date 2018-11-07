@@ -19,6 +19,8 @@ target 'TodoApplication' do
 
       pod 'EarlGrey'
       pod 'RealmSwift'
+      pod 'Quick'
+      pod 'Nimble'
   end
 
 end

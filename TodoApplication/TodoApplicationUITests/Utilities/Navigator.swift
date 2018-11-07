@@ -9,6 +9,7 @@ enum Screen {
 
 protocol Navigator: class {
     func openScreen(_ screen: Screen)
+    func dismissAll()
 }
 
 final class NavigatorImpl: Navigator {
@@ -23,14 +24,31 @@ final class NavigatorImpl: Navigator {
             break
         }
     }
+    
+    func dismissAll() {
+        rootViewController?.dismiss(animated: false, completion: nil)
+        if let navigationController = rootViewController as? UINavigationController {
+            navigationController.popToRootViewController(animated: false)
+        }
+    }
 
     // MARK: - Private
 
+    private var appDelegate: AppDelegate? {
+        return UIApplication.shared.delegate as? AppDelegate
+    }
+    
+    private var rootViewController: UIViewController? {
+        get {
+            return appDelegate?.window?.rootViewController
+        }
+        set {
+            appDelegate?.window?.rootViewController = rootViewController
+        }
+    }
+    
     private func displayViewController(_ viewController: UIViewController) {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        appDelegate?.window?.rootViewController = UINavigationController(
-            rootViewController: viewController
-        )
+        rootViewController = viewController
     }
 
 }
