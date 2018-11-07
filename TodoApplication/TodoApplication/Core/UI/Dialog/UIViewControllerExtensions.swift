@@ -30,6 +30,9 @@ extension UIViewController: AlertDisplayable, ActionSheetDisplayable {
             alert.addAction(action)
         }
 
-        present(alert, animated: true, completion: nil)
+        // http://openradar.appspot.com/19285091
+        OperationQueue.main.addOperation {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
