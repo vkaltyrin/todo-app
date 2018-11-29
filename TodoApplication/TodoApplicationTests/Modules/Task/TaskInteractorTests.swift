@@ -130,9 +130,7 @@ final class TaskInteractorTests: TestCase {
         // when
         interactor.updateItemDoneness(request: request)
         // then
-        XCTAssertEqual(presenterMock.invokedPresentShowTasksCount, 1)
-        XCTAssertNil(presenterMock.invokedPresentShowTasksParameters?.identifier)
-        XCTAssertNotNil(presenterMock.invokedPresentShowTasksParameters?.response)
+        XCTAssertEqual(presenterMock.invokedPresentInitialStateCount, 1)
     }
     
     func testUpdateItemDoneness_presentLoading() {
