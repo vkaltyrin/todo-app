@@ -58,4 +58,12 @@ final class TaskPresenterMock: TaskPresenter {
         invokedPresentLoading = true
         invokedPresentLoadingCount += 1
     }
+    
+    var invokedPresentInitialState = false
+    var invokedPresentInitialStateCount = 0
+    
+    func presentInitialState() {
+        invokedPresentInitialState = true
+        invokedPresentInitialStateCount += 1
+    }
 }

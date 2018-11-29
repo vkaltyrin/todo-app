@@ -78,6 +78,7 @@ struct TaskDataFlow {
     }
 
     enum ViewState {
+        case initial
         case loading
         case result(items: [TableSection], identifier: Identifier?)
         case error(dialog: Dialog)

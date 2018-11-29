@@ -57,7 +57,7 @@ final class TaskInteractorImpl: TaskInteractor {
             let response = TaskDataFlow.UpdateTaskName.Response(result: result)
             switch response.result {
             case .success:
-                self?.fetchItems()
+                self?.presenter.presentInitialState()
             case .failure(let error):
                 self?.presenter.presentError(error)
             }

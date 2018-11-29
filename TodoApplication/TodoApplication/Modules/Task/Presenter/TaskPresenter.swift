@@ -4,4 +4,5 @@ protocol TaskPresenter: class {
     func presentTaskActions(_ identifier: Identifier)
     func presentTaskEditing(_ identifier: Identifier)
     func presentLoading()
+    func presentInitialState()
 }

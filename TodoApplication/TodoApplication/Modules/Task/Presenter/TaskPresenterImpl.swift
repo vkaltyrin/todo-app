@@ -42,6 +42,8 @@ final class TaskPresenterImpl {
     private var state: TaskDataFlow.ViewState = .loading {
         didSet {
             switch state {
+            case .initial:
+                view.stopActivity()
             case .loading:
                 view.startActivity()
             case .error(let dialog):
@@ -140,5 +142,9 @@ extension TaskPresenterImpl: TaskPresenter {
 
     func presentLoading() {
         self.state = .loading
+    }
+
+    func presentInitialState() {
+        self.state = .initial
     }
 }
